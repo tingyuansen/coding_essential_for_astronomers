@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding Essentials for Astronomers</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Coding Essentials for Astronomers</a>
+      <nav>
+        <a href="#lectures">Lecture archive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Coding Essentials for Astronomers</h1>
+        <p>Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers.</p>
+        <p class="author-credit">Author: Yuan-Sen Ting (The Ohio State University)</p>
+        <p class="status-note">Current release covers roughly one third of the lecture series; additional chapters will be added as they are finalized.</p>
+        <a class="cta" href="#lectures">Open lecture archive →</a>
+      </div>
+    </section>
+
+    <section class="container highlight">
+      <h2>Inside the textbook</h2>
+      <ul>
+        <li>Python programming patterns applied to observational and simulation workflows.</li>
+        <li>Numerical, visualization, and automation techniques for modern data volumes.</li>
+        <li>Data analysis techniques across all modalities: images, spectra, and time series.</li>
+        <li>Best practices for collaboration, version control, and human-AI co-development.</li>
+      </ul>
+    </section>
+
+    <section id="lectures" class="container">
+      <h2 class="section-title">Lecture archive</h2>
+      <div class="lecture-grid" data-lecture-grid>
+        <p style="color: var(--muted);">Loading lectures…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Crafted for the Coding Essentials for Astronomers series. Built as a static site ready for GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <script>
+    const grid = document.querySelector('[data-lecture-grid]');
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderLectures(lectures) {
+      if (!Array.isArray(lectures) || lectures.length === 0) {
+        grid.innerHTML = '<p style="color: var(--muted);">No lectures have been published yet.</p>';
+        return;
+      }
+      grid.innerHTML = lectures.map(lecture => {
+        const number = String(lecture.number).padStart(2, '0');
+        const title = escapeHtml(lecture.title);
+        const date = escapeHtml(lecture.date);
+        const summary = lecture.summary ? escapeHtml(lecture.summary) : 'Lecture overview coming soon.';
+        const pageLink = escapeHtml(lecture.relative_path);
+        const slidesLink = `https://www.asc.ohio-state.edu/ting.74/Astron1221/Lecture${lecture.number}_Slides`;
+        return `
+          <article class="lecture-card">
+            <span class="lecture-number">Lecture ${number}</span>
+            <h3>${title}</h3>
+            <p>${date}</p>
+            <p>${summary}</p>
+            <div class="actions">
+              <a href="${pageLink}">Read lecture</a>
+              <a href="${slidesLink}">View slides</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    fetch('lectures.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Unable to load lecture metadata');
+        }
+        return response.json();
+      })
+      .then(renderLectures)
+      .catch(error => {
+        console.error(error);
+        grid.innerHTML = '<p style="color: var(--muted);">We could not load the lecture list. Please refresh.</p>';
+      });
+  </script>
+</body>
+</html>

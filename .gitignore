@@ -1,0 +1,23 @@
+# macOS cruft
+.DS_Store
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter notebook artifacts
+.ipynb_checkpoints/
+*.ipynb
+
+# Course planning documents
+*.docx
+*.txt
+
+# Misc build artefacts
+*.log

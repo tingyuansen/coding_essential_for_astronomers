@@ -1,0 +1,243 @@
+:root {
+  --bg: #0f172a;
+  --bg-alt: #111c32;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-strong: #0ea5e9;
+  --border: rgba(148, 163, 184, 0.25);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--accent-strong);
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-header {
+  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.site-header .brand {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.site-header nav a {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.site-footer .container {
+  padding: 2rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+main {
+  display: block;
+}
+
+.hero {
+  padding: 5.5rem 0 3rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 620px;
+  margin: 0 auto 2rem;
+}
+
+.hero .author-credit {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: -0.6rem auto 2.2rem;
+}
+
+.hero .status-note {
+  color: var(--accent);
+  font-size: 0.98rem;
+  margin: -1.2rem auto 2.4rem;
+}
+
+.hero .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.3);
+}
+
+.hero .cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(14, 165, 233, 0.35);
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin: 0 0 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.lecture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 0 0 3.5rem;
+}
+
+.lecture-card {
+  background: var(--bg-alt);
+  padding: 1.6rem;
+  border-radius: 18px;
+  border: 1px solid rgba(56, 189, 248, 0.08);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lecture-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 45px rgba(14, 165, 233, 0.18);
+}
+
+.lecture-card .lecture-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lecture-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.lecture-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.lecture-card .actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.lecture-card .actions a {
+  font-weight: 600;
+}
+
+.highlight {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+.highlight h2 {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+}
+
+.highlight ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.highlight li {
+  margin-bottom: 0.5rem;
+}
+
+.lecture-page main {
+  width: min(960px, 92vw);
+  margin: 0 auto;
+  padding-top: 4.5rem;
+}
+
+.lecture-page .jp-Notebook {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.5);
+  margin-bottom: 3rem;
+}
+
+.lecture-page .jp-Notebook .jp-Cell {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+}
+
+@media (max-width: 680px) {
+  .site-header .container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hero {
+    padding-top: 4rem;
+  }
+  .lecture-card {
+    padding: 1.4rem;
+  }
+}
