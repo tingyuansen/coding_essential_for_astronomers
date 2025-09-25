@@ -5,8 +5,7 @@
     "date": "September 24, 2025",
     "slug": "lecture01-welcome-and-setting-up",
     "relative_path": "lectures/lecture01-welcome-and-setting-up.html",
-    "summary": "Course orientation, environment setup, and expectations for AI-supported coding.",
-    "slides_path": "slides/Lecture1_Slides/"
+    "summary": "Course orientation, environment setup, and expectations for AI-supported coding."
   },
   {
     "number": 2,
@@ -14,8 +13,7 @@
     "date": "September 24, 2025",
     "slug": "lecture02-variables-and-collections",
     "relative_path": "lectures/lecture02-variables-and-collections.html",
-    "summary": "Core Python syntax, data structures, and essential debugging patterns for research scripts.",
-    "slides_path": "slides/Lecture2_Slides/"
+    "summary": "Core Python syntax, data structures, and essential debugging patterns for research scripts."
   },
   {
     "number": 3,
@@ -23,8 +21,7 @@
     "date": "September 24, 2025",
     "slug": "lecture03-control-flow-and-file-operations",
     "relative_path": "lectures/lecture03-control-flow-and-file-operations.html",
-    "summary": "Control flow design, file handling, and automation techniques for data-driven workflows.",
-    "slides_path": "slides/Lecture3_Slides/"
+    "summary": "Control flow design, file handling, and automation techniques for data-driven workflows."
   },
   {
     "number": 4,
@@ -32,8 +29,7 @@
     "date": "September 24, 2025",
     "slug": "lecture04-numerical-computing",
     "relative_path": "lectures/lecture04-numerical-computing.html",
-    "summary": "NumPy arrays, vectorisation, and numerical best practices for large astronomical datasets.",
-    "slides_path": "slides/Lecture4_Slides/"
+    "summary": "NumPy arrays, vectorisation, and numerical best practices for large astronomical datasets."
   },
   {
     "number": 5,
@@ -41,8 +37,7 @@
     "date": "September 24, 2025",
     "slug": "lecture05-functions-and-object-oriented-programming",
     "relative_path": "lectures/lecture05-functions-and-object-oriented-programming.html",
-    "summary": "Function design, modular organisation, and foundations of object-oriented programming.",
-    "slides_path": "slides/Lecture5_Slides/"
+    "summary": "Function design, modular organisation, and foundations of object-oriented programming."
   },
   {
     "number": 6,
@@ -50,43 +45,38 @@
     "date": "September 24, 2025",
     "slug": "lecture06-data-visualization",
     "relative_path": "lectures/lecture06-data-visualization.html",
-    "summary": "Matplotlib workflows, visual diagnostics, and interactive plotting techniques.",
-    "slides_path": "slides/Lecture6_Slides/"
+    "summary": "Matplotlib workflows, visual diagnostics, and interactive plotting techniques."
   },
   {
     "number": 7,
     "title": "Lecture 7: LLM API Basics",
-    "date": "September 13, 2025",
+    "date": "September 24, 2025",
     "slug": "lecture07-llm-api-basics",
     "relative_path": "lectures/lecture07-llm-api-basics.html",
-    "summary": "LLM API authentication, structured prompting, and cost-aware usage patterns.",
-    "slides_path": "slides/Lecture7_Slides/"
+    "summary": "LLM API authentication, structured prompting, and cost-aware usage patterns."
   },
   {
     "number": 8,
     "title": "Lecture 8: LLM Function Tools And RAG",
-    "date": "September 18, 2025",
+    "date": "September 24, 2025",
     "slug": "lecture08-llm-function-tools-and-rag",
     "relative_path": "lectures/lecture08-llm-function-tools-and-rag.html",
-    "summary": "Function calling, retrieval-augmented generation, and vector search integrations.",
-    "slides_path": "slides/Lecture8_Slides/"
+    "summary": "Function calling, retrieval-augmented generation, and vector search integrations."
   },
   {
     "number": 9,
     "title": "Lecture 9: GitHub",
-    "date": "September 20, 2025",
+    "date": "September 24, 2025",
     "slug": "lecture09-github",
     "relative_path": "lectures/lecture09-github.html",
-    "summary": "Git and GitHub fundamentals, documentation standards, and GitHub Pages publishing.",
-    "slides_path": "slides/Lecture9_Slides/"
+    "summary": "Git and GitHub fundamentals, documentation standards, and GitHub Pages publishing."
   },
   {
     "number": 10,
     "title": "Lecture 10: Streamlit",
-    "date": "September 21, 2025",
+    "date": "September 24, 2025",
     "slug": "lecture10-streamlit",
     "relative_path": "lectures/lecture10-streamlit.html",
-    "summary": "Streamlit interface design, state management, and deployment of interactive research tools.",
-    "slides_path": "slides/Lecture10_Slides/"
+    "summary": "Streamlit interface design, state management, and deployment of interactive research tools."
   }
 ]

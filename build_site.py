@@ -347,8 +347,6 @@ def _inject_header_and_footer(html: str, header_html: str, footer_html: str) -> 
 def build() -> None:
     DOCS_DIR.mkdir(exist_ok=True)
     ASSETS_DIR.mkdir(exist_ok=True)
-    if LECTURES_DIR.exists():
-        shutil.rmtree(LECTURES_DIR)
     LECTURES_DIR.mkdir(parents=True, exist_ok=True)
 
     exporter = HTMLExporter()
@@ -404,6 +402,24 @@ def build() -> None:
         display_date = _format_date(raw_date)
         slug = _slugify(number, raw_title)
         lecture_rel_path = Path("lectures") / f"{slug}.html"
+        output_path = LECTURES_DIR / lecture_rel_path.name
+
+        # Skip if HTML file already exists
+        if output_path.exists():
+            print(f"Skipping {notebook_path.name} - HTML already exists")
+            lectures.append(
+                {
+                    "number": number,
+                    "title": display_title,
+                    "date": display_date,
+                    "slug": slug,
+                    "relative_path": str(lecture_rel_path).replace("\\", "/"),
+                    "summary": LECTURE_SUMMARIES.get(
+                        number, "Hands-on coding walkthrough."
+                    ),
+                }
+            )
+            continue
 
         nb = _execute_notebook(notebook_path)
         raw_summary = _first_markdown_excerpt(nb)
@@ -419,7 +435,6 @@ def build() -> None:
         body = _inject_header_and_footer(body, header_html, footer_html)
         body = _scrub_course_details(body)
 
-        output_path = LECTURES_DIR / lecture_rel_path.name
         output_path.write_text(body, encoding="utf-8")
 
         lectures.append(

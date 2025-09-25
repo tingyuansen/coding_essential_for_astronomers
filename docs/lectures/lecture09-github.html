@@ -7543,50 +7543,21 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Streamlit:-From-Python-Scripts-to-Web-Apps">Streamlit: From Python Scripts to Web Apps<a class="anchor-link" href="#Streamlit:-From-Python-Scripts-to-Web-Apps">¶</a></h1>
+<h1 id="GitHub-and-Professional-Coding-Development">GitHub and Professional Coding Development<a class="anchor-link" href="#GitHub-and-Professional-Coding-Development">¶</a></h1>
 
-<h2 id="Introduction:">Introduction:<a class="anchor-link" href="#Introduction:">¶</a></h2><p>It's office hours. Your classmate walks in, excited: "I heard you built that amazing large language model system for searching through astronomy papers! Can I try it?"</p>
-<p>"Of course!" you reply confidently. "Let me show you how to use it."</p>
-<p>What happens next turns your confidence into mild panic:</p>
-<p>"First, install Python 3.8 or higher... wait, do you have pip? Okay, now pip install anthropic, but actually use pip3 if... hold on, you need sentence-transformers too, that's pip install sentence-transformers. Oh, you're getting an error? Right, you need to upgrade pip first. Now create a .env file—no, that's dot-E-N-V—and add your API key... actually, you need to get an API key first from... wait, why is numpy failing to install? Let me check your Python version again..."</p>
-<p>Twenty minutes later, your classmate politely says they'll "try it later" and leaves. Your powerful tool, which could have helped them find relevant papers in seconds, never got the chance to shine.</p>
-<p>This scenario repeats itself constantly in astronomy research. You build something useful—a magnitude calculator, a FITS file viewer, a period-finding tool—but sharing it requires your users to become system administrators first.</p>
-<p>Today, we fix this problem forever.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="From-Terminal-to-Browser">From Terminal to Browser<a class="anchor-link" href="#From-Terminal-to-Browser">¶</a></h3><p>Over the past nine lectures, you've built an impressive toolkit. You started with variables and loops, mastered NumPy arrays that slice through data like a hot knife through butter, created visualizations that revealed hidden patterns, and just last week, you learned to preserve your code forever on GitHub. You even taught LLMs to execute calculations and search through documents with the sophistication of a research assistant.</p>
-<p>But here's the uncomfortable truth: all of that power is trapped inside your terminal.</p>
-<p>Today, you'll learn to break your code free from the terminal and deliver it directly to anyone with a web browser. No installation. No configuration. No terminal commands. Just a link they can click and a beautiful interface they can use immediately.</p>
-<p>By the end of this lecture, your Python systems will run in a browser with elegant interfaces. Your complete AI assistant—the one that chooses between calculations and document search—will work through a chat-like interface. And here's the best part: you'll do all of this with just Python. No HTML, no CSS, no JavaScript—just the Python you already know, plus a magical library called Streamlit.</p>
-<p>Let's transform your scripts into apps.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Understanding-Streamlit">Understanding Streamlit<a class="anchor-link" href="#Understanding-Streamlit">¶</a></h2><p>Streamlit is a Python library that performs a specific kind of magic: it turns your Python scripts into interactive web applications, automatically. No web development knowledge required. No servers to configure. No databases to set up. Just Python code that becomes a living, breathing web interface.</p>
-<p>Think of Streamlit as a translator between two worlds. In one world, you have your Python code—functions, variables, calculations, all the things you've learned over nine lectures. In the other world, you have web browsers expecting HTML, CSS, and JavaScript. Streamlit stands between these worlds and translates everything automatically. You speak Python; your users see a beautiful web application.</p>
-<p>Streamlit was created by machine learning engineers who were frustrated with the exact problem you face. They had powerful Python tools—data processing pipelines, machine learning models, visualization scripts—but sharing them required either teaching everyone to code or hiring web developers. Neither option was good. So they built Streamlit to solve their own problem, and now we all benefit.</p>
-<h3 id="Streamlit-vs-Jupyter-Notebooks">Streamlit vs Jupyter Notebooks<a class="anchor-link" href="#Streamlit-vs-Jupyter-Notebooks">¶</a></h3><p>You might wonder: "I already use Jupyter notebooks, which run in a browser. Why do I need Streamlit?"</p>
-<p>Jupyter notebooks are incredible for development and analysis—that's why we've used them all semester. But they're designed for people who write code. Your users see code cells, error messages, import statements, and all the scaffolding of programming. It's like inviting someone to dinner and making them watch you cook—interesting for some, overwhelming for most.</p>
-<p>Streamlit apps hide all the code complexity. Your users see only the interface: buttons to click, text to enter, results to view. It's like serving the finished meal—they enjoy the result without seeing the kitchen chaos.</p>
-<p>Here's a visual comparison:</p>
+<p><em>A sample GitHub repository following the instructions in this tutorial can be found at <a href="https://github.com/tingyuansen/Astron1221_Github_Tutorial">https://github.com/tingyuansen/Astron1221_Github_Tutorial</a></em></p>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>It's 2 AM. You've been working on your Project 1 analysis for the past six hours. Your LLM function tools finally work perfectly, your RAG system is finding the right documents, and the API calls are returning exactly what you need. You save your file—<code>llm_project_FINAL_working.py</code>—and close your laptop with satisfaction.</p>
+<p>The next morning, disaster strikes. Your laptop won't turn on. That beautiful code, those carefully crafted function schemas, that clever embedding search you figured out at 1:47 AM—all of it exists only on a dead hard drive.</p>
+<p>This scenario has happened to countless students. Today, we ensure it never happens to you.</p>
+<h3 id="From-Desktop-to-Universe">From Desktop to Universe<a class="anchor-link" href="#From-Desktop-to-Universe">¶</a></h3><p>Over the past four weeks, you've built an impressive foundation. You've mastered Python fundamentals, created NumPy arrays that slice through data like light through a prism, visualized patterns with matplotlib, and just last week, you taught Claude to execute your calculations and search through documents. But right now, all of that work lives in isolation on your computer—invisible to advisors, inaccessible to collaborators, and vulnerable to a single spilled coffee.</p>
+<p>Today changes everything. By the end of this lecture, your code will be:</p>
 <ul>
-<li><strong>Jupyter</strong>: Code visible → User must understand Python → Can break things → Requires installation</li>
-<li><strong>Streamlit</strong>: Code hidden → User just interacts → Can't break things → Runs in any browser</li>
+<li><strong>Safe</strong>: Backed up automatically in the cloud</li>
+<li><strong>Shareable</strong>: Accessible to collaborators with a single link</li>
+<li><strong>Professional</strong>: Part of your academic portfolio</li>
+<li><strong>Discoverable</strong>: Visible to the global programming community</li>
 </ul>
-<p>But there's a deeper difference that matters for scientific applications. Jupyter notebooks are stateful—each cell execution changes the kernel's state, and you can run cells out of order. This is powerful for exploration but confusing for users. Streamlit apps run top to bottom on every interaction, ensuring consistent behavior. Your users can't accidentally break the app by clicking things in the wrong order.</p>
+<p>And here's the best part: you'll do all of this without leaving Cursor. No complex terminal commands, no arcane git incantations—just clicks, commits, and code that lives forever in the cloud.</p>
 </div>
 </div>
 </div>
@@ -7596,52 +7567,24 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Building-Your-First-Streamlit-App">Building Your First Streamlit App<a class="anchor-link" href="#Building-Your-First-Streamlit-App">¶</a></h2><h3 id="Installation-and-Setup">Installation and Setup<a class="anchor-link" href="#Installation-and-Setup">¶</a></h3><p>Let's stop talking about Streamlit and start using it. We'll create the simplest possible app, run it, and then gradually add features. This hands-on approach will make everything concrete.</p>
-<p>Install Streamlit (run this in your terminal or notebook):</p>
-<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>streamlit
-</pre></div>
-<p>That's it. No complex setup, no configuration files, no servers to install. Just one package. Behind the scenes, this installs Streamlit and its dependencies—a web server (Tornado), a communication protocol (WebSockets), and various utilities. But you don't need to know about any of that.</p>
-<h3 id="Creating-Your-First-App">Creating Your First App<a class="anchor-link" href="#Creating-Your-First-App">¶</a></h3><p>In Cursor, create a new file called <code>hello_streamlit.py</code>. Important: this must be a regular Python file (<code>.py</code>), not a Jupyter notebook (<code>.ipynb</code>)! Streamlit runs Python scripts, not notebooks. This distinction matters because notebooks have cells and state, while scripts run linearly from top to bottom—exactly what Streamlit expects.</p>
-<p>Add these lines:</p>
-<div class="highlight"><pre><span></span><span class="c1"># hello_streamlit.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"# Welcome to Astronomy Tools"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"This is my first Streamlit app!"</span><span class="p">)</span>
-
-<span class="c1"># Let's add some astronomy content</span>
-<span class="n">parallax</span> <span class="o">=</span> <span class="mf">0.768</span>  <span class="c1"># Proxima Centauri's parallax in arcseconds</span>
-<span class="n">distance</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">parallax</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Proxima Centauri: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs"</span><span class="p">)</span>
-</pre></div>
-<p>Notice something beautiful here: <code>st.write()</code> is intelligent. It accepts markdown (the <code>#</code> becomes a header), plain text, formatted strings, numbers, DataFrames, plots—almost anything. It figures out what you're giving it and displays it appropriately. This is Streamlit's philosophy: make the common case easy.</p>
-<p>Save this file in a folder you can easily find—perhaps create a new folder called <code>streamlit_apps</code> on your Desktop.</p>
-<h3 id="Running-Your-App">Running Your App<a class="anchor-link" href="#Running-Your-App">¶</a></h3><p>We need to run Streamlit from the terminal. The easiest way is to use Cursor's built-in terminal:</p>
+<h3 id="Why-Your-Code-Needs-a-Home">Why Your Code Needs a Home<a class="anchor-link" href="#Why-Your-Code-Needs-a-Home">¶</a></h3><p>Think about how you currently manage your code files. If you're like most students four weeks into programming, you probably have:</p>
+<ul>
+<li>Multiple versions of the same file scattered across folders</li>
+<li>Files named <code>project_v1.py</code>, <code>project_v2_fixed.py</code>, <code>project_final_ACTUALLY_FINAL.py</code></li>
+<li>That one working version you're afraid to modify because you might break it</li>
+<li>Code you emailed to yourself "just in case"</li>
+</ul>
+<p>Professional programmers and researchers solved this problem decades ago with a tool called Git, and today you'll learn to use it—not through intimidating command lines, but through Cursor's friendly interface.</p>
+<h3 id="What-You'll-Build-Today">What You'll Build Today<a class="anchor-link" href="#What-You'll-Build-Today">¶</a></h3><p>By the end of this lecture—whether it's a stellar parallax calculator, an LLM function tool system, or a RAG document searcher—into a professional repository that:</p>
 <ol>
-<li>In Cursor, click <strong>Terminal</strong> → <strong>New Terminal</strong> in the top menu</li>
-<li>A terminal panel opens at the bottom of Cursor</li>
-<li>Navigate to your file's folder using <code>cd</code> (if needed)</li>
-<li>Run your app:</li>
+<li><strong>Lives safely in the cloud</strong>: Your code survives even if your laptop doesn't</li>
+<li><strong>Shows your journey</strong>: Every change you made, when you made it, and why</li>
+<li><strong>Builds your portfolio</strong>: A professional presence that grad schools and employers can see</li>
+<li><strong>Enables collaboration</strong>: Share your code with a link instead of a zip file</li>
+<li><strong>Hosts documentation</strong>: Turn your README into a website showcasing your work</li>
 </ol>
-<div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>hello_streamlit.py
-</pre></div>
-<p>Press Enter, and magic happens:</p>
-<ul>
-<li>Your default browser opens automatically (if it doesn't, look in the terminal for a URL)</li>
-<li>You see your app running at <code>http://localhost:8501</code></li>
-<li>Your Python code has become a web page!</li>
-</ul>
-<p>What does <code>localhost:8501</code> mean? <code>localhost</code> means "this computer"—your app is running on your own machine, not on the internet. <code>8501</code> is the port number—think of it as the specific door through which your browser talks to Streamlit. This is important: your app is completely private right now. No one else can see it unless they're using your computer.</p>
-<p>To stop the app later, press <code>Ctrl+C</code> in the terminal.</p>
-<h3 id="The-Live-Reload-Experience">The Live Reload Experience<a class="anchor-link" href="#The-Live-Reload-Experience">¶</a></h3><p>Keep your browser open showing your app. Now go back to your code and change something:</p>
-<div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"This is my first Streamlit app! 🌟"</span><span class="p">)</span>  <span class="c1"># Added a star emoji</span>
-</pre></div>
-<p>Save the file (<code>Cmd+S</code> or <code>Ctrl+S</code>). Look at your browser—Streamlit detected the change! A message appears saying "Source file changed". You can either:</p>
-<ul>
-<li>Click "Rerun" to update immediately</li>
-<li>Click "Always rerun" to make updates automatic</li>
-</ul>
-<p>This live reload feature transforms development. You can tweak your interface, adjust calculations, fix bugs—all while seeing results instantly. It's like having a conversation with your code.</p>
+<p>The best part? Every astronomy researcher, from grad students to seasoned researchers, uses these exact same tools. The skills you learn today will serve you throughout your entire scientific career.</p>
+<p>Let's begin by understanding what Git and GitHub actually are—two related but distinctly different tools that, together, will revolutionize how you work with code.</p>
 </div>
 </div>
 </div>
@@ -7651,495 +7594,37 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Interactive-Components">Interactive Components<a class="anchor-link" href="#Interactive-Components">¶</a></h2><h3 id="Understanding-Script-Reruns">Understanding Script Reruns<a class="anchor-link" href="#Understanding-Script-Reruns">¶</a></h3><p>Streamlit has a radically simple execution model: your entire script runs from top to bottom on every interaction. Every. Single. Time. This isn't a bug or inefficiency—it's the core design principle that makes Streamlit so easy to reason about.</p>
-<p>Let's prove this empirically:</p>
-<div class="highlight"><pre><span></span><span class="c1"># rerun_demo.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Understanding Reruns"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Script ran at: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%H:%M:%S.</span><span class="si">%f</span><span class="s1">'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="n">temperature</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Temperature (K):"</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">5778</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Selected: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">K"</span><span class="p">)</span>
-</pre></div>
-<p>Run this and move the slider—the timestamp changes every time! Your entire script reruns with each interaction.</p>
-<p>This rerun behavior has profound implications. In traditional GUI programming, you attach callbacks to events: "when button clicked, run this function." In web development, you handle events: "on form submit, process data." Streamlit inverts this model entirely. There are no callbacks, no event handlers, no listeners. Just a script that runs repeatedly with current widget values.</p>
-<p>This is why Streamlit code reads like a story. You don't write "when the user changes the temperature slider, recalculate the Wien peak." You write "get the temperature from the slider, calculate the Wien peak." The calculation happens automatically whenever the temperature changes because the script reruns.</p>
-<p>The mental shift is significant. Stop thinking about events and start thinking about state. Your widgets hold state. Your script reads that state and produces output. When state changes, the script runs again with new state. It's functional programming applied to user interfaces—pure functions (your script) operating on immutable state (widget values).</p>
-<h3 id="Text-Input:-The-Foundation">Text Input: The Foundation<a class="anchor-link" href="#Text-Input:-The-Foundation">¶</a></h3><p>The simplest widget accepts text from users:</p>
-<div class="highlight"><pre><span></span><span class="c1"># text_input.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">name</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"Star name:"</span><span class="p">,</span> <span class="s2">"Vega"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"You entered: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>The text input returns its current value directly. No callbacks, no event handlers—just a simple assignment. The second parameter ("Vega") is the default value.</p>
-<h3 id="Number-Input:-Precision-Matters">Number Input: Precision Matters<a class="anchor-link" href="#Number-Input:-Precision-Matters">¶</a></h3><p>Scientific computing demands numerical precision:</p>
-<div class="highlight"><pre><span></span><span class="c1"># number_input.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="n">magnitude</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">"Apparent magnitude:"</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="c1"># Calculating absolute magnitude assuming distance to Vega (7.68 parsecs)</span>
-<span class="n">distance</span> <span class="o">=</span> <span class="mf">7.68</span>  <span class="c1"># parsecs</span>
-<span class="n">absolute_mag</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">distance</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Absolute magnitude at 10pc: </span><span class="si">{</span><span class="n">absolute_mag</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>The <code>step</code> parameter controls the increment/decrement buttons, essential for fine-tuning scientific values.</p>
-<h3 id="Sliders:-Exploration-Through-Motion">Sliders: Exploration Through Motion<a class="anchor-link" href="#Sliders:-Exploration-Through-Motion">¶</a></h3><p>Sliders transform parameter exploration into a visceral experience:</p>
-<div class="highlight"><pre><span></span><span class="c1"># slider.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">radius</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Radius (R☉):"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="n">volume</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">3</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Volume: </span><span class="si">{</span><span class="n">volume</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> V☉"</span><span class="p">)</span>
-</pre></div>
-<p>The slider shows min, max, and default value. Users can click or drag to select.</p>
-<h3 id="Checkboxes:-Binary-Decisions">Checkboxes: Binary Decisions<a class="anchor-link" href="#Checkboxes:-Binary-Decisions">¶</a></h3><p>Not all choices are continuous. Checkboxes handle binary decisions elegantly:</p>
-<div class="highlight"><pre><span></span><span class="c1"># checkbox.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">show_details</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s2">"Show calculation details"</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Answer: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">show_details</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Calculation: 6 × 7 = 42"</span><span class="p">)</span>
-</pre></div>
-<p>Checkboxes return <code>True</code> when checked, <code>False</code> when unchecked. They maintain their state between reruns. The power of checkboxes lies in conditional display—they let users control interface complexity: simple by default, detailed on demand.</p>
-<h3 id="Selectboxes:-Discrete-Choices">Selectboxes: Discrete Choices<a class="anchor-link" href="#Selectboxes:-Discrete-Choices">¶</a></h3><p>When options are discrete but not binary, selectboxes provide structure:</p>
-<div class="highlight"><pre><span></span><span class="c1"># selectbox.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">star_type</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
-    <span class="s2">"Stellar class:"</span><span class="p">,</span>
-    <span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"You selected a </span><span class="si">{</span><span class="n">star_type</span><span class="si">}</span><span class="s2">-type star"</span><span class="p">)</span>
-</pre></div>
-<p>Selectboxes enforce valid choices. Users can't enter "Z-type star"—they must choose from provided options. This validation happens automatically, preventing errors downstream.</p>
-<h3 id="Buttons:-The-Trigger-Paradigm">Buttons: The Trigger Paradigm<a class="anchor-link" href="#Buttons:-The-Trigger-Paradigm">¶</a></h3><p>Buttons are fundamentally different from other widgets:</p>
-<div class="highlight"><pre><span></span><span class="c1"># button_behavior.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Calculate"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Button clicked! This disappears on next interaction."</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">balloons</span><span class="p">()</span>  <span class="c1"># Fun animation!</span>
-</pre></div>
-<p>Buttons are <code>True</code> only when clicked, returning to <code>False</code> on the next rerun. This transient behavior makes buttons perfect for triggering actions rather than maintaining state.</p>
-<p>Why this special behavior? Consider the alternative. If buttons stayed <code>True</code> after clicking, every rerun would re-execute the button's action. Click "Send Email" once, emails send forever! The transient nature prevents repeated actions.</p>
-<p>To see the contrast:</p>
-<div class="highlight"><pre><span></span><span class="c1"># button_vs_checkbox.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Temporary"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"I disappear!"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s2">"Persistent"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"I stay visible!"</span><span class="p">)</span>
-</pre></div>
-<p>The button returns to <code>False</code> after the script reruns, while the checkbox maintains its state.</p>
-<h3 id="Layout-with-Columns">Layout with Columns<a class="anchor-link" href="#Layout-with-Columns">¶</a></h3><p>Professional interfaces need spatial organization:</p>
-<div class="highlight"><pre><span></span><span class="c1"># columns.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">col1</span><span class="p">,</span> <span class="n">col2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="n">col1</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">"Input"</span><span class="p">)</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Temperature:"</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="n">col2</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">"Output"</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wien peak: </span><span class="si">{</span><span class="mf">2.898e6</span><span class="o">/</span><span class="n">temp</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> nm"</span><span class="p">)</span>
-</pre></div>
-<p>Columns create logical groupings and visual relationships. Input on the left, output on the right—a pattern users understand intuitively. The context manager syntax (<code>with col1:</code>) is pythonic and clear. Everything within the context appears in that column.</p>
-<p>You can specify relative widths:</p>
-<div class="highlight"><pre><span></span><span class="c1"># column_widths.py</span>
-<span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col3</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">columns</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># 2:1:2 ratio</span>
-</pre></div>
-<p>This fine control lets you create information hierarchies. Wide columns for primary content, narrow columns for controls or metadata.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Handling-Data-and-Performance">Handling Data and Performance<a class="anchor-link" href="#Handling-Data-and-Performance">¶</a></h2><h3 id="The-Hidden-Cost-of-Simplicity">The Hidden Cost of Simplicity<a class="anchor-link" href="#The-Hidden-Cost-of-Simplicity">¶</a></h3><p>Streamlit's rerun model makes development beautifully simple—your script runs top to bottom, widgets return values, everything updates automatically. But this simplicity has a cost that becomes painfully obvious when you add slow operations to your app.</p>
-<p>Imagine you're building a stellar catalog analyzer. Loading the catalog takes a few seconds—reading from disk, parsing formats, building indices. In a traditional script, you load once and analyze many times. In Streamlit's rerun model, without intervention, you'd reload on every single interaction.</p>
-<p>Let's see this problem in action:</p>
-<div class="highlight"><pre><span></span><span class="c1"># slow_problem.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">():</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Simulates slow loading</span>
-    <span class="k">return</span> <span class="s2">"Large dataset"</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>  <span class="c1"># This runs EVERY time!</span>
-<span class="n">slider</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Any value:"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
-<p>Try this app—every slider movement triggers a 2-second wait! This is completely unusable.</p>
-<p>The problem compounds with real scientific data. Loading a Gaia catalog might take 10 seconds. Complex calculations on that data might take another 5. Image processing might add more. Without a solution, your app would spend minutes reloading data that hasn't changed.</p>
-<p>This isn't a flaw in Streamlit's design—it's a trade-off. The rerun model eliminates complexity around state management, event handling, and synchronization. But it requires us to explicitly mark expensive operations that shouldn't repeat.</p>
-<h3 id="The-Caching-Solution">The Caching Solution<a class="anchor-link" href="#The-Caching-Solution">¶</a></h3><p>Streamlit's answer to the performance problem is memoization—remembering function results and reusing them when appropriate. The <code>@st.cache_data</code> decorator implements this pattern elegantly:</p>
-<div class="highlight"><pre><span></span><span class="c1"># caching_solution.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>  <span class="c1"># Magic happens here!</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">():</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Only runs once!</span>
-    <span class="k">return</span> <span class="s2">"Large dataset"</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>  <span class="c1"># Instant after first call</span>
-<span class="n">slider</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Any value:"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
-<p>The transformation is dramatic. The first run still takes 2 seconds—data must load initially. But subsequent runs return instantly. Moving the slider no longer triggers a reload. The app feels responsive.</p>
-<h3 id="Caching-with-Parameters">Caching with Parameters<a class="anchor-link" href="#Caching-with-Parameters">¶</a></h3><p>Real functions take parameters. Caching handles this naturally—each unique parameter combination gets its own cache entry:</p>
-<div class="highlight"><pre><span></span><span class="c1"># cache_params.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_expensive</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="c1"># Each value of n gets cached separately</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="o">**</span> <span class="mi">2</span>
-
-<span class="n">value</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"N:"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">compute_expensive</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># Only computed once per value</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">² = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>This creates up to 100 cache entries—one per slider position. Memory is cheap compared to computation time. If users frequently revisit certain values (common in exploration), they get instant results.</p>
-<h3 id="Caching-File-Operations">Caching File Operations<a class="anchor-link" href="#Caching-File-Operations">¶</a></h3><p>File I/O is notoriously slow—network latency, disk seeking, parsing overhead. Always cache file operations:</p>
-<div class="highlight"><pre><span></span><span class="c1"># cache_files.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_catalog</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-
-<span class="c1"># This only reads the file once</span>
-<span class="n">stars</span> <span class="o">=</span> <span class="n">load_catalog</span><span class="p">(</span><span class="s2">"stars.csv"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stars</span><span class="p">)</span><span class="si">}</span><span class="s2"> stars"</span><span class="p">)</span>
-</pre></div>
-<p>This pattern is essential for scientific applications. Astronomical catalogs can be gigabytes. FITS files require complex parsing. CSV files need type inference. Without caching, every interaction would re-read, re-parse, re-process. With caching, you pay the cost once per session.</p>
-<h3 id="Knowing-When-NOT-to-Cache">Knowing When NOT to Cache<a class="anchor-link" href="#Knowing-When-NOT-to-Cache">¶</a></h3><p>Caching isn't free. It uses memory, adds overhead, and complicates debugging. Don't cache simple operations:</p>
-<div class="highlight"><pre><span></span><span class="c1"># no_cache_needed.py</span>
-<span class="c1"># ❌ Don't cache this - it's instant</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_distance</span><span class="p">(</span><span class="n">parallax</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">parallax</span>
-
-<span class="c1"># ✅ Do cache this - it's slow</span>
-<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_huge_catalog</span><span class="p">():</span>
-    <span class="c1"># Expensive operation</span>
-    <span class="k">pass</span>
-</pre></div>
-<p>Simple rule: If it feels slow when using the app, add <code>@st.cache_data</code>.</p>
-<p>Common operations that DON'T need caching:</p>
+<h2 id="Understanding-Git-and-GitHub-(Starting-from-Zero)">Understanding Git and GitHub (Starting from Zero)<a class="anchor-link" href="#Understanding-Git-and-GitHub-(Starting-from-Zero)">¶</a></h2><p>Let's clear up the confusion right away—Git and GitHub are not the same thing, though they work beautifully together.</p>
+<p><strong>Git</strong> is a version control system that runs on your computer. Think of it as a highly sophisticated "undo" system that:</p>
 <ul>
-<li>Simple math calculations</li>
-<li>String formatting</li>
-<li>List comprehensions under 1000 items</li>
-<li>Dictionary lookups</li>
-<li>Most NumPy operations on small arrays</li>
+<li>Remembers every change you've ever made to your code</li>
+<li>Lets you travel back in time to any previous version</li>
+<li>Tracks who changed what, when, and why</li>
+<li>Works entirely on your local machine (no internet required)</li>
 </ul>
-<p>Common operations that DO need caching:</p>
+<p><strong>Why is it called "Git"?</strong> The name was chosen by Linus Torvalds (who also created Linux) when he built Git in 2005. In British slang, "git" is a mild insult meaning "unpleasant person"—Torvalds jokingly named it after himself! He also said it can stand for any acronym you like: "Global Information Tracker" when it's working well, or "Goddamn Idiotic Truckload of sh*t" when it breaks. The name stuck because it's short, easy to type, and impossible to confuse with existing commands.</p>
+<p><strong>GitHub</strong> is a website that hosts Git repositories in the cloud. Think of it as:</p>
 <ul>
-<li>File I/O of any size</li>
-<li>Network requests</li>
-<li>Database queries</li>
-<li>Machine learning predictions</li>
-<li>Image processing</li>
-<li>Large matrix operations</li>
-<li>Parsing complex formats</li>
+<li>Google Drive, but specifically designed for code</li>
+<li>A social network for programmers</li>
+<li>A backup service that saves your Git history online</li>
+<li>A collaboration platform where multiple people can work on the same code</li>
 </ul>
-<h3 id="Manual-Cache-Management">Manual Cache Management<a class="anchor-link" href="#Manual-Cache-Management">¶</a></h3><p>Sometimes you need explicit control over the cache:</p>
-<div class="highlight"><pre><span></span><span class="c1"># clear_cache.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Clear all cache"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">cache_data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"Cache cleared!"</span><span class="p">)</span>
-</pre></div>
-<p>This nuclear option clears everything when needed—useful for debugging or when external data sources update.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Visualizations-and-File-Handling">Visualizations and File Handling<a class="anchor-link" href="#Visualizations-and-File-Handling">¶</a></h2><p>Scientific data demands visualization. Numbers in tables reveal patterns slowly; plots reveal them instantly. Throughout this course, you've created matplotlib figures in Jupyter notebooks, carefully crafting visualizations that illuminate your data. Now we need those same visualizations in our web apps, responsive to user input and beautifully integrated into the interface.</p>
-<p>The challenge is that matplotlib was designed for static output—papers, presentations, notebooks. Streamlit bridges this gap, taking your matplotlib figures and embedding them seamlessly into web interfaces. Your plotting knowledge transfers directly; only the display mechanism changes.</p>
-<h3 id="Basic-Matplotlib-Integration">Basic Matplotlib Integration<a class="anchor-link" href="#Basic-Matplotlib-Integration">¶</a></h3><p>The integration between Streamlit and matplotlib is beautifully simple. Create your figure exactly as you learned, then hand it to Streamlit:</p>
-<div class="highlight"><pre><span></span><span class="c1"># basic_plot.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="n">st</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</pre></div>
-<p>The key is passing the figure object to <code>st.pyplot()</code>.</p>
-<p>This single function, <code>st.pyplot()</code>, performs considerable magic. It captures the matplotlib figure, converts it to a web-friendly format (PNG or SVG), embeds it in the HTML stream. All the complexity of web image handling vanishes behind one function call.</p>
-<h3 id="Interactive-Plots">Interactive Plots<a class="anchor-link" href="#Interactive-Plots">¶</a></h3><p>Static plots inform; interactive plots engage. Combining Streamlit widgets with matplotlib creates dynamic visualizations:</p>
-<div class="highlight"><pre><span></span><span class="c1"># interactive_plot.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="n">freq</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s2">"Frequency:"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">freq</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span>
-<span class="n">st</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</pre></div>
-<p>The plot updates automatically when the slider moves! This automatic update is Streamlit's rerun model at its best. Moving the slider triggers a rerun, the script executes with the new frequency value, matplotlib generates a new figure, and Streamlit displays it.</p>
-<p>This pattern scales to complex visualizations. Imagine a Hertzsprung-Russell diagram where users adjust stellar population parameters, or a light curve where users test different periods. The same pattern—widget changes value, plot uses value, display updates—handles any complexity.</p>
-<h3 id="File-Uploads:-Bringing-User-Data">File Uploads: Bringing User Data<a class="anchor-link" href="#File-Uploads:-Bringing-User-Data">¶</a></h3><p>Your app shouldn't be limited to built-in datasets. Real scientific work requires analyzing user data—their observations, their measurements, their discoveries:</p>
-<div class="highlight"><pre><span></span><span class="c1"># file_upload.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">uploaded</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">file_uploader</span><span class="p">(</span><span class="s2">"Choose a file"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"txt"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">uploaded</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">uploaded</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"File contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters"</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">content</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>  <span class="c1"># Show first 500 chars</span>
-</pre></div>
-<p>The uploader returns <code>None</code> until a file is selected, then a file-like object. This object behaves like a file opened with Python's <code>open()</code>—you can <code>.read()</code> it, seek through it, or get its name and size.</p>
-<p>The <code>type</code> parameter accepts single extensions (<code>"txt"</code>), lists (<code>["csv", "txt"]</code>), or None (any file). This filtering happens browser-side, guiding users to appropriate files.</p>
-<h3 id="Enabling-Downloads">Enabling Downloads<a class="anchor-link" href="#Enabling-Downloads">¶</a></h3><p>Analysis without export is incomplete. Users need to save results, share findings, and preserve outputs:</p>
-<div class="highlight"><pre><span></span><span class="c1"># download.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="s2">"star,magnitude</span><span class="se">\n</span><span class="s2">Vega,0.03</span><span class="se">\n</span><span class="s2">Sirius,-1.46"</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">"Download CSV"</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
-    <span class="n">file_name</span><span class="o">=</span><span class="s2">"stars.csv"</span><span class="p">,</span>
-    <span class="n">mime</span><span class="o">=</span><span class="s2">"text/csv"</span>
-<span class="p">)</span>
-</pre></div>
-<p>The download button generates files client-side, triggers browser's download dialog, and names files appropriately. The <code>mime</code> type tells browsers how to handle the file—<code>text/csv</code> for CSVs, <code>text/plain</code> for text, <code>application/pdf</code> for PDFs.</p>
-<p>This completes the data cycle: upload, process, download. Your app becomes part of their workflow, not a dead end.</p>
-<h3 id="Progress-Indicators:-Managing-Expectations">Progress Indicators: Managing Expectations<a class="anchor-link" href="#Progress-Indicators:-Managing-Expectations">¶</a></h3><p>Humans hate uncertainty more than waiting. Progress indicators transform frustrating waits into acceptable pauses:</p>
-<div class="highlight"><pre><span></span><span class="c1"># spinner.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Process"</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">"Working..."</span><span class="p">):</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"Done!"</span><span class="p">)</span>
-</pre></div>
-<p>The spinner shows while the code inside the <code>with</code> block runs. The message should be informative ("Processing 1000 stars...") not generic ("Loading...").</p>
-<h3 id="Progress-Bars-for-Known-Operations">Progress Bars for Known Operations<a class="anchor-link" href="#Progress-Bars-for-Known-Operations">¶</a></h3><p>When you know the steps, show the progress:</p>
-<div class="highlight"><pre><span></span><span class="c1"># progress_bar.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Analyze"</span><span class="p">):</span>
-    <span class="n">progress</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">progress</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-        <span class="n">progress</span><span class="o">.</span><span class="n">progress</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-</pre></div>
-<p>Progress bars transform anxiety into anticipation. Users see movement, estimate completion time, and feel the app is working.</p>
-<h3 id="Communicating-with-Status-Messages">Communicating with Status Messages<a class="anchor-link" href="#Communicating-with-Status-Messages">¶</a></h3><p>Different situations require different messaging:</p>
-<div class="highlight"><pre><span></span><span class="c1"># messages.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"ℹ️ Upload a file to begin"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"✅ File processed successfully"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"⚠️ Large file may be slow"</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"❌ Invalid file format"</span><span class="p">)</span>
-</pre></div>
-<p>Each creates a colored box with appropriate styling. Info (blue) provides guidance without alarm. Success (green) confirms positive outcomes. Warning (yellow) alerts to potential issues without blocking progress. Error (red) indicates failure requiring action.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Building-Chat-Interfaces">Building Chat Interfaces<a class="anchor-link" href="#Building-Chat-Interfaces">¶</a></h2><p>Chat applications present a unique challenge in Streamlit's rerun model. Conversations are inherently stateful—each message builds on previous ones. But Streamlit reruns your entire script on every interaction, resetting all variables to their initial values.</p>
-<p>Let's see why this is problematic:</p>
-<div class="highlight"><pre><span></span><span class="c1"># broken_chat.py - This WON'T work!</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Resets on every rerun!</span>
-<span class="n">user_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"Say something:"</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">user_input</span><span class="p">:</span>
-    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>  <span class="c1"># Only shows one message</span>
-</pre></div>
-<p>Every time you type a new message, the script reruns from the top. The <code>messages</code> list is recreated empty, your new message is added to that empty list, and you see only the latest message. The conversation history vanishes with each interaction.</p>
-<h3 id="Understanding-Session-State">Understanding Session State<a class="anchor-link" href="#Understanding-Session-State">¶</a></h3><p>Session state is Streamlit's answer to the persistence problem. Think of it as a notebook that Streamlit keeps for each user session, preserving information between script reruns:</p>
-<div class="highlight"><pre><span></span><span class="c1"># session_state_intro.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="c1"># Initialize once per session</span>
-<span class="k">if</span> <span class="s2">"counter"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">"Increment"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Count: </span><span class="si">{</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>The counter survives reruns! Session state is a dictionary that persists until the user refreshes the page.</p>
-<p>The pattern <code>if "key" not in st.session_state:</code> is crucial—it means "initialize this only if it doesn't exist yet." This pattern appears in almost every Streamlit app that needs memory.</p>
-<h3 id="Building-Chat-Memory">Building Chat Memory<a class="anchor-link" href="#Building-Chat-Memory">¶</a></h3><p>With session state understood, we can build functioning chat memory:</p>
-<div class="highlight"><pre><span></span><span class="c1"># chat_memory.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">if</span> <span class="s2">"messages"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="n">user_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"Message:"</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">user_input</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>Now messages accumulate! This simple pattern—initialize once, append new data, display everything—forms the foundation of all Streamlit chat interfaces.</p>
-<h3 id="Chat-Specific-UI-Components">Chat-Specific UI Components<a class="anchor-link" href="#Chat-Specific-UI-Components">¶</a></h3><p>Streamlit provides specialized components that create professional chat interfaces:</p>
-<div class="highlight"><pre><span></span><span class="c1"># chat_display.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">"user"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">"assistant"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hi there!"</span><span class="p">)</span>
-</pre></div>
-<p>This creates chat bubbles with avatars. The <code>st.chat_message()</code> context manager creates:</p>
+<p>Here's the key relationship: Git tracks your changes locally, GitHub stores those changes online.</p>
+<h3 id="Why-Version-Control-Is-Revolutionary">Why Version Control Is Revolutionary<a class="anchor-link" href="#Why-Version-Control-Is-Revolutionary">¶</a></h3><p>You've actually seen Git-like behavior in many tools you use daily. When you edit a Google Doc, it automatically saves every change—you can click "Version history" to see who wrote what and when. Overleaf does the same for LaTeX documents. These tools use the same principle as Git: instead of saving entire copies of your document, they save only the <em>differences</em> between versions.</p>
+<p>This approach is brilliant because:</p>
 <ul>
-<li><strong>Avatar</strong>: Automatic icon based on role (user/assistant/system)</li>
-<li><strong>Alignment</strong>: User messages typically right-aligned, assistant left</li>
-<li><strong>Styling</strong>: Professional chat bubble appearance</li>
-<li><strong>Containment</strong>: Everything inside the context appears in the bubble</li>
+<li><strong>It's lightweight</strong>: Storing differences takes far less space than storing full copies</li>
+<li><strong>It's informative</strong>: You can see exactly what changed between any two versions</li>
+<li><strong>It's collaborative</strong>: Multiple people can work on the same document without chaos</li>
 </ul>
-<h3 id="The-Chat-Input-Widget">The Chat Input Widget<a class="anchor-link" href="#The-Chat-Input-Widget">¶</a></h3><p>Standard text inputs work for chat, but Streamlit's dedicated chat input is better:</p>
-<div class="highlight"><pre><span></span><span class="c1"># chat_input.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="k">if</span> <span class="n">prompt</span> <span class="o">:=</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_input</span><span class="p">(</span><span class="s2">"Say something"</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"You said: </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-<p>The walrus operator (<code>:=</code>) assigns and checks in one line—it assigns the input to <code>prompt</code> AND checks if it's not empty. This is perfect for chat interfaces where you only want to react to actual messages.</p>
-<p>The chat input appears at the bottom of the screen (like messaging apps), submits on Enter (no button needed), and clears after submission.</p>
-<h3 id="Assembling-a-Complete-Chat-Interface">Assembling a Complete Chat Interface<a class="anchor-link" href="#Assembling-a-Complete-Chat-Interface">¶</a></h3><p>Combining these pieces creates a functioning chat system:</p>
-<div class="highlight"><pre><span></span><span class="c1"># simple_chat.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="c1"># Initialize</span>
-<span class="k">if</span> <span class="s2">"messages"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Display history</span>
-<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]):</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">"content"</span><span class="p">])</span>
-
-<span class="c1"># Handle input</span>
-<span class="k">if</span> <span class="n">prompt</span> <span class="o">:=</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_input</span><span class="p">(</span><span class="s2">"Type here"</span><span class="p">):</span>
-    <span class="c1"># Add user message</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">})</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">"user"</span><span class="p">):</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
-    
-    <span class="c1"># Add response</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Echo: </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">response</span><span class="p">})</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">"assistant"</span><span class="p">):</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</pre></div>
-<p>Notice the message structure: dictionaries with "role" and "content" keys. This format matches what most AI APIs expect (OpenAI, Anthropic, Google).</p>
-<h3 id="Security-Considerations-for-API-Keys">Security Considerations for API Keys<a class="anchor-link" href="#Security-Considerations-for-API-Keys">¶</a></h3><p>Chat interfaces often connect to AI services requiring API keys. Security is paramount:</p>
-<div class="highlight"><pre><span></span><span class="c1"># secure_key.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"API Key:"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">api_key</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"✅ Key provided"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"⚠️ Enter API key to continue"</span><span class="p">)</span>
-</pre></div>
-<p>The <code>type="password"</code> hides the input as dots—keys are masked, excluded from autofill, and treated as sensitive by browsers.</p>
-<h3 id="Patterns-for-API-Integration">Patterns for API Integration<a class="anchor-link" href="#Patterns-for-API-Integration">¶</a></h3><p>When integrating with AI services:</p>
-<div class="highlight"><pre><span></span><span class="c1"># api_pattern.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"API Key"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">prompt</span> <span class="o">:=</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_input</span><span class="p">(</span><span class="s2">"Ask something"</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">:</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Please add API key"</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">"Thinking..."</span><span class="p">):</span>
-            <span class="c1"># Make API call here</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="s2">"API response"</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</pre></div>
-<p>Placing the API key in the sidebar keeps it accessible but out of the way. The spinner provides crucial feedback during API calls.</p>
-<h3 id="Complete-Claude-Integration">Complete Claude Integration<a class="anchor-link" href="#Complete-Claude-Integration">¶</a></h3><p>Here's how everything combines for a real AI chat:</p>
-<div class="highlight"><pre><span></span><span class="c1"># claude_minimal.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">anthropic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anthropic</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Claude Chat"</span><span class="p">)</span>
-
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"Claude API Key"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="s2">"messages"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Display messages</span>
-<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">"role"</span><span class="p">]):</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">"content"</span><span class="p">])</span>
-
-<span class="c1"># Input and response</span>
-<span class="k">if</span> <span class="n">prompt</span> <span class="o">:=</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_input</span><span class="p">(</span><span class="s2">"Message"</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">api_key</span><span class="p">:</span>
-        <span class="c1"># Add user message</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">})</span>
-        
-        <span class="c1"># Get Claude response</span>
-        <span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-            <span class="n">model</span><span class="o">=</span><span class="s2">"claude-sonnet-4-20250514"</span><span class="p">,</span>
-            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-            <span class="n">messages</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span>
-        <span class="p">)</span>
-        
-        <span class="c1"># Add assistant message</span>
-        <span class="n">answer</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">answer</span><span class="p">})</span>
-        
-        <span class="c1"># Display</span>
-        <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">"assistant"</span><span class="p">):</span>
-            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
-</pre></div>
-<p>This minimal implementation maintains conversation history, handles the full message cycle, and integrates cleanly with Claude's API.</p>
+<p>Git brings this power to your code. And while it might seem like extra work at first, it becomes essential when you're working on larger projects. Imagine working on a telescope control system with 10 people, or contributing to astropy with 100+ developers worldwide—without version control, it would be chaos!</p>
+<h3 id="A-Simple-Analogy">A Simple Analogy<a class="anchor-link" href="#A-Simple-Analogy">¶</a></h3><p>Imagine you're writing a research paper:</p>
+<ul>
+<li><strong>Git</strong> is like keeping a detailed lab notebook where you record every draft, every edit, and every revision with timestamps and notes about why you made each change</li>
+<li><strong>GitHub</strong> is like a library where you can publish your lab notebook so others can read it, learn from it, and even suggest improvements</li>
+</ul>
+<p>You can use Git without GitHub (just keeping your version history local), but you can't use GitHub without Git (GitHub needs Git's version tracking to work).</p>
 </div>
 </div>
 </div>
@@ -8149,119 +7634,836 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Deployment-to-the-Cloud">Deployment to the Cloud<a class="anchor-link" href="#Deployment-to-the-Cloud">¶</a></h2><p>Right now, your app runs at <code>localhost:8501</code>. When you run <code>streamlit run app.py</code>, your computer becomes a web server, but it's a private party. The <code>localhost</code> part means "this computer only"—it's like having a brilliant telescope in your basement that only you can use. The <code>:8501</code> is the port number—the specific door Streamlit uses to communicate. Even if you send the <code>localhost:8501</code> link to a friend, they'll get an error. Your app is trapped on your machine.</p>
-<p>To share your app with the world, we need to deploy it to the cloud. Streamlit provides free hosting that makes deployment take just minutes.</p>
-<h3 id="The-Deployment">The Deployment<a class="anchor-link" href="#The-Deployment">¶</a></h3><p>The path from local app to live website has three stages: prepare your files, push to GitHub, and deploy to Streamlit Cloud.</p>
-<p><strong>Step 1: Prepare Your Project</strong></p>
-<p>Your repository should look like this:</p>
-<pre><code>stellar-magnitude-calculator/
-├── app.py                     # Your main Streamlit app
-├── requirements.txt           # Tells Streamlit what packages to install
-├── .gitignore                 # Files to keep private
-└── README.md                  # Optional but professional
+<h3 id="Why-Scientists-Need-Version-Control">Why Scientists Need Version Control<a class="anchor-link" href="#Why-Scientists-Need-Version-Control">¶</a></h3><p>Let's be honest about how you currently save your work. You probably have a folder that looks something like this:</p>
+<pre><code>Project1/
+├── llm_tools.py
+├── llm_tools_backup.py
+├── llm_tools_old.py
+├── llm_tools_v2.py
+├── llm_tools_v2_fixed.py
+├── llm_tools_v2_final.py
+├── llm_tools_v2_final_ACTUALLY_WORKING.py
+├── llm_tools_v2_final_submitted.py
+└── test.py
 </code></pre>
-<p>The critical file is <code>requirements.txt</code>. This tells Streamlit's servers what packages your app needs:</p>
-<pre><code>streamlit
-numpy
-matplotlib
-anthropic  # Only include if you're using Claude
-</code></pre>
-<p>You also need a <code>.gitignore</code> file to keep sensitive files off GitHub. This is crucial for security.</p>
-<p><strong>Step 2: Push to GitHub</strong></p>
-<p>Using Cursor's Source Control panel (you learned this in Lecture 9), commit your files with a meaningful message like "Initial Streamlit app for stellar classification" and push to a new repository.</p>
-<p>When naming your repository, choose something descriptive: <code>stellar-classifier</code> is better than <code>project1</code>. Your code must be on GitHub for Streamlit Cloud to access it.</p>
-<p><strong>Step 3: Deploy to Streamlit Cloud</strong></p>
-<p>Navigate to <a href="https://share.streamlit.io">share.streamlit.io</a> and sign in with your GitHub account. Click "New app" and you'll see a deployment form with:</p>
-<ul>
-<li><strong>Repository</strong>: Select your repo from the dropdown</li>
-<li><strong>Branch</strong>: Usually <code>main</code> (sometimes <code>master</code> for older repos)</li>
-<li><strong>Main file path</strong>: The path to your <code>.py</code> file (usually just <code>app.py</code>)</li>
-</ul>
-<p>Consider the advanced settings—you can choose a custom URL like <code>stellar-calculator.streamlit.app</code> instead of a random string. Choose wisely; this URL becomes permanent!</p>
-<p>Click "Deploy!" and watch the magic happen. Streamlit spins up a container, installs Python, reads your <code>requirements.txt</code>, installs all packages, and runs your app. In 2-3 minutes, your app is live. Anyone, anywhere in the world, can visit your URL and use your app. They don't need Python. They just click your link.</p>
-<h3 id="Managing-API-Keys-in-Production">Managing API Keys in Production<a class="anchor-link" href="#Managing-API-Keys-in-Production">¶</a></h3><p>When your app uses APIs, you need to handle API keys carefully. There are two approaches:</p>
-<h4 id="Approach-1:-Users-Bring-Their-Own-Keys">Approach 1: Users Bring Their Own Keys<a class="anchor-link" href="#Approach-1:-Users-Bring-Their-Own-Keys">¶</a></h4><p>Most common for tools using expensive APIs:</p>
-<div class="highlight"><pre><span></span><span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">"Enter your API key:"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"password"</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">:</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"👈 Please enter your API key to continue"</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-    
-<span class="c1"># Use their key for API calls</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-</pre></div>
-<p>Users control their own usage and costs. Your app becomes a tool that helps them use their API access more effectively.</p>
-<h4 id="Approach-2:-You-Provide-the-API-Access">Approach 2: You Provide the API Access<a class="anchor-link" href="#Approach-2:-You-Provide-the-API-Access">¶</a></h4><p>Sometimes you want to provide API access as part of your service. Streamlit Secrets lets you store API keys securely. In your app's dashboard (after deployment), navigate to Settings → Secrets and add your keys in TOML format:</p>
-<div class="highlight"><pre><span></span><span class="n">ANTHROPIC_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sk-ant-api03-your-actual-key-here"</span>
-<span class="n">NASA_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"your-nasa-key"</span>
-</pre></div>
-<p>In your code:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">secrets</span><span class="p">[</span><span class="s2">"ANTHROPIC_API_KEY"</span><span class="p">]</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
-</pre></div>
-<p>For local development, create <code>.streamlit/secrets.toml</code> in your project with the same format. This file should NEVER go to GitHub—ensure it's in your <code>.gitignore</code>!</p>
-<h3 id="The-Magic-of-Continuous-Deployment">The Magic of Continuous Deployment<a class="anchor-link" href="#The-Magic-of-Continuous-Deployment">¶</a></h3><p>Once deployed, your app updates automatically whenever you push changes to GitHub. Edit your code, commit and push using Source Control, and within seconds, Streamlit detects the change and rebuilds your app. Users see the updates in about a minute. No manual redeployment. No downtime.</p>
-<p>This continuous deployment transforms how you develop. You can iterate quickly, fix issues immediately, and gradually improve your app based on user feedback.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Professional-Polish">Professional Polish<a class="anchor-link" href="#Professional-Polish">¶</a></h2><p>The difference between a script and a professional application often comes down to small details. Users form opinions in seconds—a polished interface builds trust, while a rough one suggests unreliability.</p>
-<h3 id="Page-Configuration">Page Configuration<a class="anchor-link" href="#Page-Configuration">¶</a></h3><p>Every Streamlit app should start with page configuration. This must be the first Streamlit command in your script:</p>
-<div class="highlight"><pre><span></span><span class="c1"># page_config.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
-    <span class="n">page_title</span><span class="o">=</span><span class="s2">"Star Analyzer"</span><span class="p">,</span>
-    <span class="n">page_icon</span><span class="o">=</span><span class="s2">"🌟"</span><span class="p">,</span>
-    <span class="n">layout</span><span class="o">=</span><span class="s2">"wide"</span>
-<span class="p">)</span>
-</pre></div>
-<p>The <code>page_title</code> appears in the browser tab—crucial for users with many tabs open. The <code>page_icon</code> (favicon) can be an emoji or image file. The <code>layout</code> parameter fundamentally changes your app's appearance: "centered" for simple apps, "wide" for analytical tools.</p>
-<h3 id="Custom-Theme">Custom Theme<a class="anchor-link" href="#Custom-Theme">¶</a></h3><p>Colors and typography dramatically affect perception. Create <code>.streamlit/config.toml</code> for custom colors:</p>
-<div class="highlight"><pre><span></span><span class="k">[theme]</span>
-<span class="n">primaryColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FF4B4B"</span>
-<span class="n">backgroundColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FFFFFF"</span>
-<span class="n">secondaryBackgroundColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F0F2F6"</span>
-<span class="n">textColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#262730"</span>
-<span class="n">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sans serif"</span>
-</pre></div>
-<p>Dark themes work well for astronomy apps—they reduce eye strain during night observing sessions.</p>
-<h3 id="Multi-Page-Apps">Multi-Page Apps<a class="anchor-link" href="#Multi-Page-Apps">¶</a></h3><p>Complex applications need organization. Multi-page apps divide functionality into logical sections:</p>
-<pre><code>app/
-├── Home.py
-└── pages/
-    ├── 1_Analysis.py
-    └── 2_Help.py
-</code></pre>
-<p>Pages appear in the sidebar automatically. Files are sorted alphanumerically—hence the number prefixes. Each page is a complete Streamlit script with its own logic. Session state is shared across pages, enabling powerful workflows.</p>
-<h3 id="Tooltips">Tooltips<a class="anchor-link" href="#Tooltips">¶</a></h3><p>Every field doesn't need a manual. Tooltips provide context without cluttering:</p>
-<div class="highlight"><pre><span></span><span class="c1"># tooltips.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-
-<span class="n">period</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span>
-    <span class="s2">"Period (days)"</span><span class="p">,</span>
-    <span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">"Orbital or rotation period"</span>
-<span class="p">)</span>
-</pre></div>
-<p>Good tooltips answer "What should I enter here?" without requiring users to leave the interface.</p>
-<h3 id="Performance-Tips-Summary">Performance Tips Summary<a class="anchor-link" href="#Performance-Tips-Summary">¶</a></h3><p>Performance isn't just speed—it's perceived responsiveness:</p>
+<p>We've all been there. But this approach fails us in critical ways:</p>
+<p><strong>The Problems with "Save As" Science:</strong></p>
 <ol>
-<li><strong>Cache expensive operations</strong> with <code>@st.cache_data</code></li>
-<li><strong>Limit displayed data</strong> - Show summaries first, details on demand</li>
-<li><strong>Use progress indicators</strong> for long operations</li>
-<li><strong>Lazy load</strong> with tabs and expanders</li>
-<li><strong>Store results</strong> in session state</li>
+<li><strong>Which version actually works?</strong> You know <code>v2_final_ACTUALLY_WORKING.py</code> was good, but what exactly did you change from <code>v2_final.py</code>?</li>
+<li><strong>When did that bug appear?</strong> Something broke between Tuesday and Thursday, but you have no idea what you changed</li>
+<li><strong>Why did you make that change?</strong> Three weeks later, you can't remember why you commented out that section</li>
+<li><strong>How do you share specific versions?</strong> Your advisor wants to see "the version from last week's meeting"—which file is that?</li>
+<li><strong>How do you merge improvements?</strong> Your collaborator fixed one bug while you fixed another—now what?</li>
 </ol>
-<p>These aren't optimizations—they're requirements for professional apps.</p>
+<p><strong>Git Solves All of This:</strong></p>
+<ul>
+<li>Every change is tracked with a timestamp and a description</li>
+<li>You can see exactly what changed between any two versions</li>
+<li>You can return to any previous state instantly</li>
+<li>Multiple people can work on the same code without chaos</li>
+<li>You have a complete history of your project's evolution</li>
+</ul>
+<p>For astronomers specifically, this means tracking the evolution of your analysis, documenting every decision in your data processing, and creating reproducible research that others can verify and build upon.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Creating-Your-First-GitHub-Account">Creating Your First GitHub Account<a class="anchor-link" href="#Creating-Your-First-GitHub-Account">¶</a></h3><p>Before we dive into version control, you need a GitHub account. This isn't just another website signup—this will become part of your professional identity as a researcher and programmer.</p>
+<p><strong>Step 1: Sign Up at GitHub</strong></p>
+<p>Navigate to <a href="https://github.com/signup">https://github.com/signup</a> and follow the signup process. GitHub will ask you for:</p>
+<ul>
+<li>A username (choose wisely—see below!)</li>
+<li>Your email address (you can add your .edu email later)</li>
+<li>A password (make it strong and unique)</li>
+<li>A verification puzzle to prove you're human</li>
+</ul>
+<h3 id="Choosing-Your-Username-Wisely">Choosing Your Username Wisely<a class="anchor-link" href="#Choosing-Your-Username-Wisely">¶</a></h3><p>Your GitHub username will follow you throughout your career. It will appear on:</p>
+<ul>
+<li>Every piece of code you share</li>
+<li>Research papers that cite your software</li>
+<li>Your CV and grad school applications</li>
+<li>Professional collaborations</li>
+</ul>
+<p>Choose something professional and memorable:</p>
+<ul>
+<li>✅ Good: <code>jsmith-astro</code>, <code>maria-chen</code>, <code>stellar-observer</code></li>
+<li>❌ Avoid: <code>cooldude420</code>, <code>temporary123</code>, <code>ihatephysics</code></li>
+</ul>
+<p>Many astronomers use variations of their real name, making it easier for colleagues to find their work. Remember, you can't easily change this later without breaking links to your repositories.</p>
+<h3 id="Setting-Up-Your-Profile-for-Academia">Setting Up Your Profile for Academia<a class="anchor-link" href="#Setting-Up-Your-Profile-for-Academia">¶</a></h3><p>Once you've created your account, click on your avatar in the top-right corner and select "Your profile". Add:</p>
+<ul>
+<li>Your real name (so people can find you)</li>
+<li>Your university affiliation</li>
+<li>A brief bio mentioning your interests (e.g., "Astronomy undergraduate interested in stellar variability and computational methods")</li>
+<li>Your location (optional)</li>
+<li>A link to your university webpage or LinkedIn (if you have one)</li>
+</ul>
+<p><strong>Quick Note: Student Benefits</strong></p>
+<p>As a student with a <code>.edu</code> email, you're eligible for free GitHub Pro features through the Student Developer Pack at <a href="https://education.github.com/pack">education.github.com/pack</a>. This includes unlimited private repositories and other perks, but the free GitHub account is perfectly fine for this course. You can explore student benefits later if interested.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Git-Basics-in-Cursor">Git Basics in Cursor<a class="anchor-link" href="#Git-Basics-in-Cursor">¶</a></h2><p>When professional developers use Git, they often type commands in a terminal that look like cryptic incantations: <code>git add -A &amp;&amp; git commit -m "message" &amp;&amp; git push origin main</code>. These commands are powerful, but also intimidating for beginners.</p>
+<p>Here's the beautiful thing: Cursor has built-in Git support that handles all of this complexity for you. Instead of memorizing commands, you'll use buttons and visual indicators. It's like the difference between using a modern camera app on your phone versus manually adjusting f-stops and shutter speeds—both take photos, but one is much friendlier for beginners.</p>
+<p><strong>Finding the Source Control Panel</strong></p>
+<p>Open Cursor and look at the left sidebar. If you don't see the sidebar, press <code>Cmd+B</code> (Mac) or <code>Ctrl+B</code> (Windows) to toggle it. You'll see several icons along the left edge:</p>
+<ul>
+<li>📂 Explorer (files)</li>
+<li>🔍 Search</li>
+<li><strong>📊 Source Control</strong> (looks like a branch/fork icon) ← This is where the Git magic happens</li>
+<li>▶️ Run and Debug</li>
+<li>🧩 Extensions</li>
+</ul>
+<p>Click on the Source Control icon. This panel is your command center for all things Git.</p>
+<p><strong>First: Create a Folder for Your Project</strong></p>
+<p>Before we can use Git, we need a folder to track. You have two ways to do this:</p>
+<p><strong>Method 1: Using File Menu</strong></p>
+<ol>
+<li>Click File → Open Folder (or press <code>Cmd+O</code> on Mac, <code>Ctrl+O</code> on Windows)</li>
+<li>Navigate to your Desktop or Documents folder</li>
+<li>Click "New Folder" and name it something like <code>my-first-repo</code> or <code>project1-github</code></li>
+<li>Click "Open" to open this folder in Cursor</li>
+</ol>
+<p><strong>Method 2: Using Explorer (More Visual)</strong></p>
+<ol>
+<li>If you already have Cursor open, click the Explorer icon (📂) in the sidebar</li>
+<li>If you have a parent folder open, right-click in the Explorer panel</li>
+<li>Select "New Folder" from the context menu</li>
+<li>Name your folder and press Enter</li>
+<li>You can also right-click to create "New File" when needed</li>
+</ol>
+<p>The Explorer's right-click menu is powerful—you can:</p>
+<ul>
+<li><strong>New File</strong>: Create any type of file (.py, .md, .txt, etc.)</li>
+<li><strong>New Folder</strong>: Organize your project with subdirectories</li>
+<li><strong>Rename</strong>: Change file or folder names</li>
+<li><strong>Delete</strong>: Remove files (be careful!)</li>
+<li><strong>Copy/Paste</strong>: Duplicate files or move them around</li>
+</ul>
+<p><strong>What You'll See in Source Control</strong></p>
+<p>With your new folder open, click on the Source Control icon. You'll see:</p>
+<pre><code>CHANGES
+
+The folder currently open doesn't have a Git repository. 
+You can initialize a repository which will enable source 
+control features powered by Git.
+
+[Initialize Repository]
+
+You can directly publish this folder to a GitHub 
+repository. Once published, you'll have access to 
+source control features powered by Git and GitHub.
+
+[Publish to GitHub]
+</code></pre>
+<p>You have two options here:</p>
+<ul>
+<li><strong>Initialize Repository</strong>: Creates a local Git repository on your computer only</li>
+<li><strong>Publish to GitHub</strong>: Creates a repository and immediately connects it to GitHub</li>
+</ul>
+<p>For now, let's choose <strong>Initialize Repository</strong> to understand the basics first. We'll connect to GitHub in the next section.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Your-First-Repository">Your First Repository<a class="anchor-link" href="#Your-First-Repository">¶</a></h3><p>Now let's initialize your repository and understand what happens.</p>
+<p><strong>Step 1: Initialize the Repository</strong></p>
+<p>Click the blue "Initialize Repository" button. Something magical just happened—though you might not see much change at first. Cursor has created a hidden folder called <code>.git</code> inside your project folder. This hidden folder is where Git stores all the history of your project.</p>
+<p><strong>Step 2: Create Your First File</strong></p>
+<p>Let's create something to track:</p>
+<ol>
+<li>Click on the Explorer icon (📂) in the sidebar to switch from Source Control to the file view</li>
+<li>In the Explorer panel, right-click in the empty space</li>
+<li>Select "New File"</li>
+<li>Name it <code>hello_astronomy.py</code></li>
+<li>Add this simple code:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># My first tracked Python file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_distance</span><span class="p">(</span><span class="n">parallax_arcsec</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Calculate distance from parallax."""</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">parallax_arcsec</span>
+
+<span class="c1"># Test with Proxima Centauri</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="mf">0.768</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Proxima Centauri: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs"</span><span class="p">)</span>
+</pre></div>
+<p><strong>Step 3: Watch the Source Control Panel React</strong></p>
+<p>Save the file (<code>Cmd+S</code> or <code>Ctrl+S</code>), then click the Source Control icon (📊) to switch back. You can toggle between these panels anytime—Explorer for managing files, Source Control for managing versions.</p>
+<p>In Source Control, you'll now see:</p>
+<pre><code>CHANGES (1)
+  U  hello_astronomy.py
+</code></pre>
+<p>The "U" stands for "Untracked"—Git sees this new file but isn't tracking it yet. The file name might also appear in green, indicating it's new.</p>
+<h3 id="Understanding-the-Git-Workflow:-Stage-and-Commit">Understanding the Git Workflow: Stage and Commit<a class="anchor-link" href="#Understanding-the-Git-Workflow:-Stage-and-Commit">¶</a></h3><p>Think of Git like taking photographs of your project's progress:</p>
+<ul>
+<li><strong>Working Directory</strong>: This is your project folder where you actively edit files—like setting up a scene for a photo</li>
+<li><strong>Staging Area</strong>: This is where you select which changes to include in your next snapshot—like choosing which people to include in a group photo</li>
+<li><strong>Repository History</strong>: This is your album of all past snapshots—permanent records of your project at different points in time</li>
+</ul>
+<p>The workflow goes: Edit files → Stage changes → Commit (take snapshot)</p>
+<h3 id="The-States-of-Your-Files">The States of Your Files<a class="anchor-link" href="#The-States-of-Your-Files">¶</a></h3><p>In Git, files can exist in different states:</p>
+<ol>
+<li><strong>Untracked</strong> (U): Git sees this file exists but has never tracked it before—like a new person who just walked into your photo scene</li>
+<li><strong>Modified</strong> (M): You've changed a file that Git already knows about—like someone in your photo changed their outfit</li>
+<li><strong>Staged</strong> (A for "Added"): You've selected this change to be included in your next commit—like saying "yes, this person will be in the photo"</li>
+<li><strong>Committed</strong>: The change is permanently saved in your Git history—the photo has been taken and added to the album</li>
+</ol>
+<p>Right now, your <code>hello_astronomy.py</code> file is <strong>Untracked</strong>. Git sees it but isn't tracking its changes yet. You need to stage it (select it for the photo) and then commit it (take the photo).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-Basic-Workflow-in-Cursor">The Basic Workflow in Cursor<a class="anchor-link" href="#The-Basic-Workflow-in-Cursor">¶</a></h3><p>Now let's actually track your file by staging and committing it.</p>
+<p><strong>Step 1: Stage Your File</strong></p>
+<p>In the Source Control panel, hover over your <code>hello_astronomy.py</code> file. You'll see a <code>+</code> button appear to its right. Click it.</p>
+<p>Watch what happens:</p>
+<ul>
+<li>The file moves from "Changes" section to a new "Staged Changes" section</li>
+<li>The "U" changes to "A" (meaning "Added")</li>
+<li>The file is now ready to be committed</li>
+</ul>
+<p>You've just told Git: "I want to include this file in my next snapshot."</p>
+<p><strong>Step 2: Write a Commit Message</strong></p>
+<p>Above the file list, you'll see a text box that says "Message (Ctrl+Enter to commit)". This is where you describe what you're saving. Your commit message is like writing a caption for your snapshot—it helps you (and others) understand what changed and why.</p>
+<p>Type a meaningful message:</p>
+<pre><code>Add initial parallax calculation script
+</code></pre>
+<p><strong>Important</strong>: You cannot commit without a message! Git requires you to describe what you're committing. If you try to commit with an empty message box, nothing will happen. This forces you to document your work—a good habit that you'll appreciate later.</p>
+<p><strong>Step 3: Commit (Take the Snapshot)</strong></p>
+<p>Press <code>Ctrl+Enter</code> (Windows) or <code>Cmd+Enter</code> (Mac) to commit. Or click the checkmark button (✓) above the message box.</p>
+<p>Your Source Control panel will suddenly look empty! Don't panic—this is good. It means all your changes are committed (saved to history). Your file is now part of your repository's permanent record.</p>
+<p><strong>Step 4: Make a Change to See the Workflow Again</strong></p>
+<p>Let's modify your file to see how Git tracks changes:</p>
+<ol>
+<li>Switch to Explorer (📂) and open <code>hello_astronomy.py</code></li>
+<li>Add these lines at the bottom:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># Calculate distance to Alpha Centauri A</span>
+<span class="n">alpha_cen_distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="mf">0.754</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Alpha Centauri A: </span><span class="si">{</span><span class="n">alpha_cen_distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs"</span><span class="p">)</span>
+</pre></div>
+<ol start="3">
+<li>Save the file and switch back to Source Control (📊)</li>
+</ol>
+<p>Now you'll see:</p>
+<pre><code>CHANGES (1)
+  M  hello_astronomy.py
+</code></pre>
+<p>The "M" means "Modified"—Git knows this file changed since your last commit. If you click on the file name, Cursor will show you exactly what changed, with removed lines in red and added lines in green.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Writing-Good-Commit-Messages">Writing Good Commit Messages<a class="anchor-link" href="#Writing-Good-Commit-Messages">¶</a></h3><p>Your commit messages are the story of your project. Six months from now, when you're trying to understand why your code changed, these messages will be your guide. Let's learn to write them well from the start.</p>
+<p><strong>The Difference Good Messages Make</strong></p>
+<p>Imagine returning to your project after winter break and seeing this history:</p>
+<p>❌ <strong>Bad commit messages:</strong></p>
+<pre><code>- fixed stuff
+- asdfasdf
+- working now
+- update
+- changes
+- final version
+</code></pre>
+<p>What did you fix? What was broken? What changed? You have no idea.</p>
+<p>✅ <strong>Good commit messages:</strong></p>
+<pre><code>- Fix magnitude calculation for negative flux values
+- Add error handling for missing FITS headers
+- Refactor parallax function to use NumPy arrays
+- Update plotting to include error bars
+- Add documentation for stellar luminosity function
+</code></pre>
+<p>Now you know exactly what each change accomplished!</p>
+<p><strong>The Simple Rules for Good Messages</strong></p>
+<ol>
+<li><strong>Start with a verb</strong>: "Add", "Fix", "Update", "Remove", "Refactor"</li>
+<li><strong>Be specific</strong>: Say what you changed, not just that you changed something</li>
+<li><strong>Keep it short</strong>: Aim for under 50 characters for the first line</li>
+<li><strong>Explain why if needed</strong>: For complex changes, add a blank line then more detail</li>
+</ol>
+<p><strong>Examples for Your Projects</strong></p>
+<p>For your LLM and astronomy projects, here are commit message patterns:</p>
+<pre><code>✓ Add function schema for parallax calculation
+✓ Fix embedding dimension mismatch in RAG search
+✓ Update temperature parameter to reduce hallucination
+✓ Implement chunk overlap for document splitting
+✓ Remove hardcoded API key from source file
+✓ Refactor search function to use vectorized operations
+</code></pre>
+<h3 id="When-to-Commit?">When to Commit?<a class="anchor-link" href="#When-to-Commit?">¶</a></h3><p>Think of commits as save points in a video game. Good times to commit:</p>
+<ul>
+<li>After adding a new function that works</li>
+<li>After fixing a bug</li>
+<li>After completing a section of documentation</li>
+<li>Before trying something risky (so you can undo if needed)</li>
+<li>At the end of each work session</li>
+</ul>
+<p>Don't wait until your entire project is done to make your first commit! Small, frequent commits are better than one massive commit at the end.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Connecting-to-GitHub-from-Cursor">Connecting to GitHub from Cursor<a class="anchor-link" href="#Connecting-to-GitHub-from-Cursor">¶</a></h2><p>Before pushing any code to GitHub, Git needs to know what name and email to attach to your commits. This is just local configuration—it doesn't connect to GitHub or require any password.</p>
+<p><strong>On Mac:</strong></p>
+<ol>
+<li>Open Terminal (press <code>Cmd+Space</code>, type "Terminal", press Enter)</li>
+<li>Type this command and press Enter:</li>
+</ol>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
+</pre></div>
+<ol start="3">
+<li>Type this command and press Enter:</li>
+</ol>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@example.com"</span>
+</pre></div>
+<ol start="4">
+<li>Close Terminal</li>
+</ol>
+<p><strong>On Windows:</strong></p>
+<ol>
+<li>Open Command Prompt (press Windows key, type "cmd", press Enter)</li>
+<li>Type this command and press Enter:</li>
+</ol>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
+</pre></div>
+<ol start="3">
+<li>Type this command and press Enter:</li>
+</ol>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@example.com"</span>
+</pre></div>
+<ol start="4">
+<li>Close Command Prompt</li>
+</ol>
+<p>Use your actual name and the same email you used for GitHub. These commands run silently—no output means they worked!</p>
+<p><strong>Important:</strong> These commands just tell Git what name/email to label your commits with. They don't connect to GitHub or verify you own that email. The actual authentication happens in the next step when you click "Publish Branch."</p>
+<h3 id="Publishing-Your-Repository-to-GitHub">Publishing Your Repository to GitHub<a class="anchor-link" href="#Publishing-Your-Repository-to-GitHub">¶</a></h3><p>Now back in Cursor, look at the Source Control panel. You'll see a blue "Publish Branch" button (☁️). This is your one-click solution to get your code on GitHub.</p>
+<p><strong>Click "Publish Branch" and here's where the real authentication happens:</strong></p>
+<ol>
+<li>Your browser will open automatically</li>
+<li>GitHub will ask you to sign in (if you're not already)</li>
+<li>GitHub will ask "Authorize Cursor to access your account?"</li>
+<li>Click "Authorize" to allow Cursor to push code to your GitHub</li>
+<li>Return to Cursor, name your repository, and choose public or private</li>
+<li>Cursor pushes your code to GitHub</li>
+</ol>
+<p>The browser step is where you actually prove you own the GitHub account. Cursor uses OAuth—you log in through GitHub's website, not through Cursor itself, which is more secure.</p>
+<p><strong>That's it!</strong> Your code is now safely backed up on GitHub.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Publishing-Your-First-Repository">Publishing Your First Repository<a class="anchor-link" href="#Publishing-Your-First-Repository">¶</a></h3><p>Let's actually publish your code to GitHub now.</p>
+<p><strong>Step 1: Click "Publish Branch"</strong></p>
+<p>In the Source Control panel, click the blue "Publish Branch" button. A dialog will appear asking you to name your repository and choose its visibility.</p>
+<p><strong>Step 2: Name Your Repository</strong></p>
+<p>Cursor will suggest a repository name based on your folder name (like <code>my-first-repo</code>). You can:</p>
+<ul>
+<li>Keep the suggested name</li>
+<li>Change it to something more descriptive like <code>astro-python-project1</code></li>
+<li>Add a description (optional but helpful)</li>
+</ul>
+<p><strong>Step 3: Choose Visibility - Public vs Private</strong></p>
+<p>You'll see two options:</p>
+<p><strong>Public Repository</strong>:</p>
+<ul>
+<li>Anyone on the internet can see your code</li>
+<li>Great for building your portfolio</li>
+<li>Shows you're learning and growing</li>
+<li>Required for GitHub Pages (free website hosting)</li>
+<li>Use for: completed projects, coursework you're proud of, anything you want to showcase</li>
+</ul>
+<p><strong>Private Repository</strong>:</p>
+<ul>
+<li>Only you and people you invite can see it</li>
+<li>Good for work-in-progress or sensitive research</li>
+<li>You can make it public later when ready</li>
+<li>Use for: unfinished projects, experimental code, anything with sensitive data</li>
+</ul>
+<p>For this course, choose <strong>Public</strong>—it builds your portfolio and shows your learning journey to future employers or grad schools.</p>
+<p><strong>Step 4: Watch the Magic Happen</strong></p>
+<p>Click "OK" or "Publish". Your browser will open if this is your first time:</p>
+<ol>
+<li>Sign in to GitHub if prompted</li>
+<li>You'll see "Authorize Cursor" page—click the green "Authorize" button</li>
+<li>Return to Cursor</li>
+</ol>
+<p>You'll see activity in the bottom status bar as Cursor pushes your code. When it's done, you'll see a notification: "Successfully published to GitHub!"</p>
+<p><strong>Step 5: View Your Repository Online</strong></p>
+<p>After publishing, a notification appears with a link to view your repository on GitHub. Click it! You'll see:</p>
+<ul>
+<li>All your files</li>
+<li>Your commit history</li>
+<li>A nice interface to browse your code</li>
+</ul>
+<p>Your code is now safely in the cloud, backed up forever, and part of your professional portfolio!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-GitHub-Website-Tour">The GitHub Website Tour<a class="anchor-link" href="#The-GitHub-Website-Tour">¶</a></h3><p>Now your repository is live on GitHub! Let's understand what you're looking at:</p>
+<p><strong>Understanding Your Repository Page</strong></p>
+<p>At the top, you'll see <code>[your-username]/[repository-name]</code>—this shows:</p>
+<ul>
+<li>Your GitHub username</li>
+<li>Your repository name (probably <code>Astron1221</code> or whatever you chose)</li>
+<li>A "Public" badge showing everyone can see this</li>
+</ul>
+<h3 id="The-Main-Navigation-Tabs">The Main Navigation Tabs<a class="anchor-link" href="#The-Main-Navigation-Tabs">¶</a></h3><p>Below your repository name, you see several tabs:</p>
+<ul>
+<li><strong>Code</strong>: Where you browse your files (you're here now)</li>
+<li><strong>Issues</strong>: Where people can report bugs or suggest features</li>
+<li><strong>Pull requests</strong>: Where collaborators propose changes</li>
+<li><strong>Actions</strong>: For automated workflows (advanced topic)</li>
+<li><strong>Projects</strong>: For organizing tasks (like a to-do board)</li>
+<li><strong>Security</strong>: Security alerts and settings</li>
+<li><strong>Insights</strong>: Statistics about your repository</li>
+</ul>
+<p>For now, you'll mainly use the <strong>Code</strong> tab.</p>
+<p><strong>Your Repository Content</strong></p>
+<p>In the main area, you can see:</p>
+<ul>
+<li>Your latest commit message (whatever you wrote when you committed)</li>
+<li>When it was made (probably "a few minutes ago")</li>
+<li>Number of commits (showing your project's history)</li>
+<li>Your file: <code>hello_astronomy.py</code></li>
+</ul>
+<p>Click on your Python file to view your code directly on GitHub. You can even edit it here (though we'll keep using Cursor for that).</p>
+<h3 id="The-About-Section">The About Section<a class="anchor-link" href="#The-About-Section">¶</a></h3><p>On the right side, you'll see "No description, website, or topics provided." Let's fix that:</p>
+<ol>
+<li>Click the gear icon ⚙️ next to "About"</li>
+<li>Add a description like "Python code for Astronomy 1221 course"</li>
+<li>Add topics like <code>python</code>, <code>astronomy</code>, <code>education</code></li>
+<li>Click "Save changes"</li>
+</ol>
+<p>This helps people understand what your project is about when they discover it.</p>
+<h3 id="Changing-Visibility-Later">Changing Visibility Later<a class="anchor-link" href="#Changing-Visibility-Later">¶</a></h3><p>Made your repository public but want to make it private? Or vice versa?</p>
+<ol>
+<li>Go to Settings tab</li>
+<li>Scroll to the "Danger Zone" at the bottom</li>
+<li>Click "Change repository visibility"</li>
+<li>Follow the prompts</li>
+</ol>
+<p>You can switch between public and private anytime, though making a popular public repo private might disappoint users who depend on it!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Essential-GitHub-Workflows-in-Cursor">Essential GitHub Workflows in Cursor<a class="anchor-link" href="#Essential-GitHub-Workflows-in-Cursor">¶</a></h2><p>Now that your code is on GitHub, let's learn the daily workflow you'll use from now on. Every time you work on your project, you'll follow this pattern: Pull → Edit → Commit → Push.</p>
+<p><strong>Understanding Pull (Why We Sync First)</strong></p>
+<p>"Pull" means downloading the latest version from GitHub to your computer. But wait—didn't you just push your code? Why would you need to pull?</p>
+<p>Here's why pulling matters:</p>
+<ul>
+<li>You might work on multiple computers (laptop and desktop)</li>
+<li>You might edit files directly on GitHub's website</li>
+<li>Later, collaborators might make changes</li>
+<li>You might forget what version you have locally after a few days</li>
+</ul>
+<p>Think of it like this: GitHub has the "official" version. Before you start working, you want to make sure you have that official version. Pulling ensures you're not working on an outdated copy.</p>
+<h3 id="The-Daily-Workflow">The Daily Workflow<a class="anchor-link" href="#The-Daily-Workflow">¶</a></h3><p>Let's add a new feature to practice the complete workflow:</p>
+<ol>
+<li><p><strong>First, always sync</strong> - Click the sync button (🔄) in the bottom status bar. This pulls any changes from GitHub and pushes any local commits you have.</p>
+</li>
+<li><p><strong>Make your changes</strong> - Switch to Explorer, open <code>hello_astronomy.py</code>, and add this at the bottom:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># Calculate distance to Betelgeuse</span>
+<span class="n">betelgeuse_distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="mf">0.00522</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Betelgeuse: </span><span class="si">{</span><span class="n">betelgeuse_distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs"</span><span class="p">)</span>
+</pre></div>
+<ol start="3">
+<li><strong>Save your file</strong> (<code>Cmd+S</code> or <code>Ctrl+S</code>)</li>
+<li><strong>Switch to Source Control</strong> - You'll see your file marked with "M" for Modified</li>
+<li><strong>Stage your changes</strong> - Click the <code>+</code> next to the file</li>
+<li><strong>Write a commit message</strong> - "Add Betelgeuse calculation"</li>
+<li><strong>Commit</strong> - Press <code>Cmd+Enter</code> or click the checkmark</li>
+<li><strong>Push to GitHub</strong> - Click the sync button (🔄) again</li>
+</ol>
+<p>After pushing, refresh your GitHub page in the browser. Your new commit appears instantly!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Seeing-Version-Control-in-Action">Seeing Version Control in Action<a class="anchor-link" href="#Seeing-Version-Control-in-Action">¶</a></h3><p>Let's actually see what version control does for you. This is the magic of Git—it remembers everything.</p>
+<h3 id="Viewing-Your-Project-History-in-Cursor">Viewing Your Project History in Cursor<a class="anchor-link" href="#Viewing-Your-Project-History-in-Cursor">¶</a></h3><p>Look at the bottom of your Source Control panel. You'll see a "GRAPH" section you can expand. Click on it to see your project's history visually:</p>
+<pre><code>○ [your latest commit]      main ☁
+│
+● [your second commit]
+│
+● [your first commit]
+</code></pre>
+<p>Each dot represents a commit (a saved snapshot of your project). The lines show how your project evolved over time, with the newest at the top. This is your complete history—every save point you've created.</p>
+<h3 id="Understanding-What-Git-Tracks">Understanding What Git Tracks<a class="anchor-link" href="#Understanding-What-Git-Tracks">¶</a></h3><p>Make a small change to your file to see Git in action:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Change this line:</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Proxima Centauri: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs"</span><span class="p">)</span>
+<span class="c1"># To this:</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance to Proxima Centauri: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> parsecs (</span><span class="si">{</span><span class="n">distance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.26</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> light-years)"</span><span class="p">)</span>
+</pre></div>
+<p>Save the file and click on <code>hello_astronomy.py</code> in Source Control. Cursor shows you:</p>
+<ul>
+<li><strong>Red lines (-)</strong>: What was removed</li>
+<li><strong>Green lines (+)</strong>: What was added</li>
+</ul>
+<p>This is called a "diff" (difference). Git tracks exactly what changed, not entire file copies. This is efficient—even with hundreds of commits, your project stays small.</p>
+<h3 id="Recovering-Old-Code-(The-Simple-Way)">Recovering Old Code (The Simple Way)<a class="anchor-link" href="#Recovering-Old-Code-(The-Simple-Way)">¶</a></h3><p>Made a mistake and want to get back some old code? Here's the easiest method:</p>
+<ol>
+<li>Go to your GitHub repository in your browser</li>
+<li>Click on your file (<code>hello_astronomy.py</code>)</li>
+<li>Click "History" button (shows all versions of this file)</li>
+<li>Click on any past version to view it</li>
+<li>Select and copy the code you need</li>
+<li>Paste it back in Cursor and make a new commit</li>
+</ol>
+<p>The key insight: every commit is a permanent snapshot. Your old code is never truly lost—it's always there in your history on GitHub. Instead of trying to "undo" commits (which can get complicated), just make new commits that fix problems.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Creating-a-.gitignore-File">Creating a .gitignore File<a class="anchor-link" href="#Creating-a-.gitignore-File">¶</a></h3><p>Some files should never be tracked by Git. Since you're already familiar with keeping <code>.env</code> files secure from Lecture 7, let's set up a <code>.gitignore</code> file to automatically exclude files that shouldn't be in your repository.</p>
+<p><strong>Files That Don't Belong in Git:</strong></p>
+<ul>
+<li><code>.env</code> files with API keys (you know this from Lecture 7!)</li>
+<li>Python cache files (<code>__pycache__/</code> folders that Python creates)</li>
+<li>System files (<code>.DS_Store</code> on Mac, <code>Thumbs.db</code> on Windows)</li>
+<li>Large data files (astronomical observations, FITS files, big CSVs)</li>
+<li>Any file with sensitive information</li>
+</ul>
+<p><strong>Creating Your .gitignore:</strong></p>
+<ol>
+<li>In Explorer, create a new file named <code>.gitignore</code> (yes, it starts with a dot!)</li>
+<li>Add these lines:</li>
+</ol>
+<pre><code># Python
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Data files (too large for Git)
+*.fits
+*.csv
+data/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+</code></pre>
+<ol start="3">
+<li>Save, stage, and commit this <code>.gitignore</code> file with message "Add .gitignore"</li>
+<li>Push to GitHub</li>
+</ol>
+<p><strong>Testing That .gitignore Works:</strong></p>
+<p>Let's verify that Git actually ignores files:</p>
+<ol>
+<li>Create a new file called <code>.env</code> in your project folder</li>
+<li>Add some fake API keys:</li>
+</ol>
+<pre><code>ANTHROPIC_API_KEY=sk-fake-key-123456789
+SECRET_PASSWORD=this-should-never-be-on-github
+</code></pre>
+<ol start="3">
+<li>Save the file</li>
+</ol>
+<p>Now look at Source Control—notice that <code>.env</code> doesn't appear at all! Even though you just created and saved it, Git completely ignores it because it's listed in your <code>.gitignore</code>. This is automatic protection against accidentally sharing secrets.</p>
+<p>Try creating a <code>test_data.csv</code> file too—it will also be invisible to Git. The <code>.gitignore</code> file is your safety net, preventing common mistakes before they happen.</p>
+<p><strong>The key point:</strong> Once <code>.gitignore</code> is set up, you can work freely without constantly worrying about what files to commit. Git handles it automatically!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="What-to-Do-When-Push-Fails">What to Do When Push Fails<a class="anchor-link" href="#What-to-Do-When-Push-Fails">¶</a></h3><p>Sometimes when you try to push, things go wrong. Don't panic! Here are the most common issues and how to fix them:</p>
+<p><strong>Problem 1: "Repository not found"</strong></p>
+<p>This means Cursor is trying to push to a repository that doesn't exist on GitHub.</p>
+<ul>
+<li><strong>Solution</strong>: Use the "Publish Branch" button instead of sync. This will create the repository first.</li>
+</ul>
+<p><strong>Problem 2: "File too large"</strong></p>
+<p>GitHub has a 100MB file size limit (with warnings starting at 50MB). If you try to commit a large data file:</p>
+<pre><code>remote: error: File data.fits is 150 MB; this exceeds GitHub's file size limit of 100 MB
+</code></pre>
+<h3 id="Why-does-GitHub-limit-file-sizes?">Why does GitHub limit file sizes?<a class="anchor-link" href="#Why-does-GitHub-limit-file-sizes?">¶</a></h3><ul>
+<li>Git tracks every version of every file in your repository's history</li>
+<li>Large files make the entire repository huge and slow to download</li>
+<li>Git was designed for code, not large data storage</li>
+<li>Every time someone clones your repository, they download ALL versions of ALL files</li>
+</ul>
+<p><strong>Solution for large files:</strong></p>
+<ol>
+<li>Remove the file from your staging area</li>
+<li>Add it to <code>.gitignore</code> to prevent future accidents</li>
+<li>Commit the <code>.gitignore</code> instead</li>
+<li>Store large files elsewhere (Google Drive, Box, etc.) and add a link in your README</li>
+<li>For files you must version control, consider Git LFS (Large File Storage) - advanced topic</li>
+</ol>
+<p><strong>Problem 3: "Authentication failed"</strong></p>
+<p>This means Cursor lost connection to your GitHub account.</p>
+<ul>
+<li><strong>Solution</strong>:<ol>
+<li>Try clicking sync again—it may prompt for re-authentication</li>
+<li>If that doesn't work, sign out and sign in again through Cursor's account settings</li>
+</ol>
+</li>
+</ul>
+<p><strong>Problem 4: "Updates were rejected"</strong></p>
+<p>This happens when GitHub has changes you don't have locally (maybe you edited on the website).</p>
+<pre><code>! [rejected] main -&gt; main (fetch first)
+</code></pre>
+<ul>
+<li><strong>Solution</strong>: Pull first (sync button), then push again</li>
+</ul>
+<p><strong>Golden Rule</strong>: When in doubt, save your work elsewhere (copy to a text file), pull the latest version from GitHub, then re-apply your changes and commit again. This always works!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Writing-a-Professional-README">Writing a Professional README<a class="anchor-link" href="#Writing-a-Professional-README">¶</a></h2><p>Right now, when people visit your GitHub repository, they see "No description, website, or topics provided." Let's fix that by creating a README file—the first thing visitors see when they find your project.</p>
+<h3 id="What-is-a-README?">What is a README?<a class="anchor-link" href="#What-is-a-README?">¶</a></h3><p>A README.md file is like the cover page of your project. The <code>.md</code> stands for Markdown—the same formatting you use in Jupyter notebook text cells. It appears automatically on your repository's main page, formatted beautifully by GitHub.</p>
+<h3 id="Creating-Your-First-README">Creating Your First README<a class="anchor-link" href="#Creating-Your-First-README">¶</a></h3><ol>
+<li>In Cursor's Explorer, create a new file called <code>README.md</code> (must be exactly this name)</li>
+<li>Add this content:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="gh"># Astronomy 1221 Projects</span>
+
+Python code for astronomical calculations and analysis.
+
+<span class="gu">## What This Project Does</span>
+
+This repository contains Python scripts for:
+<span class="k">-</span><span class="w"> </span>Calculating stellar distances from parallax measurements
+<span class="k">-</span><span class="w"> </span>Converting between parsecs and light-years
+<span class="k">-</span><span class="w"> </span>Learning Git and GitHub for scientific computing
+
+<span class="gu">## How to Use</span>
+
+Run the main script:
+<span class="sb">`python hello_astronomy.py`</span>
+
+<span class="gu">## Requirements</span>
+
+<span class="k">-</span><span class="w"> </span>Python 3.8 or higher
+<span class="k">-</span><span class="w"> </span>NumPy
+
+<span class="gu">## Author</span>
+
+Albert Einstein - Astronomy undergraduate at The Ohio State University
+
+<span class="gu">## Course Information</span>
+
+This code was developed for Astronomy 1221: Astronomical Data Analysis
+</pre></div>
+<ol start="3">
+<li>Save the file, stage it, commit with message "Add README", and push</li>
+</ol>
+<p><strong>See the Magic:</strong></p>
+<p>Refresh your GitHub repository page. Your README now appears below your file list, beautifully formatted! The <code>#</code> symbols became headers, the code block is syntax-highlighted, and everything looks professional.</p>
+<p>This README is simple but complete—it tells visitors what your project does, how to use it, and who made it. As your project grows, your README grows too.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Creating-requirements.txt">Creating requirements.txt<a class="anchor-link" href="#Creating-requirements.txt">¶</a></h3><p>After your README, the next professional touch is a <code>requirements.txt</code> file. This file lists all the Python packages your code needs to run, making it easy for others (or future you) to recreate your environment.</p>
+<p><strong>Why requirements.txt Matters</strong></p>
+<p>Imagine someone wants to run your Project 1 code. They clone your repository, try to run it, and get:</p>
+<pre><code>ImportError: No module named 'anthropic'
+</code></pre>
+<p>Without knowing what packages you used, they're stuck. A <code>requirements.txt</code> file solves this—it's a shopping list of everything needed to run your code.</p>
+<p><strong>Creating Your requirements.txt</strong></p>
+<ol>
+<li>In Cursor's Explorer, create a new file called <code>requirements.txt</code></li>
+<li>Add the packages your project uses. For a typical Project 1, it might look like:</li>
+</ol>
+<pre><code>numpy==1.24.3
+anthropic==0.7.0
+python-dotenv==1.0.0
+sentence-transformers==2.2.2
+matplotlib==3.7.1
+</code></pre>
+<ol start="3">
+<li>Save, stage, commit with "Add requirements.txt", and push</li>
+</ol>
+<p><strong>Finding Your Current Package Versions</strong></p>
+<p>Not sure what versions you have? In your terminal, run:</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>list
+</pre></div>
+<p>This shows all installed packages and their versions. Pick out the ones your project actually uses.</p>
+<h3 id="How-Others-Use-Your-requirements.txt">How Others Use Your requirements.txt<a class="anchor-link" href="#How-Others-Use-Your-requirements.txt">¶</a></h3><p>When someone clones your repository, they can install all dependencies with one command:</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+<p>This installs exactly the versions you specified, ensuring your code works the same way on their computer as it does on yours.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Creating-Your-Portfolio-Website-with-GitHub-Pages">Creating Your Portfolio Website with GitHub Pages<a class="anchor-link" href="#Creating-Your-Portfolio-Website-with-GitHub-Pages">¶</a></h2><p>GitHub offers something amazing: free website hosting for every repository. This feature, called GitHub Pages, can turn your repository into a live website. Perfect for showcasing your projects to grad schools or future employers!</p>
+<p><strong>Enabling GitHub Pages:</strong></p>
+<ol>
+<li>Go to your repository on GitHub</li>
+<li>Click "Settings" (in the tabs, far right)</li>
+<li>Scroll down to the "Pages" section</li>
+<li>Under "Source", select "Deploy from a branch"</li>
+<li>Choose "main" branch and "/ (root)" folder</li>
+<li>Click "Save"</li>
+</ol>
+<h3 id="Checking-Your-Deployment">Checking Your Deployment<a class="anchor-link" href="#Checking-Your-Deployment">¶</a></h3><p>After enabling Pages, return to your main repository page. Look at the right sidebar under "Deployments"—you'll see:</p>
+<ul>
+<li>✅ <strong>github-pages</strong> now</li>
+</ul>
+<p>This green checkmark means your site is live! Click on "github-pages" to see your deployment history and get the direct link to your website.</p>
+<p>Your site will be at: <code>https://[your-username].github.io/[repository-name]</code></p>
+<p><strong>What Will People See?</strong></p>
+<p>By default, GitHub Pages will show your README.md file as a beautifully formatted webpage—no extra work needed! The Markdown is automatically converted to HTML with professional styling. This is perfect for:</p>
+<ul>
+<li>Project documentation</li>
+<li>Course portfolios</li>
+<li>Personal homepages</li>
+</ul>
+<p><strong>Advanced Option: Custom HTML (Optional)</strong></p>
+<p>If you want more control over the design, you can create an <code>index.html</code> file. Important: if you add <code>index.html</code>, it will override your README display. For most projects, the README is sufficient and much easier to maintain!</p>
+<h3 id="Your-Personal-Homepage-Opportunity">Your Personal Homepage Opportunity<a class="anchor-link" href="#Your-Personal-Homepage-Opportunity">¶</a></h3><p>Here's something powerful for your career development: you can create a special repository named <code>[your-username].github.io</code> (exactly your username followed by .github.io). This becomes your personal GitHub Pages homepage at <code>https://[your-username].github.io</code>—no repository name in the URL!</p>
+<p><strong>Why Create a Personal Homepage?</strong></p>
+<ul>
+<li><strong>Professional presence</strong>: A central place to showcase all your projects</li>
+<li><strong>Easy to maintain</strong>: Just edit Markdown files, no complex web development</li>
+<li><strong>Free forever</strong>: GitHub hosts it at no cost</li>
+<li><strong>Impressive to employers</strong>: Shows you understand modern development practices</li>
+</ul>
+<p><strong>Setting Up Your Personal Homepage:</strong></p>
+<ol>
+<li>Create a new repository named exactly <code>[your-username].github.io</code></li>
+<li>Add a README.md with your bio, project links, and achievements</li>
+<li>Enable GitHub Pages (same process as above)</li>
+<li>Your site appears at <code>https://[your-username].github.io</code></li>
+</ol>
+<p>You can link to all your project repositories from this central homepage, creating a professional portfolio that grows with your career. Start simple with Markdown—you can always enhance it later as you learn more web development!</p>
+<p>In Lecture 10, you'll learn to create interactive Streamlit apps. You can link to these from your GitHub Pages site, creating a complete portfolio of interactive astronomical tools!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Collaboration-Basics">Collaboration Basics<a class="anchor-link" href="#Collaboration-Basics">¶</a></h2><p>So far, you've been working solo on your repository. But one of GitHub's superpowers is enabling collaboration. Let's learn the basics of working with others—essential for group projects and future research.</p>
+<h3 id="Inviting-Collaborators">Inviting Collaborators<a class="anchor-link" href="#Inviting-Collaborators">¶</a></h3><p>If you're working on Project with a coursework partner, you can give them access to your repository:</p>
+<ol>
+<li>Go to your repository on GitHub</li>
+<li>Click "Settings" → "Collaborators"</li>
+<li>Click "Add people"</li>
+<li>Enter their GitHub username or email</li>
+<li>They'll receive an invitation to accept</li>
+</ol>
+<p>Once they accept, they can:</p>
+<ul>
+<li>Clone your repository to their computer</li>
+<li>Make changes and push directly</li>
+<li>See all the code and history</li>
+</ul>
+<h3 id="The-Simple-Collaboration-Flow">The Simple Collaboration Flow<a class="anchor-link" href="#The-Simple-Collaboration-Flow">¶</a></h3><p>When two people work on the same repository, coordination is key. Here's the simplest approach that avoids conflicts:</p>
+<p><strong>The "Take Turns" Method:</strong></p>
+<ol>
+<li><strong>Before you start working</strong>: Always sync (pull) first</li>
+<li><strong>While working</strong>: Let your collaborator know you're making changes</li>
+<li><strong>After you finish</strong>: Commit and push immediately</li>
+<li><strong>Communication is key</strong>: Message your collaborator when you're done</li>
+</ol>
+<p>Example workflow:</p>
+<ul>
+<li>Monday: You work on the data analysis functions → push when done</li>
+<li>Tuesday: Your coursework partner pulls your changes, adds visualization → pushes when done</li>
+<li>Wednesday: You pull their changes, add documentation → push when done</li>
+</ul>
+<h3 id="What-If-You-Both-Edit-at-the-Same-Time?">What If You Both Edit at the Same Time?<a class="anchor-link" href="#What-If-You-Both-Edit-at-the-Same-Time?">¶</a></h3><p>If you and your collaborator accidentally edit the same file simultaneously, Git will warn you when you try to sync. You'll see a "merge conflict" message. Don't panic! For now, the simplest solution:</p>
+<ol>
+<li>Save your work somewhere else (copy to a text file)</li>
+<li>Discard your local changes</li>
+<li>Pull your collaborator's version</li>
+<li>Re-add your changes manually</li>
+<li>Commit and push</li>
+</ol>
+<p>As you get more experienced, you'll learn to resolve conflicts directly, but taking turns is much easier for beginners!</p>
 </div>
 </div>
 </div>
@@ -8273,38 +8475,28 @@ anthropic  # Only include if you're using Claude
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><h3 id="Key-Concepts">Key Concepts<a class="anchor-link" href="#Key-Concepts">¶</a></h3><p>In this lecture, you've learned:</p>
 <ul>
-<li><strong>Streamlit fundamentals</strong>: How this Python library transforms scripts into interactive web applications without requiring web development knowledge</li>
-<li><strong>The rerun paradigm</strong>: Streamlit's unique execution model where your entire script runs top-to-bottom on every interaction, simplifying state management</li>
-<li><strong>Interactive widgets and layouts</strong>: Building user interfaces with sliders, buttons, text inputs, and columns that make your astronomical calculations accessible to non-programmers</li>
-<li><strong>Performance optimization</strong>: Using <code>@st.cache_data</code> to prevent expensive operations from repeating and keep your apps responsive</li>
-<li><strong>Session state management</strong>: Preserving data between reruns to build conversational interfaces and maintain application memory</li>
-<li><strong>Cloud deployment</strong>: Publishing your apps to Streamlit Cloud through GitHub, making them globally accessible with automatic updates</li>
+<li><strong>Git and GitHub fundamentals</strong>: Git tracks your changes locally while GitHub stores them in the cloud, creating a complete version control system for your code</li>
+<li><strong>Visual version control through Cursor</strong>: How to initialize repositories, stage changes, and commit your work using Cursor's friendly interface instead of command-line tools</li>
+<li><strong>Professional repository management</strong>: Creating comprehensive documentation with README files, managing dependencies with requirements.txt, and protecting sensitive data with .gitignore files</li>
+<li><strong>GitHub Pages deployment</strong>: Transforming your repository into a live website for showcasing your astronomical programming projects</li>
+<li><strong>Collaborative workflows</strong>: Working with others through GitHub's collaboration features and handling common issues that arise when pushing code</li>
 </ul>
 <h3 id="What-You-Can-Now-Do">What You Can Now Do<a class="anchor-link" href="#What-You-Can-Now-Do">¶</a></h3><p>After working through this material, you should be able to:</p>
 <ul>
-<li>Transform any Python analysis script into an interactive web application that runs in browsers without installation</li>
-<li>Create professional interfaces with widgets, visualizations, and file upload/download capabilities for astronomical data processing</li>
-<li>Build chat interfaces with memory that integrate with AI services like Claude for intelligent astronomical assistants</li>
-<li>Deploy applications to the cloud with proper API key management and continuous deployment from GitHub</li>
-<li>Optimize performance using caching strategies and progress indicators for computationally intensive astronomical calculations</li>
-<li>Design multi-page applications with professional polish including custom themes and tooltips</li>
+<li>Create and manage Git repositories through Cursor's visual interface, tracking every change to your astronomy code</li>
+<li>Write meaningful commit messages that document your project's evolution and make your code history understandable</li>
+<li>Publish your projects to GitHub with proper documentation and dependency management for others to use and learn from</li>
+<li>Set up GitHub Pages to create a professional portfolio website showcasing your astronomical data analysis projects</li>
+<li>Collaborate with other students on shared repositories using pull-sync-edit-commit-push workflows</li>
+<li>Troubleshoot common Git issues like large files, authentication problems, and merge conflicts</li>
 </ul>
 <h3 id="Practice-Suggestions">Practice Suggestions<a class="anchor-link" href="#Practice-Suggestions">¶</a></h3><p>To solidify these concepts:</p>
 <ol>
-<li>Convert your project into a Streamlit app with a chat interface, allowing users to interact with your AI assistant through their browser</li>
-<li>Create an interactive stellar classification tool where users can upload observational data and see real-time classification results</li>
-<li>Deploy at least one app to Streamlit Cloud, share the link with classmates, and iterate based on their feedback</li>
+<li>Upload your completed Project 1 to a new GitHub repository with a comprehensive README explaining your LLM integration or data analysis</li>
+<li>Create a personal homepage repository at <code>[your-username].github.io</code> and start building your astronomy programming portfolio</li>
+<li>Practice the daily workflow—make small commits frequently rather than large commits rarely, documenting each change clearly</li>
 </ol>
-<h3 id="Looking-Ahead">Looking Ahead<a class="anchor-link" href="#Looking-Ahead">¶</a></h3><p>In the second half of this semester, you'll dive deep into <strong>Pandas for astronomical data analysis</strong>. The Streamlit skills you've mastered today will become even more powerful when combined with DataFrames—you'll build apps that load astronomical catalogs, perform complex queries, and visualize millions of stars interactively. Your ability to transform data analysis scripts into shareable web applications positions you to create tools that could enable the next great astronomical discovery.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Looking-Ahead">Looking Ahead<a class="anchor-link" href="#Looking-Ahead">¶</a></h3><p>Next lecture, we'll build on these foundations to explore <strong>Streamlit</strong>—transforming your Python scripts into interactive web applications. The Git skills you've practiced today—especially repository management and GitHub Pages—will be essential for deploying your Streamlit apps and sharing them with the astronomy community. You'll create interactive visualizations and tools that anyone can use through their browser, all powered by the same GitHub infrastructure you've just mastered.</p>
 </div>
 </div>
 </div>
