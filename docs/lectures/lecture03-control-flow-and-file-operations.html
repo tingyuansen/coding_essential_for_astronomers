@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title>
+<title>Lecture 3: Control Flow And File Operations – Coding Essentials for Astronomers</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../assets/notebook.css">
@@ -8357,6 +8357,265 @@ Star2: 11.2
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f25902b7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Progress-Bars-with-tqdm">Progress Bars with tqdm<a class="anchor-link" href="#Progress-Bars-with-tqdm">¶</a></h3><p>When processing large astronomical datasets - thousands of images, millions of stars, or years of observations - loops can take minutes or hours to complete. The <code>tqdm</code> library adds progress bars to show how much work remains, preventing the frustration of wondering if your program is still running.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e8c7057">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># First install: pip install tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>  <span class="c1"># For demonstration delays</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35b525c8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Basic Progress Bar:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c3c969e9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Simulate processing 1000 star measurements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Processing star catalog..."</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)):</span>
+    <span class="c1"># Simulate some calculation time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># 1 millisecond delay</span>
+    <span class="c1"># Your actual processing would go here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Processing star catalog...
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>  0%|                                                                                                    | 0/1000 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>  8%|███████▏                                                                                  | 80/1000 [00:00&lt;00:01, 790.11it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 16%|██████████████▏                                                                          | 160/1000 [00:00&lt;00:01, 787.56it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 24%|█████████████████████▎                                                                   | 239/1000 [00:00&lt;00:00, 786.58it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 32%|████████████████████████████▎                                                            | 318/1000 [00:00&lt;00:00, 754.45it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 39%|███████████████████████████████████                                                      | 394/1000 [00:00&lt;00:00, 755.10it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 47%|██████████████████████████████████████████                                               | 472/1000 [00:00&lt;00:00, 754.40it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 55%|█████████████████████████████████████████████████                                        | 551/1000 [00:00&lt;00:00, 763.58it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 63%|████████████████████████████████████████████████████████                                 | 630/1000 [00:00&lt;00:00, 769.53it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 71%|███████████████████████████████████████████████████████████████                          | 708/1000 [00:00&lt;00:00, 771.28it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 79%|██████████████████████████████████████████████████████████████████████                   | 787/1000 [00:01&lt;00:00, 774.75it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 87%|█████████████████████████████████████████████████████████████████████████████            | 866/1000 [00:01&lt;00:00, 777.53it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre> 94%|████████████████████████████████████████████████████████████████████████████████████     | 944/1000 [00:01&lt;00:00, 776.36it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>100%|████████████████████████████████████████████████████████████████████████████████████████| 1000/1000 [00:01&lt;00:00, 769.37it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=22e58f97">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Progress Bar with Custom Description:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6486983a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Process multiple observation nights</span>
+<span class="n">nights</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'2024-03-15'</span><span class="p">,</span> <span class="s1">'2024-03-16'</span><span class="p">,</span> <span class="s1">'2024-03-17'</span><span class="p">,</span> <span class="s1">'2024-03-18'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">night</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">nights</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Processing nights"</span><span class="p">):</span>
+    <span class="c1"># Simulate processing each night's data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Analyzing </span><span class="si">{</span><span class="n">night</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Simulate processing time</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights:   0%|                                                                                    | 0/4 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>  Analyzing 2024-03-15
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights:  25%|███████████████████                                                         | 1/4 [00:00&lt;00:01,  1.99it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>  Analyzing 2024-03-16
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights:  50%|██████████████████████████████████████                                      | 2/4 [00:01&lt;00:01,  1.99it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>  Analyzing 2024-03-17
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights:  75%|█████████████████████████████████████████████████████████                   | 3/4 [00:01&lt;00:00,  1.98it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>  Analyzing 2024-03-18
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights: 100%|████████████████████████████████████████████████████████████████████████████| 4/4 [00:02&lt;00:00,  1.98it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Processing nights: 100%|████████████████████████████████████████████████████████████████████████████| 4/4 [00:02&lt;00:00,  1.98it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1de7238d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="When-to-Use-Progress-Bars">When to Use Progress Bars<a class="anchor-link" href="#When-to-Use-Progress-Bars">¶</a></h4><p>Use <code>tqdm</code> when:</p>
+<ul>
+<li>Processing takes more than a few seconds</li>
+<li>Working with large datasets (&gt;100 items)</li>
+<li>Users need feedback that processing is continuing</li>
+<li>You want to estimate completion time</li>
+</ul>
+<p>Don't use <code>tqdm</code> for:</p>
+<ul>
+<li>Very fast loops (&lt; 1 second total)</li>
+<li>Inner loops of nested structures (can be cluttered)</li>
+<li>When output needs to be clean (scripts, automated processing)</li>
+</ul>
+<p><code>tqdm</code> works with any iterable - lists, ranges, file contents, even custom iterators. Just wrap your iterable with <code>tqdm()</code> and you get an instant progress bar.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4d07d573">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -9591,12 +9850,7 @@ Star: HD 189733, RA: 300.178°
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Telescope: AAT</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
+<pre>Telescope: AAT
 Filters: ['g', 'r', 'i']
 </pre>
 </div>
@@ -9695,7 +9949,7 @@ File size: 85 bytes
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b49af4e7">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b49af4e7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9708,6 +9962,18 @@ File size: 85 bytes
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">'data'</span><span class="p">)</span>  <span class="c1"># Creates directory</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Created data directory"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Created data directory
+</pre>
 </div>
 </div>
 </div>
@@ -9792,8 +10058,8 @@ File size: 85 bytes
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Found 31 files
-Found 3 text files
+<pre>Found 21 files
+Found 2 text files
 </pre>
 </div>
 </div>
@@ -10096,12 +10362,7 @@ Checking visibility:
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-Saved observing list to observing_list_3UT.txt</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
+Saved observing list to observing_list_3UT.txt
 </pre>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title>
+<title>Lecture 10: Streamlit – Coding Essentials for Astronomers</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../assets/notebook.css">
@@ -8149,7 +8149,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Deployment-to-the-Cloud">Deployment to the Cloud<a class="anchor-link" href="#Deployment-to-the-Cloud">¶</a></h2><p>Right now, your app runs at <code>localhost:8501</code>. When you run <code>streamlit run app.py</code>, your computer becomes a web server, but it's a private party. The <code>localhost</code> part means "this computer only"—it's like having a brilliant telescope in your basement that only you can use. The <code>:8501</code> is the port number—the specific door Streamlit uses to communicate. Even if you send the <code>localhost:8501</code> link to a friend, they'll get an error. Your app is trapped on your machine.</p>
+<h2 id="Deployment-to-the-Cloud">Deployment to the Cloud<a class="anchor-link" href="#Deployment-to-the-Cloud">¶</a></h2><p>Right now, your app runs at <code>localhost:8501</code>. This should look familiar—you've seen <code>localhost</code> URLs before when running Jupyter notebooks! Just like Jupyter runs at <code>localhost:8888</code>, Streamlit uses <code>localhost:8501</code>. When you run <code>streamlit run app.py</code>, your computer becomes a web server, but it's a private party. The <code>localhost</code> part means "this computer only." The <code>:8501</code> is the port number—the specific door Streamlit uses to communicate (different from Jupyter's <code>:8888</code> port). Even if you send the <code>localhost:8501</code> link to a friend, they'll get an error, just like they would with your Jupyter notebook URLs. Your app is trapped on your machine.</p>
 <p>To share your app with the world, we need to deploy it to the cloud. Streamlit provides free hosting that makes deployment take just minutes.</p>
 <h3 id="The-Deployment">The Deployment<a class="anchor-link" href="#The-Deployment">¶</a></h3><p>The path from local app to live website has three stages: prepare your files, push to GitHub, and deploy to Streamlit Cloud.</p>
 <p><strong>Step 1: Prepare Your Project</strong></p>

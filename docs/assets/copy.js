@@ -1,18 +1,25 @@
 (function () {
   const copyClass = 'copy-button';
 
-  function getCode(area) {
-    const cmContent = area.querySelector('.cm-content');
+  function getCode(container) {
+    const cmContent = container.querySelector('.cm-content');
     if (cmContent) {
       return Array.from(cmContent.querySelectorAll('.cm-line'))
         .map((line) => line.textContent)
         .join('\n');
     }
-    const pre = area.querySelector('pre');
+    if (container.tagName === 'PRE') {
+      return container.innerText;
+    }
+    const pre = container.querySelector('pre');
     if (pre) {
       return pre.innerText;
     }
-    return area.innerText;
+    const code = container.querySelector('code');
+    if (code) {
+      return code.innerText;
+    }
+    return container.innerText;
   }
 
   function fallbackCopy(text) {
@@ -48,11 +55,11 @@
 
   async function handleCopy(event) {
     const button = event.currentTarget;
-    const area = button.closest('.jp-InputArea');
-    if (!area) {
+    const container = button.closest('[data-copy-target]');
+    if (!container) {
       return;
     }
-    const code = getCode(area).trimEnd();
+    const code = getCode(container).trimEnd();
     if (!code) {
       showStatus(button, 'Empty');
       return;
@@ -71,15 +78,22 @@
     }
   }
 
-  function injectButton(area) {
-    const editor = area.querySelector('.jp-InputArea-editor');
-    if (!editor) {
+  function ensurePosition(container) {
+    const style = window.getComputedStyle(container);
+    if (!style || style.position === 'static') {
+      container.style.position = 'relative';
+    }
+  }
+
+  function injectButton(container) {
+    if (!container || container.dataset.copyDecorated === 'true') {
       return;
     }
-    if (area.dataset.copyDecorated === 'true') {
-      return;
-    }
-    area.dataset.copyDecorated = 'true';
+    container.dataset.copyDecorated = 'true';
+    container.setAttribute('data-copy-target', '');
+    container.classList.add('has-copy-button');
+    ensurePosition(container);
+
     const button = document.createElement('button');
     button.type = 'button';
     button.className = copyClass;
@@ -87,14 +101,44 @@
     button.setAttribute('aria-label', 'Copy code to clipboard');
     button.textContent = 'Copy';
     button.addEventListener('click', handleCopy);
-    editor.appendChild(button);
+    container.appendChild(button);
+  }
+
+  function decorateCodeCells() {
+    document.querySelectorAll('.jp-InputArea').forEach((area) => {
+      const editor = area.querySelector('.jp-InputArea-editor');
+      if (editor) {
+        injectButton(editor);
+      }
+    });
+  }
+
+  function decorateMarkdownBlocks() {
+    document.querySelectorAll('.jp-RenderedMarkdown').forEach((markdown) => {
+      markdown.querySelectorAll('div.highlight').forEach((block) => {
+        injectButton(block);
+      });
+
+      markdown.querySelectorAll('pre').forEach((pre) => {
+        if (pre.closest('div.highlight')) {
+          return;
+        }
+        if (pre.dataset.copyWrapped === 'true') {
+          return;
+        }
+        pre.dataset.copyWrapped = 'true';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'copy-markdown-block';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+        injectButton(wrapper);
+      });
+    });
   }
 
   function decorateAll() {
-    document.querySelectorAll('.jp-InputArea').forEach((area) => {
-      area.style.position = area.style.position || 'relative';
-      injectButton(area);
-    });
+    decorateCodeCells();
+    decorateMarkdownBlocks();
   }
 
   if (document.readyState === 'loading') {

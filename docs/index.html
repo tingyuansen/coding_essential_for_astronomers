@@ -74,7 +74,15 @@
         const date = escapeHtml(lecture.date);
         const summary = lecture.summary ? escapeHtml(lecture.summary) : 'Lecture overview coming soon.';
         const pageLink = escapeHtml(lecture.relative_path);
-        const slidesLink = `https://www.asc.ohio-state.edu/ting.74/Astron1221/Lecture${lecture.number}_Slides`;
+        const slidesLink = escapeHtml(`https://www.asc.ohio-state.edu/ting.74/Astron1221/Lecture${lecture.number}_Slides`);
+        const actions = [
+          `<a href="${pageLink}">Read lecture</a>`,
+          `<a href="${slidesLink}" target="_blank" rel="noopener">View slides</a>`
+        ];
+        if (lecture.quiz_link) {
+          const quizLink = escapeHtml(lecture.quiz_link);
+          actions.push(`<a href="${quizLink}" target="_blank" rel="noopener">AI quiz bot</a>`);
+        }
         return `
           <article class="lecture-card">
             <span class="lecture-number">Lecture ${number}</span>
@@ -82,8 +90,7 @@
             <p>${date}</p>
             <p>${summary}</p>
             <div class="actions">
-              <a href="${pageLink}">Read lecture</a>
-              <a href="${slidesLink}">View slides</a>
+              ${actions.join('\n              ')}
             </div>
           </article>
         `;

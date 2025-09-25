@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title>
+<title>Lecture 8: LLM Function Tools And RAG – Coding Essentials for Astronomers</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../assets/notebook.css">
@@ -7918,11 +7918,11 @@ Number of content blocks in response: 2
 <pre>Claude wants to use a function!
 
 Block 0: Type = 'text'
-  Text content: "I'll calculate the distance to a star with a parallax of 0.05 arcseconds."
+  Text content: "I'll calculate the distance to a star with a parallax of 0.05 arcseconds for you."
 Block 1: Type = 'tool_use'
   Function to call: parallax_to_distance
   Arguments to pass: {'parallax_arcsec': 0.05}
-  Unique ID for this call: toolu_01KCdvZCzMPhFBs2khobq2We
+  Unique ID for this call: toolu_019H6KVvqfzxWgiRJShEYhWs
 </pre>
 </div>
 </div>
@@ -7967,7 +7967,7 @@ Block 1: Type = 'tool_use'
 <pre>Tool request details:
   Function name: parallax_to_distance
   Arguments: {'parallax_arcsec': 0.05}
-  Tool ID: toolu_01KCdvZCzMPhFBs2khobq2We
+  Tool ID: toolu_019H6KVvqfzxWgiRJShEYhWs
 
 This ID is important - we need it to send results back to Claude!
 </pre>
@@ -8084,11 +8084,14 @@ Function result: {'distance_parsecs': 20.0}
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Claude's final natural language answer:
 ==================================================
-The distance to a star with a parallax of 0.05 arcseconds is **20 parsecs**.
+A star with a parallax of 0.05 arcseconds is at a distance of **20 parsecs** from Earth.
 
-This is calculated using the parallax-distance relationship: distance (in parsecs) = 1 / parallax (in arcseconds). So 1 ÷ 0.05 = 20 parsecs.
+To put this in perspective:
+- 20 parsecs = approximately 65.2 light-years
+- This is a relatively nearby star in astronomical terms
+- For comparison, the nearest star to our Sun (Proxima Centauri) is about 1.3 parsecs away
 
-For reference, 20 parsecs is approximately 65.2 light-years or about 617 trillion kilometers.
+The relationship used here is the parallax-distance formula: distance (in parsecs) = 1 / parallax (in arcseconds).
 ==================================================
 
 Notice how Claude converts the raw number into a complete explanation!
@@ -8401,14 +8404,12 @@ Answer:
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Based on a parallax of 0.768 arcseconds, Proxima Centauri is at a distance of **1.3 parsecs** from Earth.
+<pre>Based on the parallax measurement of 0.768 arcseconds, Proxima Centauri is at a distance of **1.3 parsecs**.
 
 To put this in perspective:
 - 1.3 parsecs = approximately 4.24 light-years
-- This makes Proxima Centauri the closest known star to our Solar System (excluding the Sun)
-- The distance is calculated using the parallax formula: distance (parsecs) = 1 / parallax (arcseconds)
-
-This measurement confirms Proxima Centauri's status as our nearest stellar neighbor!
+- This makes Proxima Centauri the closest star to our Solar System (excluding the Sun)
+- The distance is calculated using the parallax formula: distance (in parsecs) = 1/parallax (in arcseconds)
 
 ======================================================================
 
@@ -8425,7 +8426,7 @@ Answer:
 - **66,264 solar luminosities** (L☉)
 - **2.54 × 10³¹ watts**
 
-This makes Betelgeuse an extremely luminous star - over 66,000 times more luminous than our Sun! This high luminosity is primarily due to its enormous size (700 times the Sun's radius), which more than compensates for its relatively cool surface temperature of 3,500 K compared to the Sun's 5,778 K.
+This makes Betelgeuse an extremely luminous star - about 66,000 times more luminous than our Sun! This high luminosity is primarily due to its enormous size (700 times the Sun's radius), which more than compensates for its relatively cool surface temperature of 3,500 K (compared to the Sun's ~5,778 K).
 
 ======================================================================
 
@@ -8473,7 +8474,7 @@ A markdown file (with the extension .md) is a plain text file that uses simple s
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8484,6 +8485,34 @@ A markdown file (with the extension .md) is a plain text file that uses simple s
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'Lecture7_LLM_API_Basics_20250924.md'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">lecture7_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[15], line 2</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Read the pre-converted lecture file</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">open</span>(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">Lecture7_LLM_API_Basics_20250924.md</span><span style="color: rgb(175,0,0)">'</span>, <span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">r</span><span style="color: rgb(175,0,0)">'</span>) <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> f:
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     lecture7_content <span style="color: rgb(98,98,98)">=</span> f<span style="color: rgb(98,98,98)">.</span>read()
+
+File <span class="ansi-green-fg">~/anaconda3/lib/python3.13/site-packages/IPython/core/interactiveshell.py:324</span>, in <span class="ansi-cyan-fg">_modified_open</span><span class="ansi-blue-fg">(file, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    317</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> file <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> {<span style="color: rgb(98,98,98)">0</span>, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">2</span>}:
+<span class="ansi-green-intense-fg ansi-bold">    318</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(
+<span class="ansi-green-intense-fg ansi-bold">    319</span>         <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">IPython won</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">t let you open fd=</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>file<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> by default </span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    320</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">as it is likely to crash IPython. If you know what you are doing, </span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    321</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">you can use builtins</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)"> open.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    322</span>     )
+<span class="ansi-green-fg">--&gt; 324</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> io_open(file, <span style="color: rgb(98,98,98)">*</span>args, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs)
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: 'Lecture7_LLM_API_Basics_20250924.md'</pre>
 </div>
 </div>
 </div>
@@ -8538,19 +8567,20 @@ A markdown file (with the extension .md) is a plain text file that uses simple s
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Found 11 main sections in Lecture 7:
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[16], line 3</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Find all main sections using string methods</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> sections <span style="color: rgb(98,98,98)">=</span> []
+<span class="ansi-green-fg">----&gt; 3</span> lines <span style="color: rgb(98,98,98)">=</span> lecture7_content<span style="color: rgb(98,98,98)">.</span>split(<span style="color: rgb(175,0,0)">'</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">'</span>)  <span style="color: rgb(95,135,135)"># Split into individual lines</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> line <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> lines:
+<span class="ansi-green-intense-fg ansi-bold">      6</span>     <span style="color: rgb(95,135,135)"># Check if line starts with '## ' (main section header)</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> line<span style="color: rgb(98,98,98)">.</span>startswith(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">## </span><span style="color: rgb(175,0,0)">'</span>):
+<span class="ansi-green-intense-fg ansi-bold">      8</span>         <span style="color: rgb(95,135,135)"># Remove the '## ' to get just the title</span>
 
-  1. Introduction
-  2. Understanding APIs
-  3. Setting Up Your Connection
-  4. Your First API Call
-  5. Understanding the Parameters
-  6. Building Conversations
-  7. Prompting Strategies
-  8. Making It Practical
-  ... and 3 more sections
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'lecture7_content' is not defined</pre>
 </div>
 </div>
 </div>
@@ -8642,14 +8672,17 @@ A markdown file (with the extension .md) is a plain text file that uses simple s
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Created 12 chunks from Lecture 7
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[18], line 2</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Create chunks from our lecture</span>
+<span class="ansi-green-fg">----&gt; 2</span> lecture_chunks <span style="color: rgb(98,98,98)">=</span> chunk_by_sections(lecture7_content)
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Created </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span><span style="color: rgb(0,135,0)">len</span>(lecture_chunks)<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> chunks from Lecture 7</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Chunk statistics:</span><span style="color: rgb(175,0,0)">"</span>)
 
-Chunk statistics:
-  Average size: 5,275 characters
-  Smallest: 323 characters
-  Largest: 9,570 characters
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'lecture7_content' is not defined</pre>
 </div>
 </div>
 </div>
@@ -8697,33 +8730,22 @@ Chunk statistics:
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>First 3 chunks from Lecture 7:
 ==================================================
-
-Chunk 0:
-  Title: ---
-  Size: 323 characters
-  Preview: ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version:...
-
-Chunk 1:
-  Title: ## Introduction
-  Size: 5,969 characters
-  Preview: ## Introduction
-
-For the past six weeks, you've been building a programming foundation. Variables, lists, loops, functions, classes—perhaps they felt ...
-
-Chunk 2:
-  Title: ## Understanding APIs
-  Size: 3,336 characters
-  Preview: ## Understanding APIs
-
-Let's demystify this term that gets thrown around constantly in programming. API stands for Application Programming Interface, ...
 </pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[19], line 5</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">First 3 chunks from Lecture 7:</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">50</span>)
+<span class="ansi-green-fg">----&gt; 5</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> i <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">range</span>(<span style="color: rgb(0,135,0)">min</span>(<span style="color: rgb(98,98,98)">3</span>, <span style="color: rgb(0,135,0)">len</span>(lecture_chunks))):
+<span class="ansi-green-intense-fg ansi-bold">      6</span>     chunk <span style="color: rgb(98,98,98)">=</span> lecture_chunks[i]
+<span class="ansi-green-intense-fg ansi-bold">      7</span>     <span style="color: rgb(95,135,135)"># Get the first line (usually the section title)</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'lecture_chunks' is not defined</pre>
 </div>
 </div>
 </div>
@@ -8946,13 +8968,13 @@ Model information:
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Creating embeddings for test phrases...
+  'stellar parallax measurement': vector with 384 dimensions
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>  'stellar parallax measurement': vector with 384 dimensions
-  'measuring star distances': vector with 384 dimensions
+<pre>  'measuring star distances': vector with 384 dimensions
   'galaxy classification': vector with 384 dimensions
   'cooking recipes': vector with 384 dimensions
 
@@ -9068,27 +9090,17 @@ The model understands they're about the same concept.
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Creating embeddings for 12 chunks...
-This may take a minute...
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>  Processed 5/12 chunks
-  Processed 10/12 chunks
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>
-✓ Created 12 embeddings
-Each embedding has 384 dimensions
-Total data: 12 chunks × 384 dimensions = 4,608 numbers
-</pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[24], line 2</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Generate embeddings for all lecture chunks</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Creating embeddings for </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span><span style="color: rgb(0,135,0)">len</span>(lecture_chunks)<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> chunks...</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">This may take a minute...</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      5</span> chunk_embeddings <span style="color: rgb(98,98,98)">=</span> []
+
+<span class="ansi-red-fg">NameError</span>: name 'lecture_chunks' is not defined</pre>
 </div>
 </div>
 </div>
@@ -9206,31 +9218,26 @@ Total data: 12 chunks × 384 dimensions = 4,608 numbers
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Query: 'How do I keep API keys secure?'
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[26], line 3</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Test search with a specific question</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> query <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">How do I keep API keys secure?</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">----&gt; 3</span> results <span style="color: rgb(98,98,98)">=</span> search_chunks(query, top_k<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">2</span>)
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Query: </span><span style="color: rgb(175,0,0)">'</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>query<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      6</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">+</span> <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">50</span>)
 
-==================================================
-Found 2 relevant sections:
-==================================================
+Cell <span class="ansi-green-fg">In[25], line 19</span>, in <span class="ansi-cyan-fg">search_chunks</span><span class="ansi-blue-fg">(query, top_k)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> query_embedding <span style="color: rgb(98,98,98)">=</span> embedding_model<span style="color: rgb(98,98,98)">.</span>encode(query)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Vectorized similarity calculation - much faster than a loop!</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span style="color: rgb(95,135,135)"># Convert list of embeddings to NumPy array for vectorized operations</span>
+<span class="ansi-green-fg">---&gt; 19</span> chunk_matrix <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>array(chunk_embeddings)
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(95,135,135)"># Calculate dot products with all chunks at once</span>
+<span class="ansi-green-intense-fg ansi-bold">     22</span> similarities <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>dot(chunk_matrix, query_embedding)
 
-Result 1:
-  Similarity score: 0.405
-  (1.0 = perfect match, 0.0 = unrelated)
-  Section: ## Summary
-  Preview: ## Summary
-
-### Key Concepts
-In this lecture, you've learned:
-- **API Fundamentals**: How to communicate with Large Language Models programmatically through structured requests and responses, transfor...
-
-Result 2:
-  Similarity score: 0.350
-  (1.0 = perfect match, 0.0 = unrelated)
-  Section: ## Understanding APIs
-  Preview: ## Understanding APIs
-
-Let's demystify this term that gets thrown around constantly in programming. API stands for Application Programming Interface, but that definition helps nobody. Here's a better ...
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'chunk_embeddings' is not defined</pre>
 </div>
 </div>
 </div>
@@ -9365,29 +9372,37 @@ Let's demystify this term that gets thrown around constantly in programming. API
 RAG-POWERED ANSWER
 ======================================================================
 Searching for content related to: 'What are the main parameters for API calls we learned about?'
-Found 2 relevant sections (similarity &gt; 0.2)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>
-Answer based on Lecture 7 content:
-Based on the course materials provided, I can see that the lecture covers API fundamentals and mentions that API requests contain parameters, but the specific main parameters for API calls are not fully detailed in the sections you've shared.
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[28], line 7</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">RAG-POWERED ANSWER</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      6</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">70</span>)
+<span class="ansi-green-fg">----&gt; 7</span> answer <span style="color: rgb(98,98,98)">=</span> rag_answer(test_question)
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Answer based on Lecture 7 content:</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">      9</span> <span style="color: rgb(0,135,0)">print</span>(answer)
 
-From what is included in the course materials, I can identify these parameters that were mentioned:
+Cell <span class="ansi-green-fg">In[27], line 15</span>, in <span class="ansi-cyan-fg">rag_answer</span><span class="ansi-blue-fg">(question, max_chunks)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Searching for content related to: </span><span style="color: rgb(175,0,0)">'</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>question<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     14</span> <span style="color: rgb(95,135,135)"># Step 1: Retrieve relevant chunks</span>
+<span class="ansi-green-fg">---&gt; 15</span> results <span style="color: rgb(98,98,98)">=</span> search_chunks(question, top_k<span style="color: rgb(98,98,98)">=</span>max_chunks)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Check if we found relevant content</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> results[<span style="color: rgb(98,98,98)">0</span>][<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">similarity</span><span style="color: rgb(175,0,0)">'</span>] <span style="color: rgb(98,98,98)">&lt;</span> <span style="color: rgb(98,98,98)">0.2</span>:
 
-1. **The prompt/text content** - The text you want the LLM to analyze or process
-2. **Model selection** - Which specific model to use for the request
-3. **Response length** - How long the response should be
+Cell <span class="ansi-green-fg">In[25], line 19</span>, in <span class="ansi-cyan-fg">search_chunks</span><span class="ansi-blue-fg">(query, top_k)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> query_embedding <span style="color: rgb(98,98,98)">=</span> embedding_model<span style="color: rgb(98,98,98)">.</span>encode(query)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Vectorized similarity calculation - much faster than a loop!</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span style="color: rgb(95,135,135)"># Convert list of embeddings to NumPy array for vectorized operations</span>
+<span class="ansi-green-fg">---&gt; 19</span> chunk_matrix <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>array(chunk_embeddings)
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(95,135,135)"># Calculate dot products with all chunks at once</span>
+<span class="ansi-green-intense-fg ansi-bold">     22</span> similarities <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>dot(chunk_matrix, query_embedding)
 
-The materials explain that when you want an LLM to analyze text, "you send a specially formatted message over the internet to the LLM's servers. The message contains your prompt, along with parameters like which model to use and how long the response should be."
-
-However, the course materials you've provided appear to be incomplete, as Section 2 (Summary) cuts off mid-sentence when discussing "Best practices for managing API keys using environment files and ." This suggests there may be additional content about API parameters that wasn't included in what you shared.
-
-To provide a more comprehensive answer about the main parameters for API calls that were covered in Lecture 7, I would need access to the complete course materials, particularly any sections that might detail the specific parameter options and their usage.
-======================================================================
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'chunk_embeddings' is not defined</pre>
 </div>
 </div>
 </div>
@@ -9450,71 +9465,66 @@ To provide a more comprehensive answer about the main parameters for API calls t
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>I don't have the specific context of which API you're referring to, as you haven't shared the previous conversation or documentation. Could you clarify which API you're discussing? 
+<pre>I don't have the specific context of which API or documentation you're referring to. Could you clarify what API you're asking about? 
 
-Are you asking about:
-- A specific messaging or chat API (like WhatsApp, Slack, Discord, etc.)?
-- A conversational AI API (like OpenAI's ChatGPT API, Anthropic's Claude API, etc.)?
-- A customer service platform API?
-- Something else entirely?
+However, I can share some general insights about conversation histories in APIs:
 
-Once you provide that context, I'd be happy to discuss what we typically learn about conversation histories in APIs, such as:
-- How conversation context is maintained
-- Storage and retrieval of message history
-- Pagination through conversation threads
-- Privacy and data retention considerations
-- Rate limits and performance implications
+**Common patterns for conversation history in APIs:**
 
-Could you share more details about the specific API or conversation you're referencing?
+1. **Stateless vs Stateful**
+   - Most APIs are stateless - each request is independent
+   - Conversation history must be explicitly passed with each request
+
+2. **Message Arrays**
+   - History often structured as arrays of message objects
+   - Each message typically has roles (user, assistant, system) and content
+
+3. **Token Limits**
+   - APIs usually have token/character limits for total conversation length
+   - Older messages may need to be truncated or summarized
+
+4. **Session Management**
+   - Some APIs provide session IDs to maintain context server-side
+   - Others require client-side history management
+
+5. **
 
 ======================================================================
 
 WITH Course Materials (RAG-Enhanced):
 ==================================================
 Searching for content related to: 'What did we learn about conversation histories in the API?'
-Found 2 relevant sections (similarity &gt; 0.2)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Based on the course materials from Lecture 7, here's what we learned about conversation histories in the API:
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[29], line 18</span>
+<span class="ansi-green-intense-fg ansi-bold">     16</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">WITH Course Materials (RAG-Enhanced):</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">50</span>)
+<span class="ansi-green-fg">---&gt; 18</span> rag_answer_text <span style="color: rgb(98,98,98)">=</span> rag_answer(comparison_question)
+<span class="ansi-green-intense-fg ansi-bold">     19</span> <span style="color: rgb(0,135,0)">print</span>(rag_answer_text)
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">+</span> <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">70</span>)
 
-## Key Learning: The API is Stateless
+Cell <span class="ansi-green-fg">In[27], line 15</span>, in <span class="ansi-cyan-fg">rag_answer</span><span class="ansi-blue-fg">(question, max_chunks)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Searching for content related to: </span><span style="color: rgb(175,0,0)">'</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>question<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     14</span> <span style="color: rgb(95,135,135)"># Step 1: Retrieve relevant chunks</span>
+<span class="ansi-green-fg">---&gt; 15</span> results <span style="color: rgb(98,98,98)">=</span> search_chunks(question, top_k<span style="color: rgb(98,98,98)">=</span>max_chunks)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Check if we found relevant content</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> results[<span style="color: rgb(98,98,98)">0</span>][<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">similarity</span><span style="color: rgb(175,0,0)">'</span>] <span style="color: rgb(98,98,98)">&lt;</span> <span style="color: rgb(98,98,98)">0.2</span>:
 
-The most important concept about conversation histories in the API is that **the API is completely stateless**—each API call is independent and has no memory of previous calls. This is fundamentally different from chat interfaces where Claude appears to "remember" your conversation.
+Cell <span class="ansi-green-fg">In[25], line 19</span>, in <span class="ansi-cyan-fg">search_chunks</span><span class="ansi-blue-fg">(query, top_k)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> query_embedding <span style="color: rgb(98,98,98)">=</span> embedding_model<span style="color: rgb(98,98,98)">.</span>encode(query)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Vectorized similarity calculation - much faster than a loop!</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span style="color: rgb(95,135,135)"># Convert list of embeddings to NumPy array for vectorized operations</span>
+<span class="ansi-green-fg">---&gt; 19</span> chunk_matrix <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>array(chunk_embeddings)
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(95,135,135)"># Calculate dot products with all chunks at once</span>
+<span class="ansi-green-intense-fg ansi-bold">     22</span> similarities <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>dot(chunk_matrix, query_embedding)
 
-## Critical Difference from Chat Interfaces
-
-Unlike the chat interface where Claude seems to "remember" your conversation, when using the API, Claude has no built-in memory between separate API calls. Each request starts with a completely blank slate.
-
-## Maintaining Context Requires Explicit Action
-
-To maintain context across multiple API calls, **you must explicitly provide the entire conversation history with each request**. The API doesn't automatically remember or store previous interactions.
-
-## Practical Demonstration
-
-The course materials provided a clear example showing this concept:
-
-**Call 1:**
-- User: "My favorite galaxy is M31. Remember this."
-- Claude responds normally
-
-**Call 2 (separate API call):**
-- User: "What is my favorite galaxy?"
-- Claude has no idea what the user is referring to
-
-As the materials emphasize: "Notice: Claude has no idea! Each API call is completely independent."
-
-## Bottom Line
-
-The key takeaway is that conversation histories don't exist automatically in the API—they must be manually constructed and maintained by including the full conversation context in each API request if you want Claude to have memory of previous exchanges.
-
-======================================================================
-
-Notice: The RAG answer references specific details from YOUR lecture!
-It mentions the exact concepts and examples we covered in class.
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'chunk_embeddings' is not defined</pre>
 </div>
 </div>
 </div>
@@ -9812,9 +9822,9 @@ Processing: What's the distance to a star with 0.1 arcsecond parallax?
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-Answer: A star with a parallax of 0.1 arcseconds is at a distance of **10 parsecs**.
+Answer: A star with a parallax of 0.1 arcseconds is at a distance of **10 parsecs** from Earth.
 
-This follows the basic parallax-distance relationship: distance (in parsecs) = 1 / parallax (in arcseconds). Since 1 parsec equals approximately 3.26 light-years, this star is about 32.6 light-years away from Earth.
+This follows the basic parallax-distance relationship: distance (in parsecs) = 1 / parallax (in arcseconds). So with a parallax of 0.1 arcseconds, the distance is 1/0.1 = 10 parsecs, which is equivalent to about 32.6 light-years.
 ============================================================
 
 Test 2:
@@ -9830,55 +9840,49 @@ Processing: What did we learn about conversation histories in the API?
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>
-Answer: Based on the course materials, here's what we learned about conversation histories in the API:
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[33], line 11</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Test </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>i<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">:</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     10</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">60</span>)
+<span class="ansi-green-fg">---&gt; 11</span> answer <span style="color: rgb(98,98,98)">=</span> complete_assistant(question)
+<span class="ansi-green-intense-fg ansi-bold">     12</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Answer: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>answer<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     13</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">=</span><span style="color: rgb(175,0,0)">"</span> <span style="color: rgb(98,98,98)">*</span> <span style="color: rgb(98,98,98)">60</span>)
 
-## Key Learning: APIs are Stateless
+Cell <span class="ansi-green-fg">In[32], line 33</span>, in <span class="ansi-cyan-fg">complete_assistant</span><span class="ansi-blue-fg">(question)</span>
+<span class="ansi-green-intense-fg ansi-bold">     28</span>     result <span style="color: rgb(98,98,98)">=</span> stellar_luminosity(
+<span class="ansi-green-intense-fg ansi-bold">     29</span>         tool_use<span style="color: rgb(98,98,98)">.</span>input[<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">radius_solar</span><span style="color: rgb(175,0,0)">'</span>],
+<span class="ansi-green-intense-fg ansi-bold">     30</span>         tool_use<span style="color: rgb(98,98,98)">.</span>input[<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">temperature_k</span><span style="color: rgb(175,0,0)">'</span>]
+<span class="ansi-green-intense-fg ansi-bold">     31</span>     )
+<span class="ansi-green-intense-fg ansi-bold">     32</span> <span class="ansi-bold" style="color: rgb(0,135,0)">elif</span> tool_use<span style="color: rgb(98,98,98)">.</span>name <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">search_course_materials</span><span style="color: rgb(175,0,0)">"</span>:
+<span class="ansi-green-fg">---&gt; 33</span>     result <span style="color: rgb(98,98,98)">=</span> search_course_materials(
+<span class="ansi-green-intense-fg ansi-bold">     34</span>         tool_use<span style="color: rgb(98,98,98)">.</span>input[<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">question</span><span style="color: rgb(175,0,0)">'</span>],
+<span class="ansi-green-intense-fg ansi-bold">     35</span>         tool_use<span style="color: rgb(98,98,98)">.</span>input<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">max_results</span><span style="color: rgb(175,0,0)">'</span>, <span style="color: rgb(98,98,98)">2</span>)
+<span class="ansi-green-intense-fg ansi-bold">     36</span>     )
+<span class="ansi-green-intense-fg ansi-bold">     37</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">     38</span>     result <span style="color: rgb(98,98,98)">=</span> {<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">error</span><span style="color: rgb(175,0,0)">"</span>: <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Unknown function: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>tool_use<span style="color: rgb(98,98,98)">.</span>name<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span>}
 
-The most important concept about conversation histories in the API is that **the API is completely stateless**—each API call is independent and has no memory of previous calls. This is fundamentally different from chat interfaces where Claude appears to "remember" your conversation.
+Cell <span class="ansi-green-fg">In[30], line 7</span>, in <span class="ansi-cyan-fg">search_course_materials</span><span class="ansi-blue-fg">(question, max_results)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span style="color: rgb(175,0,0)">"""</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span style="color: rgb(175,0,0)">Search course materials and return relevant content.</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span style="color: rgb(175,0,0)">This function will be callable by Claude as a tool.</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span style="color: rgb(175,0,0)">"""</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> <span style="color: rgb(95,135,135)"># Search for relevant chunks</span>
+<span class="ansi-green-fg">----&gt; 7</span> results <span style="color: rgb(98,98,98)">=</span> search_chunks(question, top_k<span style="color: rgb(98,98,98)">=</span>max_results)
+<span class="ansi-green-intense-fg ansi-bold">      9</span> <span style="color: rgb(95,135,135)"># Check if we found anything relevant</span>
+<span class="ansi-green-intense-fg ansi-bold">     10</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> results[<span style="color: rgb(98,98,98)">0</span>][<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">similarity</span><span style="color: rgb(175,0,0)">'</span>] <span style="color: rgb(98,98,98)">&lt;</span> <span style="color: rgb(98,98,98)">0.2</span>:
 
-## How to Maintain Context
+Cell <span class="ansi-green-fg">In[25], line 19</span>, in <span class="ansi-cyan-fg">search_chunks</span><span class="ansi-blue-fg">(query, top_k)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> query_embedding <span style="color: rgb(98,98,98)">=</span> embedding_model<span style="color: rgb(98,98,98)">.</span>encode(query)
+<span class="ansi-green-intense-fg ansi-bold">     17</span> <span style="color: rgb(95,135,135)"># Vectorized similarity calculation - much faster than a loop!</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> <span style="color: rgb(95,135,135)"># Convert list of embeddings to NumPy array for vectorized operations</span>
+<span class="ansi-green-fg">---&gt; 19</span> chunk_matrix <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>array(chunk_embeddings)
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(95,135,135)"># Calculate dot products with all chunks at once</span>
+<span class="ansi-green-intense-fg ansi-bold">     22</span> similarities <span style="color: rgb(98,98,98)">=</span> np<span style="color: rgb(98,98,98)">.</span>dot(chunk_matrix, query_embedding)
 
-To maintain context across multiple API calls, you must **explicitly provide the entire conversation history** with each request. This means:
-
-1. **No automatic memory**: Unlike chat interfaces, the API doesn't automatically remember what was discussed in previous calls
-2. **Manual context management**: You need to build up and maintain the conversation history yourself
-3. **Include full history**: Each API request must contain all relevant previous messages if you want Claude to have context
-
-## Practical Implementation
-
-The course demonstrated this with an example showing:
-- **First call**: Send a message asking Claude to remember something (like "My favorite galaxy is M31. Remember this.")
-- **Second call without context**: Claude has NO memory of the first call
-- **Proper approach**: Include the entire conversation history in each subsequent call
-
-This stateless nature is actually a feature—it gives you complete control over what context Claude has access to, allowing you to build more sophisticated applications where you can selectively include or exclude parts of the conversation history as needed.
-============================================================
-
-Test 3:
-============================================================
-Processing: Calculate the luminosity of a star with radius 3 solar radii and temperature 7000K
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>  → Using tool: stellar_luminosity
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-Answer: The star with a radius of 3 solar radii and a temperature of 7000K has:
-
-- **Luminosity: 19.47 solar luminosities** (L☉)
-- **Luminosity: 7.46 × 10²⁷ watts**
-
-This star is significantly more luminous than the Sun, which is expected given its larger radius (3 times the Sun's radius) and higher temperature (7000K compared to the Sun's ~5778K). The luminosity scales as R²T⁴, so both the increased radius and temperature contribute to the much higher luminosity.
-============================================================
-</pre>
+<span class="ansi-red-fg">NameError</span>: name 'chunk_embeddings' is not defined</pre>
 </div>
 </div>
 </div>
@@ -9976,27 +9980,27 @@ Developed by Facebook AI Research, FAISS is extremely fast, especially with GPU 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>No existing collection to delete
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Added 12 chunks to ChromaDB
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[34], line 4</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">chromadb</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span style="color: rgb(95,135,135)"># Read the same Lecture 7 file</span>
+<span class="ansi-green-fg">----&gt; 4</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">open</span>(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">Lecture7_LLM_API_Basics_20250924.md</span><span style="color: rgb(175,0,0)">'</span>, <span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">r</span><span style="color: rgb(175,0,0)">'</span>) <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> f:
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     lecture7_content <span style="color: rgb(98,98,98)">=</span> f<span style="color: rgb(98,98,98)">.</span>read()
+<span class="ansi-green-intense-fg ansi-bold">      7</span> <span style="color: rgb(95,135,135)"># Use our same chunking function</span>
 
-Result 1 (distance: 1.189):
-## Summary
+File <span class="ansi-green-fg">~/anaconda3/lib/python3.13/site-packages/IPython/core/interactiveshell.py:324</span>, in <span class="ansi-cyan-fg">_modified_open</span><span class="ansi-blue-fg">(file, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    317</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> file <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> {<span style="color: rgb(98,98,98)">0</span>, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">2</span>}:
+<span class="ansi-green-intense-fg ansi-bold">    318</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(
+<span class="ansi-green-intense-fg ansi-bold">    319</span>         <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">IPython won</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">t let you open fd=</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>file<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> by default </span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    320</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">as it is likely to crash IPython. If you know what you are doing, </span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    321</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">you can use builtins</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)"> open.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    322</span>     )
+<span class="ansi-green-fg">--&gt; 324</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> io_open(file, <span style="color: rgb(98,98,98)">*</span>args, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs)
 
-### Key Concepts
-In this lecture, you've learned:
-- **API Fundamentals**: How to communicate with Large Language Models programmatically through structured requests and responses, transfor...
-
-Result 2 (distance: 1.300):
-## Understanding APIs
-
-Let's demystify this term that gets thrown around constantly in programming. API stands for Application Programming Interface, but that definition helps nobody. Here's a better ...
-</pre>
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: 'Lecture7_LLM_API_Basics_20250924.md'</pre>
 </div>
 </div>
 </div>

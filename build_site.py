@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 import datetime as _dt
+import html
 import io
 import json
 import re
@@ -56,6 +57,18 @@ LECTURE_SUMMARIES = {
     ),
 }
 
+QUIZ_LINKS = {
+    2: "https://www.playlab.ai/project/cmef7fyyr049hjo0unode4jfp",
+    3: "https://www.playlab.ai/project/cmej5um0y0bp6jx0uipjwrc4e",
+    4: "https://www.playlab.ai/project/cmeaywmuo015rlc0uegalyjtm",
+    5: "https://www.playlab.ai/project/cmex8qs8d06fole0uiw8yk4vf",
+    6: "https://www.playlab.ai/project/cmf1ur1ba0k6yje0vdb875ll8",
+    7: "https://www.playlab.ai/project/cmfichs6103zjl50u67eq8opb",
+    8: "https://www.playlab.ai/project/cmfokigx40oqwow0uauvk1z3p",
+    9: "https://www.playlab.ai/project/cmf1uyhie0knkhn0uml9sls1c",
+    10: "https://www.playlab.ai/project/cmfud0fvx0fscnv0udkrqfvj5",
+}
+
 
 def _format_title(raw: str) -> str:
     words = raw.replace("_", " ").strip()
@@ -77,7 +90,7 @@ def _format_title(raw: str) -> str:
 
 def _format_date(date_str: str) -> str:
     dt = _dt.datetime.strptime(date_str, "%Y%m%d").date()
-    return dt.strftime("%B %d, %Y")
+    return dt.strftime("%b %Y")
 
 
 def _slugify(number: int, raw: str) -> str:
@@ -403,27 +416,50 @@ def build() -> None:
         slug = _slugify(number, raw_title)
         lecture_rel_path = Path("lectures") / f"{slug}.html"
         output_path = LECTURES_DIR / lecture_rel_path.name
+        page_title = f"{display_title} – Coding Essentials for Astronomers"
 
         # Skip if HTML file already exists
         if output_path.exists():
             print(f"Skipping {notebook_path.name} - HTML already exists")
-            lectures.append(
-                {
-                    "number": number,
-                    "title": display_title,
-                    "date": display_date,
-                    "slug": slug,
-                    "relative_path": str(lecture_rel_path).replace("\\", "/"),
-                    "summary": LECTURE_SUMMARIES.get(
-                        number, "Hands-on coding walkthrough."
-                    ),
-                }
-            )
+            try:
+                existing_html = output_path.read_text(encoding="utf-8")
+            except OSError:
+                existing_html = ""
+            else:
+                new_title = f"<title>{html.escape(page_title)}</title>"
+                refreshed_html = re.sub(
+                    r"<title>.*?</title>", new_title, existing_html, count=1
+                )
+                if refreshed_html != existing_html:
+                    output_path.write_text(refreshed_html, encoding="utf-8")
+
+            lecture_entry = {
+                "number": number,
+                "title": display_title,
+                "date": display_date,
+                "slug": slug,
+                "relative_path": str(lecture_rel_path).replace("\\", "/"),
+                "summary": LECTURE_SUMMARIES.get(
+                    number, "Hands-on coding walkthrough."
+                ),
+            }
+            quiz_link = QUIZ_LINKS.get(number)
+            if quiz_link:
+                lecture_entry["quiz_link"] = quiz_link
+
+            lectures.append(lecture_entry)
             continue
 
         nb = _execute_notebook(notebook_path)
         raw_summary = _first_markdown_excerpt(nb)
         body, resources = exporter.from_notebook_node(nb)
+
+        body = re.sub(
+            r"<title>.*?</title>",
+            f"<title>{html.escape(page_title)}</title>",
+            body,
+            count=1,
+        )
 
         head_injection = (
             "<meta charset=\"utf-8\">\n"
@@ -437,18 +473,21 @@ def build() -> None:
 
         output_path.write_text(body, encoding="utf-8")
 
-        lectures.append(
-            {
-                "number": number,
-                "title": display_title,
-                "date": display_date,
-                "slug": slug,
-                "relative_path": str(lecture_rel_path).replace("\\", "/"),
-                "summary": LECTURE_SUMMARIES.get(
-                    number, raw_summary or "Hands-on coding walkthrough."
-                ),
-            }
-        )
+        lecture_entry = {
+            "number": number,
+            "title": display_title,
+            "date": display_date,
+            "slug": slug,
+            "relative_path": str(lecture_rel_path).replace("\\", "/"),
+            "summary": LECTURE_SUMMARIES.get(
+                number, raw_summary or "Hands-on coding walkthrough."
+            ),
+        }
+        quiz_link = QUIZ_LINKS.get(number)
+        if quiz_link:
+            lecture_entry["quiz_link"] = quiz_link
+
+        lectures.append(lecture_entry)
 
     lectures.sort(key=lambda item: item["number"])  # ensure numeric order
     (DOCS_DIR / "lectures.json").write_text(

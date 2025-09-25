@@ -156,6 +156,18 @@
   color: #bbf7d0;
 }
 
+.has-copy-button {
+  position: relative;
+}
+
+.has-copy-button pre {
+  padding-right: 2.4rem;
+}
+
+.copy-markdown-block {
+  margin: 0;
+}
+
 mjx-container[jax="CHTML"],
 mjx-container[jax="CHTML"] * {
   color: var(--text);
