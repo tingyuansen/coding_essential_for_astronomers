@@ -87,5 +87,34 @@
     "relative_path": "lectures/lecture10-streamlit.html",
     "summary": "Streamlit interface design, state management, and deployment of interactive research tools.",
     "quiz_link": "https://www.playlab.ai/project/cmfud0fvx0fscnv0udkrqfvj5"
+  },
+  {
+    "number": 11,
+    "title": "Lecture 11: Pandas Basics",
+    "date": "Oct 2025",
+    "slug": "lecture11-pandas-basics",
+    "relative_path": "lectures/lecture11-pandas-basics.html",
+    "summary": "Pandas DataFrames, catalog operations, and data manipulation for astronomical analysis.",
+    "quiz_link": "https://www.playlab.ai/project/cmgd0wbkp0vjsp80ufo2go2u8",
+    "data_file": "data_gaia_dr3.csv"
+  },
+  {
+    "number": 12,
+    "title": "Lecture 12: Advanced Pandas",
+    "date": "Oct 2025",
+    "slug": "lecture12-advanced-pandas",
+    "relative_path": "lectures/lecture12-advanced-pandas.html",
+    "summary": "GroupBy operations, merging catalogs, pivot tables, and advanced Pandas transformations.",
+    "quiz_link": "https://www.playlab.ai/project/cmgiohn0d0n1gk50ucl7r4v9t",
+    "data_file": "data_gaia_dr3.csv"
+  },
+  {
+    "number": 13,
+    "title": "Lecture 13: Astroquery Astropy Units Coordinates",
+    "date": "Oct 2025",
+    "slug": "lecture13-astroquery-astropy-units-coordinates",
+    "relative_path": "lectures/lecture13-astroquery-astropy-units-coordinates.html",
+    "summary": "Astroquery database access, Astropy units and coordinates, and catalog cross-matching.",
+    "quiz_link": "https://www.playlab.ai/project/cmgpnfltg6uapjy0u7fjnxgis"
   }
 ]

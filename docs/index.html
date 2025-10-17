@@ -83,6 +83,10 @@
           const quizLink = escapeHtml(lecture.quiz_link);
           actions.push(`<a href="${quizLink}" target="_blank" rel="noopener">AI quiz bot</a>`);
         }
+        if (lecture.data_file) {
+          const dataLink = escapeHtml(lecture.data_file);
+          actions.push(`<a href="${dataLink}" download>Download data</a>`);
+        }
         return `
           <article class="lecture-card">
             <span class="lecture-number">Lecture ${number}</span>

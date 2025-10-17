@@ -55,6 +55,15 @@ LECTURE_SUMMARIES = {
     10: (
         "Streamlit interface design, state management, and deployment of interactive research tools."
     ),
+    11: (
+        "Pandas DataFrames, catalog operations, and data manipulation for astronomical analysis."
+    ),
+    12: (
+        "GroupBy operations, merging catalogs, pivot tables, and advanced Pandas transformations."
+    ),
+    13: (
+        "Astroquery database access, Astropy units and coordinates, and catalog cross-matching."
+    ),
 }
 
 QUIZ_LINKS = {
@@ -67,6 +76,9 @@ QUIZ_LINKS = {
     8: "https://www.playlab.ai/project/cmfokigx40oqwow0uauvk1z3p",
     9: "https://www.playlab.ai/project/cmf1uyhie0knkhn0uml9sls1c",
     10: "https://www.playlab.ai/project/cmfud0fvx0fscnv0udkrqfvj5",
+    11: "https://www.playlab.ai/project/cmgd0wbkp0vjsp80ufo2go2u8",
+    12: "https://www.playlab.ai/project/cmgiohn0d0n1gk50ucl7r4v9t",
+    13: "https://www.playlab.ai/project/cmgpnfltg6uapjy0u7fjnxgis",
 }
 
 
