@@ -314,6 +314,9 @@ def _fill_missing_outputs(nb: nbformat.NotebookNode) -> None:
             continue
         if _should_skip_cell(source, missing_aliases):
             continue
+        # Skip cells that were already executed (have execution_count set)
+        if cell.get("execution_count") is not None:
+            continue
         if cell.get("outputs"):
             continue
         aliases = _extract_import_aliases(source)
