@@ -1,12 +1,102 @@
 [
   {
+    "number": 1,
+    "title": "Lecture 1: Welcome And Setting Up",
+    "date": "Sep 2025",
+    "slug": "lecture01-welcome-and-setting-up",
+    "relative_path": "lectures/lecture01-welcome-and-setting-up.html",
+    "summary": "Course orientation, environment setup, and expectations for AI-supported coding."
+  },
+  {
+    "number": 2,
+    "title": "Lecture 2: Variables And Collections",
+    "date": "Sep 2025",
+    "slug": "lecture02-variables-and-collections",
+    "relative_path": "lectures/lecture02-variables-and-collections.html",
+    "summary": "Core Python syntax, data structures, and essential debugging patterns for research scripts.",
+    "quiz_link": "https://www.playlab.ai/project/cmef7fyyr049hjo0unode4jfp"
+  },
+  {
+    "number": 3,
+    "title": "Lecture 3: Control Flow And File Operations",
+    "date": "Sep 2025",
+    "slug": "lecture03-control-flow-and-file-operations",
+    "relative_path": "lectures/lecture03-control-flow-and-file-operations.html",
+    "summary": "Control flow design, file handling, and automation techniques for data-driven workflows.",
+    "quiz_link": "https://www.playlab.ai/project/cmej5um0y0bp6jx0uipjwrc4e"
+  },
+  {
+    "number": 4,
+    "title": "Lecture 4: Numerical Computing",
+    "date": "Sep 2025",
+    "slug": "lecture04-numerical-computing",
+    "relative_path": "lectures/lecture04-numerical-computing.html",
+    "summary": "NumPy arrays, vectorisation, and numerical best practices for large astronomical datasets.",
+    "quiz_link": "https://www.playlab.ai/project/cmeaywmuo015rlc0uegalyjtm"
+  },
+  {
+    "number": 5,
+    "title": "Lecture 5: Functions And Object-Oriented Programming",
+    "date": "Sep 2025",
+    "slug": "lecture05-functions-and-object-oriented-programming",
+    "relative_path": "lectures/lecture05-functions-and-object-oriented-programming.html",
+    "summary": "Function design, modular organisation, and foundations of object-oriented programming.",
+    "quiz_link": "https://www.playlab.ai/project/cmex8qs8d06fole0uiw8yk4vf"
+  },
+  {
+    "number": 6,
+    "title": "Lecture 6: Data Visualization",
+    "date": "Sep 2025",
+    "slug": "lecture06-data-visualization",
+    "relative_path": "lectures/lecture06-data-visualization.html",
+    "summary": "Matplotlib workflows, visual diagnostics, and interactive plotting techniques.",
+    "quiz_link": "https://www.playlab.ai/project/cmf1ur1ba0k6yje0vdb875ll8"
+  },
+  {
+    "number": 7,
+    "title": "Lecture 7: LLM API Basics",
+    "date": "Sep 2025",
+    "slug": "lecture07-llm-api-basics",
+    "relative_path": "lectures/lecture07-llm-api-basics.html",
+    "summary": "LLM API authentication, structured prompting, and cost-aware usage patterns.",
+    "quiz_link": "https://www.playlab.ai/project/cmfichs6103zjl50u67eq8opb"
+  },
+  {
+    "number": 8,
+    "title": "Lecture 8: LLM Function Tools And RAG",
+    "date": "Sep 2025",
+    "slug": "lecture08-llm-function-tools-and-rag",
+    "relative_path": "lectures/lecture08-llm-function-tools-and-rag.html",
+    "summary": "Function calling, retrieval-augmented generation, and vector search integrations.",
+    "quiz_link": "https://www.playlab.ai/project/cmfokigx40oqwow0uauvk1z3p"
+  },
+  {
+    "number": 9,
+    "title": "Lecture 9: GitHub",
+    "date": "Sep 2025",
+    "slug": "lecture09-github",
+    "relative_path": "lectures/lecture09-github.html",
+    "summary": "Git and GitHub fundamentals, documentation standards, and GitHub Pages publishing.",
+    "quiz_link": "https://www.playlab.ai/project/cmf1uyhie0knkhn0uml9sls1c"
+  },
+  {
+    "number": 10,
+    "title": "Lecture 10: Streamlit",
+    "date": "Sep 2025",
+    "slug": "lecture10-streamlit",
+    "relative_path": "lectures/lecture10-streamlit.html",
+    "summary": "Streamlit interface design, state management, and deployment of interactive research tools.",
+    "quiz_link": "https://www.playlab.ai/project/cmfud0fvx0fscnv0udkrqfvj5"
+  },
+  {
     "number": 11,
     "title": "Lecture 11: Pandas Basics",
     "date": "Oct 2025",
     "slug": "lecture11-pandas-basics",
     "relative_path": "lectures/lecture11-pandas-basics.html",
     "summary": "Pandas DataFrames, catalog operations, and data manipulation for astronomical analysis.",
-    "quiz_link": "https://www.playlab.ai/project/cmgd0wbkp0vjsp80ufo2go2u8"
+    "quiz_link": "https://www.playlab.ai/project/cmgd0wbkp0vjsp80ufo2go2u8",
+    "data_file": "data_gaia_dr3.csv"
   },
   {
     "number": 12,
@@ -15,7 +105,8 @@
     "slug": "lecture12-advanced-pandas",
     "relative_path": "lectures/lecture12-advanced-pandas.html",
     "summary": "GroupBy operations, merging catalogs, pivot tables, and advanced Pandas transformations.",
-    "quiz_link": "https://www.playlab.ai/project/cmgiohn0d0n1gk50ucl7r4v9t"
+    "quiz_link": "https://www.playlab.ai/project/cmgiohn0d0n1gk50ucl7r4v9t",
+    "data_file": "data_gaia_dr3.csv"
   },
   {
     "number": 13,
