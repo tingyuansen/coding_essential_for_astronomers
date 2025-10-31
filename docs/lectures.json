@@ -123,7 +123,8 @@
     "date": "Oct 2025",
     "slug": "lecture14-astropy-time-observationplanning-fits",
     "relative_path": "lectures/lecture14-astropy-time-observationplanning-fits.html",
-    "summary": "Astropy Time systems, observation planning, visibility calculations, and FITS file handling."
+    "summary": "Astropy Time systems, observation planning, visibility calculations, and FITS file handling.",
+    "quiz_link": "https://www.playlab.ai/project/cmgwref9m0wacm00uvr5c2yjk"
   },
   {
     "number": 15,
@@ -131,7 +132,8 @@
     "date": "Oct 2025",
     "slug": "lecture15-skyfield-ephemerides",
     "relative_path": "lectures/lecture15-skyfield-ephemerides.html",
-    "summary": "SkyField ephemerides, precise planetary positions, and rise/set/transit calculations."
+    "summary": "SkyField ephemerides, precise planetary positions, and rise/set/transit calculations.",
+    "quiz_link": "https://www.playlab.ai/project/cmh2j60nb5xl5lk0uxe5b1nw4"
   },
   {
     "number": 16,
@@ -139,7 +141,8 @@
     "date": "Oct 2025",
     "slug": "lecture16-scipy-interpolation-differentiation-integration",
     "relative_path": "lectures/lecture16-scipy-interpolation-differentiation-integration.html",
-    "summary": "SciPy interpolation, differentiation, and integration for astronomical time-series data."
+    "summary": "SciPy interpolation, differentiation, and integration for astronomical time-series data.",
+    "quiz_link": "https://www.playlab.ai/project/cmh74ex6l1if9kx0u2uw4x0yz"
   },
   {
     "number": 17,
@@ -147,6 +150,7 @@
     "date": "Oct 2025",
     "slug": "lecture17-scipy-random-variable-measurement-uncertainty",
     "relative_path": "lectures/lecture17-scipy-random-variable-measurement-uncertainty.html",
-    "summary": "Statistical analysis, measurement uncertainty, random variables, and error propagation."
+    "summary": "Statistical analysis, measurement uncertainty, random variables, and error propagation.",
+    "quiz_link": "https://www.playlab.ai/project/cmhcp30770ahqke0vq42ccwpu"
   }
 ]
