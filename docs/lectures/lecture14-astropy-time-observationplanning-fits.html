@@ -7667,8 +7667,8 @@ a.anchor-link {
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Current time (UTC): 2025-10-31 16:26:58.205271
-ISO 8601 format: 2025-10-31 16:26:58.205
+<pre>Current time (UTC): 2025-10-31 16:45:48.612539
+ISO 8601 format: 2025-10-31 16:45:48.613
 Just the date: 2025-10-31
 </pre>
 </div>
@@ -7764,8 +7764,8 @@ Modified Julian Date: 60967.04
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Current JD: 2460980.19
-Current MJD: 60979.69
+<pre>Current JD: 2460980.20
+Current MJD: 60979.70
 </pre>
 </div>
 </div>
@@ -8653,7 +8653,9 @@ Look West, at 48° above the horizon
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Azimuth: </span><span class="si">{</span><span class="n">moon_altaz</span><span class="o">.</span><span class="n">az</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Estimate lunar phase from Sun-Moon angular separation</span>
-<span class="n">sun_moon_separation</span> <span class="o">=</span> <span class="n">sun</span><span class="o">.</span><span class="n">separation</span><span class="p">(</span><span class="n">moon</span><span class="p">)</span>
+<span class="c1"># Transform moon to same frame as sun to avoid coordinate frame mismatch warning</span>
+<span class="n">moon_gcrs</span> <span class="o">=</span> <span class="n">moon</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">sun</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+<span class="n">sun_moon_separation</span> <span class="o">=</span> <span class="n">sun</span><span class="o">.</span><span class="n">separation</span><span class="p">(</span><span class="n">moon_gcrs</span><span class="p">)</span>
 <span class="n">phase</span> <span class="o">=</span> <span class="n">sun_moon_separation</span><span class="o">.</span><span class="n">deg</span> <span class="o">/</span> <span class="mf">180.0</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Sun-Moon separation: </span><span class="si">{</span><span class="n">sun_moon_separation</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -9207,7 +9209,6 @@ Best observing window:
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="n">fits_url</span> <span class="o">=</span> <span class="s2">"https://archive.stsci.edu/hlsps/ceers/nircam/hlsp_ceers_jwst_nircam_nircam3_f200w_v0.5_i2d.fits.gz"</span>
 <span class="n">fits_gz</span> <span class="o">=</span> <span class="s2">"ceers_nircam3_f200w.fits.gz"</span>
@@ -9228,13 +9229,7 @@ Best observing window:
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Downloading </span><span class="si">{</span><span class="n">fits_gz</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"This will take several minutes depending on connection speed.</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">class</span><span class="w"> </span><span class="nc">TqdmUpTo</span><span class="p">(</span><span class="n">tqdm</span><span class="p">):</span>
-                <span class="k">def</span><span class="w"> </span><span class="nf">update_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">tsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">tsize</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">bsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-            <span class="k">with</span> <span class="n">TqdmUpTo</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">'B'</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">miniters</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="n">fits_gz</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
-                <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">fits_url</span><span class="p">,</span> <span class="n">fits_gz</span><span class="p">,</span> <span class="n">reporthook</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">update_to</span><span class="p">)</span>
+            <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">fits_url</span><span class="p">,</span> <span class="n">fits_gz</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✓ Downloaded </span><span class="si">{</span><span class="n">fits_gz</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✗ Download failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -9279,2732 +9274,6 @@ Compressed size: ~1.5 GB, Uncompressed: ~2.5 GB
 Downloading ceers_nircam3_f200w.fits.gz...
 This will take several minutes depending on connection speed.
 
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz: 0.00B [00:00, ?B/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   0%|          | 8.19k/1.34G [00:00&lt;6:46:06, 54.9kB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   0%|          | 958k/1.34G [00:00&lt;04:46, 4.67MB/s]   </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   0%|          | 3.68M/1.34G [00:00&lt;01:35, 13.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   0%|          | 6.58M/1.34G [00:00&lt;01:08, 19.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   1%|          | 9.31M/1.34G [00:00&lt;01:00, 22.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   1%|          | 12.3M/1.34G [00:00&lt;00:54, 24.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   1%|          | 15.2M/1.34G [00:00&lt;00:50, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   1%|▏         | 18.2M/1.34G [00:00&lt;00:48, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   2%|▏         | 20.8M/1.34G [00:00&lt;00:48, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   2%|▏         | 23.8M/1.34G [00:01&lt;00:47, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   2%|▏         | 26.6M/1.34G [00:01&lt;00:54, 23.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   2%|▏         | 31.1M/1.34G [00:01&lt;00:44, 29.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   3%|▎         | 34.1M/1.34G [00:01&lt;00:44, 29.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   3%|▎         | 37.0M/1.34G [00:01&lt;00:44, 29.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   3%|▎         | 39.9M/1.34G [00:01&lt;00:44, 29.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   3%|▎         | 42.6M/1.34G [00:01&lt;00:45, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   3%|▎         | 45.5M/1.34G [00:01&lt;00:44, 28.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   4%|▎         | 48.3M/1.34G [00:01&lt;00:45, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   4%|▍         | 51.3M/1.34G [00:02&lt;00:44, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   4%|▍         | 54.2M/1.34G [00:02&lt;00:44, 28.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   4%|▍         | 57.1M/1.34G [00:02&lt;00:44, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   4%|▍         | 60.0M/1.34G [00:02&lt;00:44, 28.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   5%|▍         | 63.0M/1.34G [00:02&lt;00:43, 29.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   5%|▍         | 65.4M/1.34G [00:02&lt;00:46, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   5%|▌         | 68.2M/1.34G [00:02&lt;00:46, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   5%|▌         | 70.4M/1.34G [00:02&lt;00:54, 23.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   6%|▌         | 74.9M/1.34G [00:02&lt;00:42, 29.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   6%|▌         | 77.4M/1.34G [00:02&lt;00:44, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   6%|▌         | 80.1M/1.34G [00:03&lt;00:44, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   6%|▌         | 82.7M/1.34G [00:03&lt;00:46, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   6%|▋         | 85.4M/1.34G [00:03&lt;00:46, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 87.9M/1.34G [00:03&lt;00:47, 26.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 90.5M/1.34G [00:03&lt;00:47, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 93.1M/1.34G [00:03&lt;00:48, 25.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 95.7M/1.34G [00:03&lt;00:47, 25.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 97.6M/1.34G [00:03&lt;00:51, 24.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   7%|▋         | 100M/1.34G [00:03&lt;00:52, 23.6MB/s] </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   8%|▊         | 103M/1.34G [00:03&lt;00:51, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   8%|▊         | 105M/1.34G [00:04&lt;00:49, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   8%|▊         | 108M/1.34G [00:04&lt;00:49, 25.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   8%|▊         | 111M/1.34G [00:04&lt;00:47, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   8%|▊         | 113M/1.34G [00:04&lt;00:47, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   9%|▊         | 116M/1.34G [00:04&lt;00:47, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   9%|▉         | 118M/1.34G [00:04&lt;00:47, 25.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   9%|▉         | 121M/1.34G [00:04&lt;00:47, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   9%|▉         | 123M/1.34G [00:04&lt;00:51, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:   9%|▉         | 126M/1.34G [00:04&lt;00:49, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  10%|▉         | 128M/1.34G [00:04&lt;00:48, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  10%|▉         | 131M/1.34G [00:05&lt;00:50, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  10%|▉         | 133M/1.34G [00:05&lt;00:48, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  10%|█         | 136M/1.34G [00:05&lt;00:48, 24.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  10%|█         | 138M/1.34G [00:05&lt;00:49, 24.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█         | 141M/1.34G [00:05&lt;00:49, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█         | 144M/1.34G [00:05&lt;00:47, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█         | 146M/1.34G [00:05&lt;00:47, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█         | 149M/1.34G [00:05&lt;00:48, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█▏        | 151M/1.34G [00:05&lt;00:46, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  11%|█▏        | 154M/1.34G [00:06&lt;00:46, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  12%|█▏        | 157M/1.34G [00:06&lt;00:47, 25.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  12%|█▏        | 159M/1.34G [00:06&lt;00:47, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  12%|█▏        | 162M/1.34G [00:06&lt;00:47, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  12%|█▏        | 164M/1.34G [00:06&lt;00:47, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  12%|█▏        | 166M/1.34G [00:06&lt;00:47, 24.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  13%|█▎        | 169M/1.34G [00:06&lt;00:46, 25.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  13%|█▎        | 172M/1.34G [00:06&lt;00:45, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  13%|█▎        | 174M/1.34G [00:06&lt;00:47, 24.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  13%|█▎        | 177M/1.34G [00:06&lt;00:45, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  13%|█▎        | 179M/1.34G [00:07&lt;00:45, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  14%|█▎        | 182M/1.34G [00:07&lt;00:45, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  14%|█▍        | 184M/1.34G [00:07&lt;00:45, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  14%|█▍        | 187M/1.34G [00:07&lt;00:44, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  14%|█▍        | 189M/1.34G [00:07&lt;00:52, 21.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  14%|█▍        | 192M/1.34G [00:07&lt;00:49, 23.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▍        | 194M/1.34G [00:07&lt;00:51, 22.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▍        | 196M/1.34G [00:07&lt;00:52, 21.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▍        | 199M/1.34G [00:07&lt;00:52, 21.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▍        | 201M/1.34G [00:07&lt;00:54, 21.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▌        | 203M/1.34G [00:08&lt;00:52, 21.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  15%|█▌        | 205M/1.34G [00:08&lt;00:51, 22.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▌        | 208M/1.34G [00:08&lt;00:49, 22.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▌        | 210M/1.34G [00:08&lt;00:48, 23.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▌        | 213M/1.34G [00:08&lt;00:47, 23.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▌        | 215M/1.34G [00:08&lt;00:46, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▋        | 218M/1.34G [00:08&lt;00:46, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  16%|█▋        | 220M/1.34G [00:08&lt;00:45, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  17%|█▋        | 223M/1.34G [00:08&lt;00:46, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  17%|█▋        | 225M/1.34G [00:09&lt;00:46, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  17%|█▋        | 227M/1.34G [00:09&lt;00:47, 23.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  17%|█▋        | 230M/1.34G [00:09&lt;00:46, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  17%|█▋        | 232M/1.34G [00:09&lt;00:45, 24.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 234M/1.34G [00:09&lt;00:46, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 236M/1.34G [00:09&lt;00:49, 22.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 239M/1.34G [00:09&lt;00:47, 23.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 241M/1.34G [00:09&lt;00:50, 21.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 243M/1.34G [00:09&lt;00:48, 22.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  18%|█▊        | 246M/1.34G [00:09&lt;00:48, 22.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▊        | 248M/1.34G [00:10&lt;00:49, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▊        | 250M/1.34G [00:10&lt;00:50, 21.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 251M/1.34G [00:10&lt;00:56, 19.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 253M/1.34G [00:10&lt;00:57, 18.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 255M/1.34G [00:10&lt;01:01, 17.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 256M/1.34G [00:10&lt;01:07, 15.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 258M/1.34G [00:10&lt;01:03, 17.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 260M/1.34G [00:10&lt;01:04, 16.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  19%|█▉        | 261M/1.34G [00:10&lt;01:07, 15.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|█▉        | 263M/1.34G [00:10&lt;01:08, 15.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|█▉        | 264M/1.34G [00:11&lt;01:11, 15.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|█▉        | 266M/1.34G [00:11&lt;01:08, 15.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|█▉        | 268M/1.34G [00:11&lt;01:05, 16.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|██        | 269M/1.34G [00:11&lt;01:05, 16.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|██        | 271M/1.34G [00:11&lt;01:04, 16.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  20%|██        | 273M/1.34G [00:11&lt;01:05, 16.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 275M/1.34G [00:11&lt;01:04, 16.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 276M/1.34G [00:11&lt;01:05, 16.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 278M/1.34G [00:11&lt;01:03, 16.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 280M/1.34G [00:11&lt;01:02, 16.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 281M/1.34G [00:12&lt;01:02, 17.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██        | 283M/1.34G [00:12&lt;00:59, 17.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██▏       | 285M/1.34G [00:12&lt;01:01, 17.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  21%|██▏       | 287M/1.34G [00:12&lt;00:59, 17.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 289M/1.34G [00:12&lt;01:00, 17.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 291M/1.34G [00:12&lt;00:58, 17.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 292M/1.34G [00:12&lt;00:58, 17.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 294M/1.34G [00:12&lt;00:58, 18.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 296M/1.34G [00:12&lt;00:58, 18.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 298M/1.34G [00:12&lt;00:57, 18.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  22%|██▏       | 299M/1.34G [00:13&lt;01:00, 17.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 301M/1.34G [00:13&lt;00:59, 17.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 303M/1.34G [00:13&lt;00:58, 17.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 305M/1.34G [00:13&lt;01:01, 16.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 307M/1.34G [00:13&lt;00:59, 17.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 308M/1.34G [00:13&lt;01:00, 17.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 310M/1.34G [00:13&lt;01:04, 16.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 312M/1.34G [00:13&lt;01:01, 16.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  23%|██▎       | 314M/1.34G [00:13&lt;01:01, 16.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▎       | 315M/1.34G [00:14&lt;00:58, 17.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▎       | 317M/1.34G [00:14&lt;01:00, 17.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 319M/1.34G [00:14&lt;00:59, 17.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 321M/1.34G [00:14&lt;00:58, 17.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 323M/1.34G [00:14&lt;01:01, 16.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 325M/1.34G [00:14&lt;00:59, 17.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 326M/1.34G [00:14&lt;00:59, 17.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  24%|██▍       | 327M/1.34G [00:14&lt;01:05, 15.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▍       | 329M/1.34G [00:14&lt;00:58, 17.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▍       | 331M/1.34G [00:14&lt;00:56, 17.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▍       | 333M/1.34G [00:15&lt;00:54, 18.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▌       | 335M/1.34G [00:15&lt;00:54, 18.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▌       | 337M/1.34G [00:15&lt;00:54, 18.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  25%|██▌       | 339M/1.34G [00:15&lt;00:52, 19.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 341M/1.34G [00:15&lt;00:50, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 343M/1.34G [00:15&lt;00:52, 18.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 345M/1.34G [00:15&lt;00:50, 19.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 347M/1.34G [00:15&lt;00:52, 19.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 349M/1.34G [00:15&lt;00:50, 19.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▌       | 351M/1.34G [00:15&lt;00:49, 19.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  26%|██▋       | 353M/1.34G [00:16&lt;00:49, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 355M/1.34G [00:16&lt;00:50, 19.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 357M/1.34G [00:16&lt;00:51, 19.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 359M/1.34G [00:16&lt;00:49, 19.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 361M/1.34G [00:16&lt;00:49, 19.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 363M/1.34G [00:16&lt;00:50, 19.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 365M/1.34G [00:16&lt;00:50, 19.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  27%|██▋       | 367M/1.34G [00:16&lt;00:50, 19.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 369M/1.34G [00:16&lt;00:47, 20.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 371M/1.34G [00:17&lt;00:47, 20.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 374M/1.34G [00:17&lt;00:45, 21.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 376M/1.34G [00:17&lt;00:45, 21.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 378M/1.34G [00:17&lt;00:45, 21.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  28%|██▊       | 380M/1.34G [00:17&lt;00:44, 21.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▊       | 382M/1.34G [00:17&lt;00:43, 22.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▊       | 385M/1.34G [00:17&lt;00:42, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▉       | 387M/1.34G [00:17&lt;00:42, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▉       | 389M/1.34G [00:17&lt;00:44, 21.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▉       | 391M/1.34G [00:17&lt;00:44, 21.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  29%|██▉       | 393M/1.34G [00:18&lt;00:45, 20.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|██▉       | 395M/1.34G [00:18&lt;00:44, 21.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|██▉       | 397M/1.34G [00:18&lt;00:45, 20.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|██▉       | 399M/1.34G [00:18&lt;00:47, 19.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|██▉       | 402M/1.34G [00:18&lt;00:45, 20.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|███       | 404M/1.34G [00:18&lt;00:45, 20.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|███       | 406M/1.34G [00:18&lt;00:45, 20.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  30%|███       | 408M/1.34G [00:18&lt;00:44, 20.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███       | 409M/1.34G [00:18&lt;00:47, 19.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███       | 411M/1.34G [00:18&lt;00:52, 17.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███       | 413M/1.34G [00:19&lt;00:50, 18.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███       | 415M/1.34G [00:19&lt;00:46, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███       | 417M/1.34G [00:19&lt;00:44, 20.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███▏      | 419M/1.34G [00:19&lt;00:48, 19.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  31%|███▏      | 421M/1.34G [00:19&lt;00:49, 18.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 423M/1.34G [00:19&lt;00:49, 18.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 425M/1.34G [00:19&lt;00:48, 18.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 426M/1.34G [00:19&lt;00:48, 18.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 428M/1.34G [00:19&lt;00:50, 18.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 430M/1.34G [00:19&lt;00:49, 18.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 432M/1.34G [00:20&lt;00:47, 19.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  32%|███▏      | 434M/1.34G [00:20&lt;00:45, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 436M/1.34G [00:20&lt;00:45, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 438M/1.34G [00:20&lt;00:45, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 440M/1.34G [00:20&lt;00:44, 20.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 442M/1.34G [00:20&lt;00:46, 19.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 444M/1.34G [00:20&lt;00:47, 18.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 446M/1.34G [00:20&lt;00:47, 18.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  33%|███▎      | 448M/1.34G [00:20&lt;00:47, 18.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▎      | 450M/1.34G [00:20&lt;00:46, 19.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▍      | 452M/1.34G [00:21&lt;00:44, 19.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▍      | 454M/1.34G [00:21&lt;00:45, 19.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▍      | 457M/1.34G [00:21&lt;00:43, 20.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▍      | 459M/1.34G [00:21&lt;00:41, 21.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  34%|███▍      | 461M/1.34G [00:21&lt;00:42, 20.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▍      | 463M/1.34G [00:21&lt;00:42, 20.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▍      | 465M/1.34G [00:21&lt;00:41, 21.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▍      | 467M/1.34G [00:21&lt;00:44, 19.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▌      | 469M/1.34G [00:21&lt;00:44, 19.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▌      | 471M/1.34G [00:21&lt;00:42, 20.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  35%|███▌      | 473M/1.34G [00:22&lt;00:40, 21.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▌      | 476M/1.34G [00:22&lt;00:39, 21.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▌      | 478M/1.34G [00:22&lt;00:40, 21.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▌      | 480M/1.34G [00:22&lt;00:41, 20.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▌      | 482M/1.34G [00:22&lt;00:41, 20.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▌      | 484M/1.34G [00:22&lt;00:39, 21.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  36%|███▋      | 487M/1.34G [00:22&lt;00:38, 22.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 489M/1.34G [00:22&lt;00:39, 21.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 491M/1.34G [00:22&lt;00:38, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 494M/1.34G [00:22&lt;00:37, 22.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 496M/1.34G [00:23&lt;00:35, 23.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 499M/1.34G [00:23&lt;00:35, 23.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  37%|███▋      | 501M/1.34G [00:23&lt;00:35, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 503M/1.34G [00:23&lt;00:37, 22.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 506M/1.34G [00:23&lt;00:36, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 508M/1.34G [00:23&lt;00:36, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 510M/1.34G [00:23&lt;00:36, 22.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 512M/1.34G [00:23&lt;00:37, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  38%|███▊      | 515M/1.34G [00:23&lt;00:36, 22.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▊      | 517M/1.34G [00:24&lt;00:35, 23.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▉      | 519M/1.34G [00:24&lt;00:34, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▉      | 522M/1.34G [00:24&lt;00:34, 23.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▉      | 524M/1.34G [00:24&lt;00:33, 24.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▉      | 527M/1.34G [00:24&lt;00:34, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  39%|███▉      | 529M/1.34G [00:24&lt;00:36, 22.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  40%|███▉      | 531M/1.34G [00:24&lt;00:35, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  40%|███▉      | 533M/1.34G [00:24&lt;00:37, 21.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  40%|███▉      | 535M/1.34G [00:24&lt;00:36, 21.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  40%|████      | 538M/1.34G [00:24&lt;00:35, 22.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  40%|████      | 540M/1.34G [00:25&lt;00:36, 21.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████      | 542M/1.34G [00:25&lt;00:35, 22.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████      | 545M/1.34G [00:25&lt;00:33, 23.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████      | 547M/1.34G [00:25&lt;00:33, 23.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████      | 550M/1.34G [00:25&lt;00:32, 24.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████▏     | 552M/1.34G [00:25&lt;00:32, 24.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  41%|████▏     | 555M/1.34G [00:25&lt;00:32, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  42%|████▏     | 558M/1.34G [00:25&lt;00:31, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  42%|████▏     | 560M/1.34G [00:25&lt;00:30, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  42%|████▏     | 563M/1.34G [00:25&lt;00:31, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  42%|████▏     | 565M/1.34G [00:26&lt;00:31, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  42%|████▏     | 567M/1.34G [00:26&lt;00:32, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  43%|████▎     | 570M/1.34G [00:26&lt;00:31, 24.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  43%|████▎     | 572M/1.34G [00:26&lt;00:31, 24.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  43%|████▎     | 575M/1.34G [00:26&lt;00:30, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  43%|████▎     | 578M/1.34G [00:26&lt;00:29, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  43%|████▎     | 580M/1.34G [00:26&lt;00:29, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  44%|████▎     | 583M/1.34G [00:26&lt;00:29, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  44%|████▎     | 585M/1.34G [00:26&lt;00:29, 25.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  44%|████▍     | 588M/1.34G [00:26&lt;00:30, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  44%|████▍     | 591M/1.34G [00:27&lt;00:28, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  44%|████▍     | 594M/1.34G [00:27&lt;00:27, 26.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  45%|████▍     | 596M/1.34G [00:27&lt;00:27, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  45%|████▍     | 599M/1.34G [00:27&lt;00:26, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  45%|████▍     | 602M/1.34G [00:27&lt;00:27, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  45%|████▌     | 604M/1.34G [00:27&lt;00:27, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  45%|████▌     | 607M/1.34G [00:27&lt;00:26, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  46%|████▌     | 610M/1.34G [00:27&lt;00:26, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  46%|████▌     | 613M/1.34G [00:27&lt;00:27, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  46%|████▌     | 615M/1.34G [00:27&lt;00:26, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  46%|████▌     | 618M/1.34G [00:28&lt;00:26, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  46%|████▋     | 621M/1.34G [00:28&lt;00:25, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  47%|████▋     | 624M/1.34G [00:28&lt;00:25, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  47%|████▋     | 627M/1.34G [00:28&lt;00:25, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  47%|████▋     | 629M/1.34G [00:28&lt;00:25, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  47%|████▋     | 632M/1.34G [00:28&lt;00:25, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  47%|████▋     | 635M/1.34G [00:28&lt;00:25, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  48%|████▊     | 638M/1.34G [00:28&lt;00:30, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  48%|████▊     | 642M/1.34G [00:28&lt;00:25, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  48%|████▊     | 645M/1.34G [00:29&lt;00:25, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  48%|████▊     | 647M/1.34G [00:29&lt;00:25, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  49%|████▊     | 650M/1.34G [00:29&lt;00:25, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  49%|████▉     | 653M/1.34G [00:29&lt;00:24, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  49%|████▉     | 656M/1.34G [00:29&lt;00:25, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  49%|████▉     | 659M/1.34G [00:29&lt;00:24, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  49%|████▉     | 661M/1.34G [00:29&lt;00:25, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  50%|████▉     | 664M/1.34G [00:29&lt;00:25, 26.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  50%|████▉     | 666M/1.34G [00:29&lt;00:26, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  50%|████▉     | 668M/1.34G [00:29&lt;00:27, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  50%|█████     | 671M/1.34G [00:30&lt;00:27, 24.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  50%|█████     | 673M/1.34G [00:30&lt;00:26, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  51%|█████     | 676M/1.34G [00:30&lt;00:25, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  51%|█████     | 679M/1.34G [00:30&lt;00:24, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  51%|█████     | 682M/1.34G [00:30&lt;00:24, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  51%|█████     | 685M/1.34G [00:30&lt;00:23, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  51%|█████▏    | 687M/1.34G [00:30&lt;00:23, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  52%|█████▏    | 690M/1.34G [00:30&lt;00:23, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  52%|█████▏    | 693M/1.34G [00:30&lt;00:23, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  52%|█████▏    | 695M/1.34G [00:30&lt;00:23, 26.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  52%|█████▏    | 698M/1.34G [00:31&lt;00:24, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  52%|█████▏    | 701M/1.34G [00:31&lt;00:23, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  53%|█████▎    | 704M/1.34G [00:31&lt;00:23, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  53%|█████▎    | 706M/1.34G [00:31&lt;00:24, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  53%|█████▎    | 709M/1.34G [00:31&lt;00:23, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  53%|█████▎    | 712M/1.34G [00:31&lt;00:22, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  53%|█████▎    | 714M/1.34G [00:31&lt;00:24, 25.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  54%|█████▎    | 717M/1.34G [00:31&lt;00:23, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  54%|█████▎    | 719M/1.34G [00:31&lt;00:23, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  54%|█████▍    | 722M/1.34G [00:31&lt;00:22, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  54%|█████▍    | 725M/1.34G [00:32&lt;00:22, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  54%|█████▍    | 728M/1.34G [00:32&lt;00:22, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  55%|█████▍    | 731M/1.34G [00:32&lt;00:21, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  55%|█████▍    | 734M/1.34G [00:32&lt;00:21, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  55%|█████▌    | 737M/1.34G [00:32&lt;00:21, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  55%|█████▌    | 739M/1.34G [00:32&lt;00:22, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  55%|█████▌    | 742M/1.34G [00:32&lt;00:22, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  56%|█████▌    | 745M/1.34G [00:32&lt;00:21, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  56%|█████▌    | 748M/1.34G [00:32&lt;00:21, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  56%|█████▌    | 751M/1.34G [00:32&lt;00:21, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  56%|█████▋    | 753M/1.34G [00:33&lt;00:20, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  56%|█████▋    | 756M/1.34G [00:33&lt;00:20, 28.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  57%|█████▋    | 759M/1.34G [00:33&lt;00:20, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  57%|█████▋    | 762M/1.34G [00:33&lt;00:20, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  57%|█████▋    | 765M/1.34G [00:33&lt;00:20, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  57%|█████▋    | 768M/1.34G [00:33&lt;00:20, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  58%|█████▊    | 771M/1.34G [00:33&lt;00:20, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  58%|█████▊    | 774M/1.34G [00:33&lt;00:19, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  58%|█████▊    | 776M/1.34G [00:33&lt;00:19, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  58%|█████▊    | 779M/1.34G [00:33&lt;00:19, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  58%|█████▊    | 782M/1.34G [00:34&lt;00:19, 28.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  59%|█████▊    | 785M/1.34G [00:34&lt;00:19, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  59%|█████▉    | 788M/1.34G [00:34&lt;00:19, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  59%|█████▉    | 791M/1.34G [00:34&lt;00:19, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  59%|█████▉    | 794M/1.34G [00:34&lt;00:19, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  60%|█████▉    | 797M/1.34G [00:34&lt;00:18, 28.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  60%|█████▉    | 799M/1.34G [00:34&lt;00:18, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  60%|█████▉    | 802M/1.34G [00:34&lt;00:19, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  60%|██████    | 805M/1.34G [00:34&lt;00:19, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  60%|██████    | 808M/1.34G [00:34&lt;00:19, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  61%|██████    | 811M/1.34G [00:35&lt;00:18, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  61%|██████    | 813M/1.34G [00:35&lt;00:18, 28.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  61%|██████    | 816M/1.34G [00:35&lt;00:18, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  61%|██████    | 819M/1.34G [00:35&lt;00:18, 28.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  61%|██████▏   | 822M/1.34G [00:35&lt;00:17, 28.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  62%|██████▏   | 825M/1.34G [00:35&lt;00:17, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  62%|██████▏   | 828M/1.34G [00:35&lt;00:17, 28.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  62%|██████▏   | 830M/1.34G [00:35&lt;00:20, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  62%|██████▏   | 832M/1.34G [00:35&lt;00:20, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  62%|██████▏   | 835M/1.34G [00:35&lt;00:19, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  63%|██████▎   | 838M/1.34G [00:36&lt;00:19, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  63%|██████▎   | 840M/1.34G [00:36&lt;00:19, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  63%|██████▎   | 843M/1.34G [00:36&lt;00:19, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  63%|██████▎   | 845M/1.34G [00:36&lt;00:19, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  63%|██████▎   | 848M/1.34G [00:36&lt;00:19, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  64%|██████▎   | 851M/1.34G [00:36&lt;00:18, 25.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  64%|██████▎   | 853M/1.34G [00:36&lt;00:18, 25.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  64%|██████▍   | 856M/1.34G [00:36&lt;00:18, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  64%|██████▍   | 858M/1.34G [00:36&lt;00:19, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  64%|██████▍   | 861M/1.34G [00:36&lt;00:18, 26.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  65%|██████▍   | 864M/1.34G [00:37&lt;00:17, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  65%|██████▍   | 867M/1.34G [00:37&lt;00:17, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  65%|██████▍   | 869M/1.34G [00:37&lt;00:17, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  65%|██████▌   | 872M/1.34G [00:37&lt;00:17, 26.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  65%|██████▌   | 875M/1.34G [00:37&lt;00:17, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▌   | 878M/1.34G [00:37&lt;00:17, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▌   | 880M/1.34G [00:37&lt;00:16, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▌   | 883M/1.34G [00:37&lt;00:17, 25.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▌   | 885M/1.34G [00:37&lt;00:17, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▋   | 888M/1.34G [00:37&lt;00:18, 25.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  66%|██████▋   | 890M/1.34G [00:38&lt;00:17, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  67%|██████▋   | 892M/1.34G [00:38&lt;00:18, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  67%|██████▋   | 895M/1.34G [00:38&lt;00:17, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  67%|██████▋   | 898M/1.34G [00:38&lt;00:17, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  67%|██████▋   | 900M/1.34G [00:38&lt;00:17, 24.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  67%|██████▋   | 903M/1.34G [00:38&lt;00:17, 25.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  68%|██████▊   | 905M/1.34G [00:38&lt;00:17, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  68%|██████▊   | 908M/1.34G [00:38&lt;00:17, 24.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  68%|██████▊   | 910M/1.34G [00:38&lt;00:16, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  68%|██████▊   | 913M/1.34G [00:39&lt;00:15, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  68%|██████▊   | 916M/1.34G [00:39&lt;00:16, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  69%|██████▊   | 919M/1.34G [00:39&lt;00:15, 26.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  69%|██████▉   | 922M/1.34G [00:39&lt;00:15, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  69%|██████▉   | 924M/1.34G [00:39&lt;00:15, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  69%|██████▉   | 927M/1.34G [00:39&lt;00:15, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  69%|██████▉   | 930M/1.34G [00:39&lt;00:14, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  70%|██████▉   | 933M/1.34G [00:39&lt;00:14, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  70%|██████▉   | 935M/1.34G [00:39&lt;00:14, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  70%|███████   | 938M/1.34G [00:39&lt;00:15, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  70%|███████   | 941M/1.34G [00:40&lt;00:14, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  70%|███████   | 944M/1.34G [00:40&lt;00:14, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  71%|███████   | 947M/1.34G [00:40&lt;00:14, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  71%|███████   | 949M/1.34G [00:40&lt;00:13, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  71%|███████   | 952M/1.34G [00:40&lt;00:13, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  71%|███████▏  | 955M/1.34G [00:40&lt;00:13, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  72%|███████▏  | 958M/1.34G [00:40&lt;00:13, 28.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  72%|███████▏  | 961M/1.34G [00:40&lt;00:13, 28.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  72%|███████▏  | 963M/1.34G [00:40&lt;00:13, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  72%|███████▏  | 966M/1.34G [00:40&lt;00:13, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  72%|███████▏  | 969M/1.34G [00:41&lt;00:13, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  73%|███████▎  | 972M/1.34G [00:41&lt;00:13, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  73%|███████▎  | 975M/1.34G [00:41&lt;00:13, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  73%|███████▎  | 978M/1.34G [00:41&lt;00:12, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  73%|███████▎  | 980M/1.34G [00:41&lt;00:12, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  73%|███████▎  | 983M/1.34G [00:41&lt;00:13, 26.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  74%|███████▎  | 986M/1.34G [00:41&lt;00:12, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  74%|███████▍  | 989M/1.34G [00:41&lt;00:12, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  74%|███████▍  | 991M/1.34G [00:41&lt;00:12, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  74%|███████▍  | 994M/1.34G [00:41&lt;00:12, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  74%|███████▍  | 997M/1.34G [00:42&lt;00:12, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  75%|███████▍  | 1.00G/1.34G [00:42&lt;00:12, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  75%|███████▍  | 1.00G/1.34G [00:42&lt;00:12, 26.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  75%|███████▍  | 1.00G/1.34G [00:42&lt;00:14, 23.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  75%|███████▌  | 1.01G/1.34G [00:42&lt;00:12, 26.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  75%|███████▌  | 1.01G/1.34G [00:42&lt;00:12, 26.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  76%|███████▌  | 1.01G/1.34G [00:42&lt;00:12, 25.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  76%|███████▌  | 1.02G/1.34G [00:42&lt;00:12, 25.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  76%|███████▌  | 1.02G/1.34G [00:42&lt;00:12, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  76%|███████▌  | 1.02G/1.34G [00:42&lt;00:12, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  76%|███████▋  | 1.02G/1.34G [00:43&lt;00:12, 24.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  77%|███████▋  | 1.03G/1.34G [00:43&lt;00:11, 26.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  77%|███████▋  | 1.03G/1.34G [00:43&lt;00:12, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  77%|███████▋  | 1.03G/1.34G [00:43&lt;00:11, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  77%|███████▋  | 1.03G/1.34G [00:43&lt;00:11, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  77%|███████▋  | 1.04G/1.34G [00:43&lt;00:11, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  78%|███████▊  | 1.04G/1.34G [00:43&lt;00:11, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  78%|███████▊  | 1.04G/1.34G [00:43&lt;00:11, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  78%|███████▊  | 1.05G/1.34G [00:43&lt;00:10, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  78%|███████▊  | 1.05G/1.34G [00:43&lt;00:10, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  78%|███████▊  | 1.05G/1.34G [00:44&lt;00:10, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  79%|███████▊  | 1.05G/1.34G [00:44&lt;00:10, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  79%|███████▉  | 1.06G/1.34G [00:44&lt;00:10, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  79%|███████▉  | 1.06G/1.34G [00:44&lt;00:10, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  79%|███████▉  | 1.06G/1.34G [00:44&lt;00:09, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  80%|███████▉  | 1.06G/1.34G [00:44&lt;00:09, 28.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  80%|███████▉  | 1.07G/1.34G [00:44&lt;00:09, 28.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  80%|███████▉  | 1.07G/1.34G [00:44&lt;00:09, 28.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  80%|████████  | 1.07G/1.34G [00:44&lt;00:09, 27.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  80%|████████  | 1.08G/1.34G [00:44&lt;00:09, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  81%|████████  | 1.08G/1.34G [00:45&lt;00:09, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  81%|████████  | 1.08G/1.34G [00:45&lt;00:09, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  81%|████████  | 1.08G/1.34G [00:45&lt;00:09, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  81%|████████  | 1.09G/1.34G [00:45&lt;00:09, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  81%|████████▏ | 1.09G/1.34G [00:45&lt;00:09, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  82%|████████▏ | 1.09G/1.34G [00:45&lt;00:09, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  82%|████████▏ | 1.09G/1.34G [00:45&lt;00:08, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  82%|████████▏ | 1.10G/1.34G [00:45&lt;00:08, 27.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  82%|████████▏ | 1.10G/1.34G [00:45&lt;00:08, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  82%|████████▏ | 1.10G/1.34G [00:45&lt;00:08, 27.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  83%|████████▎ | 1.11G/1.34G [00:46&lt;00:08, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  83%|████████▎ | 1.11G/1.34G [00:46&lt;00:08, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  83%|████████▎ | 1.11G/1.34G [00:46&lt;00:08, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  83%|████████▎ | 1.11G/1.34G [00:46&lt;00:07, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  83%|████████▎ | 1.12G/1.34G [00:46&lt;00:07, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  84%|████████▎ | 1.12G/1.34G [00:46&lt;00:07, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  84%|████████▍ | 1.12G/1.34G [00:46&lt;00:07, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  84%|████████▍ | 1.13G/1.34G [00:46&lt;00:07, 28.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  84%|████████▍ | 1.13G/1.34G [00:46&lt;00:07, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  85%|████████▍ | 1.13G/1.34G [00:47&lt;00:07, 28.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  85%|████████▍ | 1.13G/1.34G [00:47&lt;00:07, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  85%|████████▍ | 1.14G/1.34G [00:47&lt;00:07, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  85%|████████▌ | 1.14G/1.34G [00:47&lt;00:07, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  85%|████████▌ | 1.14G/1.34G [00:47&lt;00:06, 28.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  86%|████████▌ | 1.15G/1.34G [00:47&lt;00:06, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  86%|████████▌ | 1.15G/1.34G [00:47&lt;00:06, 28.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  86%|████████▌ | 1.15G/1.34G [00:47&lt;00:07, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  86%|████████▌ | 1.15G/1.34G [00:47&lt;00:07, 25.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  86%|████████▋ | 1.16G/1.34G [00:47&lt;00:06, 26.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.16G/1.34G [00:48&lt;00:07, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.16G/1.34G [00:48&lt;00:07, 22.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.16G/1.34G [00:48&lt;00:07, 22.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.17G/1.34G [00:48&lt;00:07, 22.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.17G/1.34G [00:48&lt;00:07, 22.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  87%|████████▋ | 1.17G/1.34G [00:48&lt;00:07, 22.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.17G/1.34G [00:48&lt;00:07, 22.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.17G/1.34G [00:48&lt;00:07, 22.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.18G/1.34G [00:48&lt;00:07, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.18G/1.34G [00:48&lt;00:06, 23.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.18G/1.34G [00:49&lt;00:06, 22.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  88%|████████▊ | 1.18G/1.34G [00:49&lt;00:06, 22.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▊ | 1.19G/1.34G [00:49&lt;00:06, 22.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▊ | 1.19G/1.34G [00:49&lt;00:06, 22.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▉ | 1.19G/1.34G [00:49&lt;00:06, 22.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▉ | 1.19G/1.34G [00:49&lt;00:06, 22.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▉ | 1.20G/1.34G [00:49&lt;00:06, 23.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  89%|████████▉ | 1.20G/1.34G [00:49&lt;00:06, 21.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  90%|████████▉ | 1.20G/1.34G [00:49&lt;00:06, 21.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  90%|████████▉ | 1.20G/1.34G [00:49&lt;00:06, 21.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  90%|████████▉ | 1.20G/1.34G [00:50&lt;00:06, 21.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  90%|█████████ | 1.21G/1.34G [00:50&lt;00:05, 23.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  90%|█████████ | 1.21G/1.34G [00:50&lt;00:05, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████ | 1.21G/1.34G [00:50&lt;00:05, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████ | 1.21G/1.34G [00:50&lt;00:05, 24.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████ | 1.22G/1.34G [00:50&lt;00:04, 25.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████ | 1.22G/1.34G [00:50&lt;00:04, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████▏| 1.22G/1.34G [00:50&lt;00:04, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  91%|█████████▏| 1.22G/1.34G [00:50&lt;00:04, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  92%|█████████▏| 1.23G/1.34G [00:50&lt;00:04, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  92%|█████████▏| 1.23G/1.34G [00:51&lt;00:04, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  92%|█████████▏| 1.23G/1.34G [00:51&lt;00:04, 24.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  92%|█████████▏| 1.23G/1.34G [00:51&lt;00:04, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  92%|█████████▏| 1.24G/1.34G [00:51&lt;00:04, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  93%|█████████▎| 1.24G/1.34G [00:51&lt;00:04, 24.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  93%|█████████▎| 1.24G/1.34G [00:51&lt;00:04, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  93%|█████████▎| 1.24G/1.34G [00:51&lt;00:03, 24.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  93%|█████████▎| 1.25G/1.34G [00:51&lt;00:03, 25.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  93%|█████████▎| 1.25G/1.34G [00:51&lt;00:03, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  94%|█████████▎| 1.25G/1.34G [00:51&lt;00:03, 25.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  94%|█████████▎| 1.25G/1.34G [00:52&lt;00:03, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  94%|█████████▍| 1.26G/1.34G [00:52&lt;00:03, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  94%|█████████▍| 1.26G/1.34G [00:52&lt;00:03, 26.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  94%|█████████▍| 1.26G/1.34G [00:52&lt;00:02, 26.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  95%|█████████▍| 1.27G/1.34G [00:52&lt;00:02, 26.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  95%|█████████▍| 1.27G/1.34G [00:52&lt;00:02, 25.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  95%|█████████▍| 1.27G/1.34G [00:52&lt;00:02, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  95%|█████████▌| 1.27G/1.34G [00:52&lt;00:02, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  95%|█████████▌| 1.28G/1.34G [00:52&lt;00:02, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  96%|█████████▌| 1.28G/1.34G [00:52&lt;00:02, 26.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  96%|█████████▌| 1.28G/1.34G [00:53&lt;00:02, 27.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  96%|█████████▌| 1.28G/1.34G [00:53&lt;00:02, 27.0MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  96%|█████████▌| 1.29G/1.34G [00:53&lt;00:01, 26.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  96%|█████████▋| 1.29G/1.34G [00:53&lt;00:01, 27.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  97%|█████████▋| 1.29G/1.34G [00:53&lt;00:01, 27.8MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  97%|█████████▋| 1.30G/1.34G [00:53&lt;00:01, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  97%|█████████▋| 1.30G/1.34G [00:53&lt;00:01, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  97%|█████████▋| 1.30G/1.34G [00:53&lt;00:01, 27.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  97%|█████████▋| 1.30G/1.34G [00:53&lt;00:01, 27.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  98%|█████████▊| 1.31G/1.34G [00:54&lt;00:01, 27.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  98%|█████████▊| 1.31G/1.34G [00:54&lt;00:01, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  98%|█████████▊| 1.31G/1.34G [00:54&lt;00:01, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  98%|█████████▊| 1.31G/1.34G [00:54&lt;00:00, 24.9MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  98%|█████████▊| 1.32G/1.34G [00:54&lt;00:00, 24.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  99%|█████████▊| 1.32G/1.34G [00:54&lt;00:00, 23.7MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  99%|█████████▊| 1.32G/1.34G [00:54&lt;00:00, 24.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  99%|█████████▉| 1.32G/1.34G [00:54&lt;00:00, 25.5MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  99%|█████████▉| 1.33G/1.34G [00:54&lt;00:00, 26.3MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz:  99%|█████████▉| 1.33G/1.34G [00:54&lt;00:00, 26.1MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz: 100%|█████████▉| 1.33G/1.34G [00:55&lt;00:00, 26.4MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz: 100%|█████████▉| 1.33G/1.34G [00:55&lt;00:00, 25.2MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz: 100%|█████████▉| 1.34G/1.34G [00:55&lt;00:00, 25.6MB/s]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>ceers_nircam3_f200w.fits.gz: 1.34GB [00:55, 24.2MB/s]                            </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
 </pre>
 </div>
 </div>
