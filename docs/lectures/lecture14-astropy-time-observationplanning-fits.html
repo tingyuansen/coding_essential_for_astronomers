@@ -7667,8 +7667,8 @@ a.anchor-link {
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Current time (UTC): 2025-10-31 16:45:48.612539
-ISO 8601 format: 2025-10-31 16:45:48.613
+<pre>Current time (UTC): 2025-10-31 16:58:07.607743
+ISO 8601 format: 2025-10-31 16:58:07.608
 Just the date: 2025-10-31
 </pre>
 </div>
@@ -7764,8 +7764,8 @@ Modified Julian Date: 60967.04
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Current JD: 2460980.20
-Current MJD: 60979.70
+<pre>Current JD: 2460980.21
+Current MJD: 60979.71
 </pre>
 </div>
 </div>
@@ -8653,9 +8653,10 @@ Look West, at 48° above the horizon
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Azimuth: </span><span class="si">{</span><span class="n">moon_altaz</span><span class="o">.</span><span class="n">az</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Estimate lunar phase from Sun-Moon angular separation</span>
-<span class="c1"># Transform moon to same frame as sun to avoid coordinate frame mismatch warning</span>
-<span class="n">moon_gcrs</span> <span class="o">=</span> <span class="n">moon</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">sun</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
-<span class="n">sun_moon_separation</span> <span class="o">=</span> <span class="n">sun</span><span class="o">.</span><span class="n">separation</span><span class="p">(</span><span class="n">moon_gcrs</span><span class="p">)</span>
+<span class="c1"># Get both Sun and Moon in GCRS frame at the same location to avoid frame mismatch</span>
+<span class="n">sun_gcrs</span> <span class="o">=</span> <span class="n">get_sun</span><span class="p">(</span><span class="n">obs_time</span><span class="p">)</span>
+<span class="n">moon_gcrs</span> <span class="o">=</span> <span class="n">get_body</span><span class="p">(</span><span class="s1">'moon'</span><span class="p">,</span> <span class="n">obs_time</span><span class="p">)</span>  <span class="c1"># Without location, returns GCRS at geocenter</span>
+<span class="n">sun_moon_separation</span> <span class="o">=</span> <span class="n">sun_gcrs</span><span class="o">.</span><span class="n">separation</span><span class="p">(</span><span class="n">moon_gcrs</span><span class="p">)</span>
 <span class="n">phase</span> <span class="o">=</span> <span class="n">sun_moon_separation</span><span class="o">.</span><span class="n">deg</span> <span class="o">/</span> <span class="mf">180.0</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Sun-Moon separation: </span><span class="si">{</span><span class="n">sun_moon_separation</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -8691,12 +8692,6 @@ Sun-Moon separation: 27.0 deg
 Approximate illumination: 15%
 
 ✓ Moon is DOWN - ideal for observing faint objects!
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>WARNING: NonRotationTransformationWarning: transforming other coordinates from &lt;GCRS Frame (obstime=2025-10-19 02:00:00.000, obsgeoloc=(4428046.68937107, -2109444.37059812, 4063827.56141167) m, obsgeovel=(153.83384622, 322.15274458, -0.39867832) m / s)&gt; to &lt;GCRS Frame (obstime=2025-10-19 02:00:00.000, obsgeoloc=(0., 0., 0.) m, obsgeovel=(0., 0., 0.) m / s)&gt;. Angular separation can depend on the direction of the transformation. [astropy.coordinates.baseframe]
 </pre>
 </div>
 </div>
@@ -9073,7 +9068,7 @@ Best observing window:
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9089,19 +9084,8 @@ Best observing window:
 
 <span class="c1"># Assign colors for plotting</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Vega'</span><span class="p">:</span> <span class="s1">'#00FFFF'</span><span class="p">,</span> <span class="s1">'M31'</span><span class="p">:</span> <span class="s1">'#FF00FF'</span><span class="p">,</span> <span class="s1">'Jupiter'</span><span class="p">:</span> <span class="s1">'#FFA500'</span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="c1"># Plot twilight background zones</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">sun_altaz</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">deg</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">18</span><span class="p">,</span>
