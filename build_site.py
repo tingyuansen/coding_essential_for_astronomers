@@ -64,6 +64,18 @@ LECTURE_SUMMARIES = {
     13: (
         "Astroquery database access, Astropy units and coordinates, and catalog cross-matching."
     ),
+    14: (
+        "Astropy Time systems, observation planning, visibility calculations, and FITS file handling."
+    ),
+    15: (
+        "SkyField ephemerides, precise planetary positions, and rise/set/transit calculations."
+    ),
+    16: (
+        "SciPy interpolation, differentiation, and integration for astronomical time-series data."
+    ),
+    17: (
+        "Statistical analysis, measurement uncertainty, random variables, and error propagation."
+    ),
 }
 
 QUIZ_LINKS = {

@@ -116,5 +116,37 @@
     "relative_path": "lectures/lecture13-astroquery-astropy-units-coordinates.html",
     "summary": "Astroquery database access, Astropy units and coordinates, and catalog cross-matching.",
     "quiz_link": "https://www.playlab.ai/project/cmgpnfltg6uapjy0u7fjnxgis"
+  },
+  {
+    "number": 14,
+    "title": "Lecture 14: Astropy Time Observationplanning Fits",
+    "date": "Oct 2025",
+    "slug": "lecture14-astropy-time-observationplanning-fits",
+    "relative_path": "lectures/lecture14-astropy-time-observationplanning-fits.html",
+    "summary": "Astropy Time systems, observation planning, visibility calculations, and FITS file handling."
+  },
+  {
+    "number": 15,
+    "title": "Lecture 15: Skyfield Ephemerides",
+    "date": "Oct 2025",
+    "slug": "lecture15-skyfield-ephemerides",
+    "relative_path": "lectures/lecture15-skyfield-ephemerides.html",
+    "summary": "SkyField ephemerides, precise planetary positions, and rise/set/transit calculations."
+  },
+  {
+    "number": 16,
+    "title": "Lecture 16: Scipy Interpolation Differentiation Integration",
+    "date": "Oct 2025",
+    "slug": "lecture16-scipy-interpolation-differentiation-integration",
+    "relative_path": "lectures/lecture16-scipy-interpolation-differentiation-integration.html",
+    "summary": "SciPy interpolation, differentiation, and integration for astronomical time-series data."
+  },
+  {
+    "number": 17,
+    "title": "Lecture 17: Scipy Random Variable Measurement Uncertainty",
+    "date": "Oct 2025",
+    "slug": "lecture17-scipy-random-variable-measurement-uncertainty",
+    "relative_path": "lectures/lecture17-scipy-random-variable-measurement-uncertainty.html",
+    "summary": "Statistical analysis, measurement uncertainty, random variables, and error propagation."
   }
 ]
