@@ -119,7 +119,7 @@
   },
   {
     "number": 14,
-    "title": "Lecture 14: Astropy Time Observationplanning Fits",
+    "title": "Lecture 14: Astropy Time, Observation Planning, FITS",
     "date": "Oct 2025",
     "slug": "lecture14-astropy-time-observationplanning-fits",
     "relative_path": "lectures/lecture14-astropy-time-observationplanning-fits.html",
@@ -128,7 +128,7 @@
   },
   {
     "number": 15,
-    "title": "Lecture 15: Skyfield Ephemerides",
+    "title": "Lecture 15: SkyField Ephemerides",
     "date": "Oct 2025",
     "slug": "lecture15-skyfield-ephemerides",
     "relative_path": "lectures/lecture15-skyfield-ephemerides.html",
@@ -137,7 +137,7 @@
   },
   {
     "number": 16,
-    "title": "Lecture 16: Scipy Interpolation Differentiation Integration",
+    "title": "Lecture 16: SciPy Interpolation, Differentiation, Integration",
     "date": "Oct 2025",
     "slug": "lecture16-scipy-interpolation-differentiation-integration",
     "relative_path": "lectures/lecture16-scipy-interpolation-differentiation-integration.html",
@@ -146,7 +146,7 @@
   },
   {
     "number": 17,
-    "title": "Lecture 17: Scipy Random Variable Measurement Uncertainty",
+    "title": "Lecture 17: SciPy Random Variables, Measurement Uncertainty",
     "date": "Oct 2025",
     "slug": "lecture17-scipy-random-variable-measurement-uncertainty",
     "relative_path": "lectures/lecture17-scipy-random-variable-measurement-uncertainty.html",
