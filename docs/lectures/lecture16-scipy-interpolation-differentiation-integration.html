@@ -7654,6 +7654,27 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[                                 ]   0% de440s.bsp</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[########                         ]  25% de440s.bsp</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[#######################          ]  70% de440s.bsp</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[#################################] 100% de440s.bsp
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Ephemeris loaded successfully
 </pre>
@@ -9534,10 +9555,10 @@ Can now estimate Moon altitude for ANY (latitude, time)
 
 <span class="c1"># Compute first derivative (velocity) at sparse time points</span>
 <span class="c1"># CubicSpline(x, nu) evaluates the nu-th derivative: nu=0 is function itself, nu=1 is first derivative, nu=2 is second derivative</span>
-<span class="n">dalt_dt_cubic</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># First derivative in degrees per day</span>
+<span class="n">dalt_dt_cubic</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># First derivative in degrees per day</span>
 
 <span class="c1"># Compute second derivative (acceleration) at sparse time points</span>
-<span class="n">d2alt_dt2_cubic</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Second derivative in degrees per day²</span>
+<span class="n">d2alt_dt2_cubic</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Second derivative in degrees per day²</span>
 
 <span class="c1"># Convert derivatives from per-day to per-hour for more intuitive units</span>
 <span class="n">dalt_dt_cubic_per_hour</span> <span class="o">=</span> <span class="n">dalt_dt_cubic</span> <span class="o">/</span> <span class="mi">24</span>  <span class="c1"># degrees per hour</span>
@@ -9589,8 +9610,8 @@ SciPy CubicSpline method:
 
 <span class="c1"># Evaluate position (altitude) and derivatives on the dense grid</span>
 <span class="n">dense_alt_viz</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_viz</span><span class="p">)</span>  <span class="c1"># Position (altitude)</span>
-<span class="n">dense_vel_viz</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_viz</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>  <span class="c1"># First derivative (velocity) in deg/hour</span>
-<span class="n">dense_acc_viz</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_viz</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">24</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Second derivative (acceleration) in deg/hour²</span>
+<span class="n">dense_vel_viz</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_viz</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>  <span class="c1"># First derivative (velocity) in deg/hour</span>
+<span class="n">dense_acc_viz</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_viz</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">24</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Second derivative (acceleration) in deg/hour²</span>
 
 <span class="c1"># Create a three-panel figure showing smooth curves from the cubic spline</span>
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
@@ -9678,7 +9699,7 @@ SciPy CubicSpline method:
 <span class="n">dense_jd_for_extrema</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sparse_jd</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>
 
 <span class="c1"># Evaluate velocity on this dense grid</span>
-<span class="n">dense_vel_for_extrema</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_for_extrema</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>
+<span class="n">dense_vel_for_extrema</span> <span class="o">=</span> <span class="n">cs_alt</span><span class="p">(</span><span class="n">dense_jd_for_extrema</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>
 
 <span class="c1"># Find indices where velocity changes sign (crosses zero)</span>
 <span class="c1"># np.sign() gives -1, 0, or 1; np.diff() finds where this changes</span>
@@ -9977,7 +9998,7 @@ which equals the area between the curve $f(x)$ and the x-axis from $a$ to $b$.</
 <span class="c1"># cs_alt(sparse_jd, 1) gives derivative in deg/day, divide by 24 for deg/hour</span>
 <span class="c1"># (cs_alt is the CubicSpline interpolator we created for altitude)</span>
 <span class="c1"># Use absolute value because we want total distance traveled, not net displacement</span>
-<span class="n">angular_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">angular_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cs_alt</span><span class="p">(</span><span class="n">sparse_jd</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span><span class="p">)</span>
 
 <span class="c1"># Convert time from Julian dates to hours from start for easier interpretation</span>
 <span class="n">time_hours</span> <span class="o">=</span> <span class="p">(</span><span class="n">sparse_jd</span> <span class="o">-</span> <span class="n">sparse_jd</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">24</span>
