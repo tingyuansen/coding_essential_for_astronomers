@@ -152,5 +152,13 @@
     "relative_path": "lectures/lecture17-scipy-random-variable-measurement-uncertainty.html",
     "summary": "Statistical analysis, measurement uncertainty, random variables, and error propagation.",
     "quiz_link": "https://www.playlab.ai/project/cmhcp30770ahqke0vq42ccwpu"
+  },
+  {
+    "number": 18,
+    "title": "Lecture 18: Scipy Optimization Curve Fitting",
+    "date": "Nov 2025",
+    "slug": "lecture18-scipy-optimization-curve-fitting",
+    "relative_path": "lectures/lecture18-scipy-optimization-curve-fitting.html",
+    "summary": "SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data."
   }
 ]

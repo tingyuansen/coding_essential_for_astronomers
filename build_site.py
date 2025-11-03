@@ -76,6 +76,9 @@ LECTURE_SUMMARIES = {
     17: (
         "Statistical analysis, measurement uncertainty, random variables, and error propagation."
     ),
+    18: (
+        "SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data."
+    ),
 }
 
 QUIZ_LINKS = {
