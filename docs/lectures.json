@@ -159,6 +159,24 @@
     "date": "Nov 2025",
     "slug": "lecture18-scipy-optimization-curve-fitting",
     "relative_path": "lectures/lecture18-scipy-optimization-curve-fitting.html",
-    "summary": "SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data."
+    "summary": "SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data.",
+    "quiz_link": "https://www.playlab.ai/project/cmhiiv7ls03l2h90ut83lwe1l"
+  },
+  {
+    "number": 19,
+    "title": "Lecture 19: Time Series Fitting Exoplanet Transits",
+    "date": "Nov 2025",
+    "slug": "lecture19-time-series-fitting-exoplanet-transits",
+    "relative_path": "lectures/lecture19-time-series-fitting-exoplanet-transits.html",
+    "summary": "Time series analysis, exoplanet transit detection, and light curve fitting using curve fitting techniques.",
+    "quiz_link": "https://www.playlab.ai/project/cmi59odci73i6ij0uekbuv79q"
+  },
+  {
+    "number": 20,
+    "title": "Lecture 20: Image Fitting Point Sources Photometry",
+    "date": "Nov 2025",
+    "slug": "lecture20-image-fitting-point-sources-photometry",
+    "relative_path": "lectures/lecture20-image-fitting-point-sources-photometry.html",
+    "summary": "Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields."
   }
 ]

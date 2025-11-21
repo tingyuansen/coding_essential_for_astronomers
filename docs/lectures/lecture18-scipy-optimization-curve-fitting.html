@@ -8410,6 +8410,7 @@ Time (years)    Position (mas)       Error (mas)     True Position (mas)
 <li><strong>sigma</strong>: Optional measurement uncertainties (for weighted fitting)</li>
 <li><strong>absolute_sigma</strong>: If True, treats sigma as absolute errors; if False, rescales them</li>
 </ul>
+<p><strong>Important note about uncertainties:</strong> The <code>sigma</code> parameter specifies <strong>uncertainties in the y-values only</strong> (the dependent variable, e.g., measured positions or brightnesses). Accounting for uncertainties in the x-values (independent variable, e.g., time measurements) is a much more complex problem that involves <strong>hierarchical Bayesian inference</strong>, which is beyond the scope of this course. In our examples here, x-uncertainties are negligible compared to y-uncertainties, so this approximation is appropriate.</p>
 <p>The function returns two things:</p>
 <ul>
 <li><strong>popt</strong>: Optimal parameter values (the best fit)</li>

@@ -79,6 +79,12 @@ LECTURE_SUMMARIES = {
     18: (
         "SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data."
     ),
+    19: (
+        "Time series analysis, exoplanet transit detection, and light curve fitting using curve fitting techniques."
+    ),
+    20: (
+        "Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields."
+    ),
 }
 
 QUIZ_LINKS = {
@@ -94,6 +100,8 @@ QUIZ_LINKS = {
     11: "https://www.playlab.ai/project/cmgd0wbkp0vjsp80ufo2go2u8",
     12: "https://www.playlab.ai/project/cmgiohn0d0n1gk50ucl7r4v9t",
     13: "https://www.playlab.ai/project/cmgpnfltg6uapjy0u7fjnxgis",
+    18: "https://www.playlab.ai/project/cmhiiv7ls03l2h90ut83lwe1l",
+    19: "https://www.playlab.ai/project/cmi59odci73i6ij0uekbuv79q",
 }
 
 
@@ -432,6 +440,17 @@ def build() -> None:
         "</script>\n"
     )
 
+    # Load existing lectures.json to preserve entries for lectures without notebooks
+    existing_lectures = {}
+    lectures_json_path = DOCS_DIR / "lectures.json"
+    if lectures_json_path.exists():
+        try:
+            existing_data = json.loads(lectures_json_path.read_text(encoding="utf-8"))
+            for entry in existing_data:
+                existing_lectures[entry["number"]] = entry
+        except (json.JSONDecodeError, KeyError, OSError):
+            pass
+
     lectures = []
     for notebook_path in sorted(ROOT.glob("Lecture*.ipynb")):
         match = NOTEBOOK_PATTERN.match(notebook_path.stem)
@@ -518,6 +537,12 @@ def build() -> None:
             lecture_entry["quiz_link"] = quiz_link
 
         lectures.append(lecture_entry)
+
+    # Add existing lectures that don't have notebooks (preserve old entries)
+    processed_numbers = {lec["number"] for lec in lectures}
+    for number, entry in existing_lectures.items():
+        if number not in processed_numbers:
+            lectures.append(entry)
 
     lectures.sort(key=lambda item: item["number"])  # ensure numeric order
     (DOCS_DIR / "lectures.json").write_text(
