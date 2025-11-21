@@ -67,19 +67,6 @@ Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State Universi
 
 Ting, Y.-S. (2025). Coding Essentials for Astronomers. The Ohio State University. Retrieved from [repository URL]
 
-## Building the Site
-
-To build the static site from Jupyter notebooks:
-
-```bash
-python build_site.py
-```
-
-This will:
-- Execute all Jupyter notebooks
-- Convert them to HTML
-- Generate the lecture index
-- Create the `docs/lectures.json` metadata file
 
 ## Contact
 
