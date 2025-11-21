@@ -81,15 +81,7 @@ This will:
 - Generate the lecture index
 - Create the `docs/lectures.json` metadata file
 
-## License
-
-[Add your license information here]
-
-## Contributing
-
-[Add contribution guidelines if applicable]
-
 ## Contact
 
-For questions or feedback, please contact Yuan-Sen Ting at The Ohio State University.
+For questions or feedback, please contact Yuan-Sen Ting [ting dot 74 at ohio dot edu] at The Ohio State University.
 
