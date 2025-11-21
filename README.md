@@ -35,7 +35,7 @@ If you use this material in your research, teaching, or other work, please cite 
 
 ### APA Style
 
-Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State University. Available at: [repository URL]
+Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State University. Available at: https://github.com/tingyuansen/coding_essential_for_astronomers
 
 ### BibTeX
 
@@ -45,7 +45,7 @@ Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State Universi
   title = {Coding Essentials for Astronomers},
   year = {2025},
   institution = {The Ohio State University},
-  url = {[repository URL]},
+  url = {https://github.com/tingyuansen/coding_essential_for_astronomers},
   note = {Open educational resource}
 }
 ```
@@ -57,7 +57,7 @@ Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State Universi
   author = {Yuan-Sen Ting},
   title = {Coding Essentials for Astronomers},
   year = {2025},
-  url = {[repository URL]},
+  url = {https://github.com/tingyuansen/coding_essential_for_astronomers},
   organization = {The Ohio State University},
   urldate = {2025-11-XX}
 }
@@ -65,7 +65,7 @@ Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State Universi
 
 ### Plain Text Citation
 
-Ting, Y.-S. (2025). Coding Essentials for Astronomers. The Ohio State University. Retrieved from [repository URL]
+Ting, Y.-S. (2025). Coding Essentials for Astronomers. The Ohio State University. Retrieved from https://github.com/tingyuansen/coding_essential_for_astronomers
 
 
 ## Contact
