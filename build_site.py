@@ -85,6 +85,9 @@ LECTURE_SUMMARIES = {
     20: (
         "Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields."
     ),
+    21: (
+        "Spectroscopic fitting, equivalent widths, spectral line profiles, and stellar atmosphere analysis techniques."
+    ),
 }
 
 QUIZ_LINKS = {
@@ -102,6 +105,8 @@ QUIZ_LINKS = {
     13: "https://www.playlab.ai/project/cmgpnfltg6uapjy0u7fjnxgis",
     18: "https://www.playlab.ai/project/cmhiiv7ls03l2h90ut83lwe1l",
     19: "https://www.playlab.ai/project/cmi59odci73i6ij0uekbuv79q",
+    20: "https://www.playlab.ai/project/cmi9phbrm6obsgu0u4pp3sn6n",
+    21: "https://www.playlab.ai/project/cmidyngxn0dbmiy0u6mlyyhq0",
 }
 
 

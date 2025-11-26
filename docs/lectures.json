@@ -177,6 +177,16 @@
     "date": "Nov 2025",
     "slug": "lecture20-image-fitting-point-sources-photometry",
     "relative_path": "lectures/lecture20-image-fitting-point-sources-photometry.html",
-    "summary": "Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields."
+    "summary": "Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields.",
+    "quiz_link": "https://www.playlab.ai/project/cmi9phbrm6obsgu0u4pp3sn6n"
+  },
+  {
+    "number": 21,
+    "title": "Lecture 21: Spectroscopic Fitting",
+    "date": "Nov 2025",
+    "slug": "lecture21-spectroscopic-fitting",
+    "relative_path": "lectures/lecture21-spectroscopic-fitting.html",
+    "summary": "Spectroscopic fitting, equivalent widths, spectral line profiles, and stellar atmosphere analysis techniques.",
+    "quiz_link": "https://www.playlab.ai/project/cmidyngxn0dbmiy0u6mlyyhq0"
   }
 ]

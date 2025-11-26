@@ -25,6 +25,7 @@ The course covers a wide range of topics including:
 - SciPy for interpolation, optimization, and curve fitting
 - Time series analysis and exoplanet transit detection
 - Image fitting and photometry techniques
+- Spectroscopic fitting and stellar atmosphere analysis
 - LLM API integration for coding assistance
 - Version control with Git and GitHub
 - Interactive web applications with Streamlit
