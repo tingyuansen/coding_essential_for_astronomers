@@ -141,12 +141,6 @@ If you use this material in your research, teaching, or other work, please cite 
 
 ---
 
-## Keywords
-
-`astronomy` · `astrophysics` · `python` · `scientific-computing` · `data-analysis` · `numpy` · `pandas` · `matplotlib` · `astropy` · `astroquery` · `scipy` · `machine-learning` · `llm` · `open-educational-resource` · `textbook` · `photometry` · `spectroscopy` · `time-series`
-
----
-
 ## Contact
 
 For questions, feedback, or collaboration inquiries, please contact:
