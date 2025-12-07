@@ -88,6 +88,9 @@ LECTURE_SUMMARIES = {
     21: (
         "Spectroscopic fitting, equivalent widths, spectral line profiles, and stellar atmosphere analysis techniques."
     ),
+    22: (
+        "Model Context Protocol (MCP), building AI-powered tools, and integrating LLMs with external services."
+    ),
 }
 
 QUIZ_LINKS = {

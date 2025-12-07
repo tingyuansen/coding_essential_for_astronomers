@@ -188,5 +188,13 @@
     "relative_path": "lectures/lecture21-spectroscopic-fitting.html",
     "summary": "Spectroscopic fitting, equivalent widths, spectral line profiles, and stellar atmosphere analysis techniques.",
     "quiz_link": "https://www.playlab.ai/project/cmidyngxn0dbmiy0u6mlyyhq0"
+  },
+  {
+    "number": 22,
+    "title": "Lecture 22: Model Context Protocol",
+    "date": "Dec 2025",
+    "slug": "lecture22-model-context-protocol",
+    "relative_path": "lectures/lecture22-model-context-protocol.html",
+    "summary": "Model Context Protocol (MCP), building AI-powered tools, and integrating LLMs with external services."
   }
 ]
