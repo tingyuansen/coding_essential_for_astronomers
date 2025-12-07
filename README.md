@@ -1,6 +1,6 @@
 # Coding Essentials for Astronomers
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17850426.svg)](https://doi.org/10.5281/zenodo.17850426)
 
 > Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers.
 
@@ -100,7 +100,7 @@ If you use this material in your research, teaching, or other work, please cite 
 
 ### APA Style
 
-> Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State University. https://doi.org/10.5281/zenodo.XXXXXXX
+> Ting, Y.-S. (2025). *Coding Essentials for Astronomers*. The Ohio State University. https://doi.org/10.5281/zenodo.17850426
 
 ### BibTeX
 
@@ -110,8 +110,8 @@ If you use this material in your research, teaching, or other work, please cite 
   title        = {Coding Essentials for Astronomers},
   year         = {2025},
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.XXXXXXX},
-  url          = {https://doi.org/10.5281/zenodo.XXXXXXX},
+  doi          = {10.5281/zenodo.17850426},
+  url          = {https://doi.org/10.5281/zenodo.17850426},
   note         = {Open educational resource. Written in collaboration with Claude (Anthropic).}
 }
 ```
