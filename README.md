@@ -98,7 +98,7 @@ If you wish to use or adapt these lectures, please cite and refer to the origina
 
 ## AI Collaboration Acknowledgment
 
-This textbook was written in collaboration with **Claude Opus 4 and Sonnet 4**, developed by Anthropic.
+This textbook was written in collaboration with **Claude Opus 4, Sonnet 4, and Sonnet 4.5**, developed by Anthropic.
 
 While AI assisted with the writing process, **all material has been carefully designed, curated, and reviewed by the author**. The pedagogical structure, topic selection, scientific content, and teaching philosophy reflect the author's expertise developed through years of research and teaching in astrophysics and data science.
 
