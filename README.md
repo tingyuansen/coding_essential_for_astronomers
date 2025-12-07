@@ -116,19 +116,6 @@ If you use this material in your research, teaching, or other work, please cite 
 }
 ```
 
-### BibTeX (GitHub version)
-
-```bibtex
-@misc{ting2025coding_github,
-  author       = {Ting, Yuan-Sen},
-  title        = {Coding Essentials for Astronomers},
-  year         = {2025},
-  institution  = {The Ohio State University},
-  url          = {https://github.com/tingyuansen/coding_essential_for_astronomers},
-  note         = {Open educational resource}
-}
-```
-
 ---
 
 ## Contact
