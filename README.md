@@ -1,7 +1,6 @@
 # Coding Essentials for Astronomers
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 > Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers.
 
@@ -83,16 +82,7 @@ coding_essential_for_astronomers/
 
 ## License & Usage
 
-This textbook is released under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
-
-You are free to:
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material for any purpose, even commercially
-
-Under the following terms:
-- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
-
-If you wish to use or adapt these lectures, please cite and refer to the original materials (see citation section below).
+This textbook is made available for educational purposes. If you wish to use these lectures in your teaching or research, please **cite and refer to the original materials** rather than creating derivative versions. This ensures students and readers can access the most up-to-date and authoritative content.
 
 ---
 
