@@ -1,7 +1,5 @@
 # Coding Essentials for Astronomers
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17850426.svg)](https://doi.org/10.5281/zenodo.17850426)
-
 > Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers.
 
 **📖 Read the textbook online:** [https://tingyuansen.github.io/coding_essential_for_astronomers/](https://tingyuansen.github.io/coding_essential_for_astronomers/)
