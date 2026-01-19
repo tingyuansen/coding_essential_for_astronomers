@@ -21,3 +21,4 @@ env/
 
 # Misc build artefacts
 *.log
+slides_sources/

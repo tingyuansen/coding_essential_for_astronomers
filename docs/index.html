@@ -96,7 +96,7 @@ DOI: 10.5281/zenodo.17850426</p>
         const date = escapeHtml(lecture.date);
         const summary = lecture.summary ? escapeHtml(lecture.summary) : 'Lecture overview coming soon.';
         const pageLink = escapeHtml(lecture.relative_path);
-        const slidesLink = escapeHtml(`https://www.asc.ohio-state.edu/ting.74/Astron1221/Lecture${lecture.number}_Slides`);
+        const slidesLink = escapeHtml(`slides/Lecture${lecture.number}_Slides/`);
         const actions = [
           `<a href="${pageLink}">Read lecture</a>`,
           `<a href="${slidesLink}" target="_blank" rel="noopener">View slides</a>`

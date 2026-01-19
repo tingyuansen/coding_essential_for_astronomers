@@ -1,0 +1,9 @@
+import{_ as r}from"./slidev/VClicks-DLD94jBU.js";import{b as p,o as m,w as s,g as e,e as d,ac as o,v as c,x as u,C as a}from"./modules/vue-BjKabnyV.js";import{I as f}from"./slidev/center-mxZQ1lrj.js";import{u as g,f as _}from"./slidev/context-DbcbyBga.js";import{_ as v}from"./index-DayMp4VL.js";import"./modules/shiki-oSsGfnBi.js";const x={class:"relative flex flex-col justify-evenly h-96 mt-4"},y={__name:"slides.md__slidev_26",setup(b){const{$clicksContext:n,$frontmatter:l}=g();return n.setup(),(k,t)=>{const i=r;return m(),p(f,c(u(a(_)(a(l),25))),{default:s(()=>[t[1]||(t[1]=e("div",{class:"absolute inset-0 bg-gradient-to-bl from-violet-950/50 via-transparent to-indigo-950/40"},null,-1)),t[2]||(t[2]=e("h1",null,"Defining the Voigt Function",-1)),e("div",x,[d(i,null,{default:s(()=>[...t[0]||(t[0]=[e("div",{class:"card-code"},[e("span",{class:"dot-code"}),e("div",{class:"flex-1"},[e("span",null,[e("strong",null,"The model function:")]),e("div",{class:"mt-3 bg-gray-900/50 rounded px-4 py-2 font-mono text-sm"},[e("pre",{class:"text-gray-100"},[o(`from scipy.special import voigt_profile
+ 
+def voigt_line(wavelength, continuum, amp, center, sigma, gamma):
+    `),e("span",{class:"text-gray-400"},"# Voigt at each λ"),o(`
+    profile = voigt_profile(wavelength - center, sigma, gamma)  
+    `),e("span",{class:"text-gray-400"},"# Normalize to peak=1"),o(`
+    profile = profile / profile.max()                           
+    `),e("span",{class:"text-gray-400"},"# Absorption line"),o(`
+    return continuum - amp * profile                      `)])])])],-1),e("div",{class:"card-code"},[e("span",{class:"dot-code"}),e("span",null,[e("strong",null,"Key:"),o(),e("code",null,"voigt_profile(x, sigma, gamma)"),o(" handles the convolution for us")])],-1)])]),_:1})]),t[3]||(t[3]=e("div",{class:"slide-number"},"26",-1))]),_:1},16)}}},I=v(y,[["__scopeId","data-v-07e746a2"]]);export{I as default};
