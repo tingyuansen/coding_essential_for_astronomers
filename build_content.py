@@ -115,22 +115,19 @@ for _name, _title, _blurb, _orig_list in PARTS:
         _pos += 1
         DISPLAY_NUM[_orig] = _pos
 
-_REF_RE = re.compile(r"([Ll]ectures?)([\s ]+)(\d+)((?:\s*[–-]\s*)(\d+))?")
+# Match "Lecture(s)" + a list of numbers: "Lecture 9", "Lectures 7-8",
+# "Lectures 13 and 14", "Lectures 7, 8 and 9". The first number must be
+# whitespace-separated (so identifiers like "Lecture7_LLM..." are left alone);
+# subsequent numbers must be joined by an explicit separator.
+_REF_RE = re.compile(r"([Ll]ectures?)([\s ]+\d+(?:\s*(?:,|and|&|to|–|-)\s*\d+)*)")
 
 
 def _remap_refs(html: str) -> str:
-    """Rewrite 'Lecture N' / 'Lectures A-B' references to display numbers."""
-    def sub(m: re.Match) -> str:
-        word, sep, a = m.group(1), m.group(2), int(m.group(3))
-        a2 = DISPLAY_NUM.get(a, a)
-        tail = m.group(4)
-        if tail:
-            b = m.group(5)
-            b2 = DISPLAY_NUM.get(int(b), int(b))
-            dash_part = tail[: tail.rfind(b)]
-            return f"{word}{sep}{a2}{dash_part}{b2}"
-        return f"{word}{sep}{a2}"
-    return _REF_RE.sub(sub, html)
+    """Rewrite every 'Lecture N' reference (single, range, or list) to display numbers."""
+    def renum(d: "re.Match") -> str:
+        n = int(d.group())
+        return str(DISPLAY_NUM.get(n, n))
+    return _REF_RE.sub(lambda m: m.group(1) + re.sub(r"\d+", renum, m.group(2)), html)
 
 
 # --------------------------------------------------------------- helpers ------
