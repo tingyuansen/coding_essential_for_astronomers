@@ -31,49 +31,73 @@ This repository contains the complete lecture materials for *Coding Essentials f
 
 | # | Title | Summary |
 |---|-------|---------|
-| 1 | Welcome and Setting Up | Course orientation, environment setup, and expectations for AI-supported coding. |
-| 2 | Variables and Collections | Core Python syntax, data structures, and essential debugging patterns for research scripts. |
-| 3 | Control Flow and File Operations | Control flow design, file handling, and automation techniques for data-driven workflows. |
-| 4 | Numerical Computing | NumPy arrays, vectorisation, and numerical best practices for large astronomical datasets. |
-| 5 | Functions and Object-Oriented Programming | Function design, modular organisation, and foundations of object-oriented programming. |
-| 6 | Data Visualization | Matplotlib workflows, visual diagnostics, and interactive plotting techniques. |
-| 7 | LLM API Basics | LLM API authentication, structured prompting, and cost-aware usage patterns. |
-| 8 | LLM Function Tools and RAG | Function calling, retrieval-augmented generation, and vector search integrations. |
-| 9 | GitHub | Git and GitHub fundamentals, documentation standards, and GitHub Pages publishing. |
-| 10 | Streamlit | Streamlit interface design, state management, and deployment of interactive research tools. |
-| 11 | Pandas Basics | Pandas DataFrames, catalog operations, and data manipulation for astronomical analysis. |
-| 12 | Advanced Pandas | GroupBy operations, merging catalogs, pivot tables, and advanced Pandas transformations. |
-| 13 | Astroquery, Astropy Units & Coordinates | Astroquery database access, Astropy units and coordinates, and catalog cross-matching. |
-| 14 | Astropy Time, Observation Planning, FITS | Astropy Time systems, observation planning, visibility calculations, and FITS file handling. |
-| 15 | SkyField Ephemerides | SkyField ephemerides, precise planetary positions, and rise/set/transit calculations. |
-| 16 | SciPy Interpolation, Differentiation, Integration | SciPy interpolation, differentiation, and integration for astronomical time-series data. |
-| 17 | SciPy Random Variables, Measurement Uncertainty | Statistical analysis, measurement uncertainty, random variables, and error propagation. |
-| 18 | SciPy Optimization & Curve Fitting | SciPy optimization techniques, curve fitting methods, and parameter estimation from observational data. |
-| 19 | Time Series Fitting & Exoplanet Transits | Time series analysis, exoplanet transit detection, and light curve fitting techniques. |
-| 20 | Image Fitting, Point Sources & Photometry | Image fitting, point spread functions, photometry techniques, and PSF fitting for crowded stellar fields. |
-| 21 | Spectroscopic Fitting | Spectroscopic fitting, equivalent widths, spectral line profiles, and stellar atmosphere analysis techniques. |
-| 22 | Model Context Protocol | Model Context Protocol (MCP), building AI-powered tools, and integrating LLMs with external services. |
+| 1 | Welcome & Setting Up | Course orientation, environment setup, and AI-supported coding. |
+| 2 | Variables & Collections | Core Python syntax, data structures, and debugging patterns. |
+| 3 | Control Flow & File Operations | Control flow, file handling, and automation for data workflows. |
+| 4 | Numerical Computing | NumPy arrays, vectorisation, and numerical best practices. |
+| 5 | Functions & Object-Oriented Programming | Function design, modular code, and object-oriented programming. |
+| 6 | Data Visualization | Matplotlib workflows, visual diagnostics, and plotting techniques. |
+| 7 | LLM API Basics | LLM API authentication, structured prompting, and cost-aware use. |
+| 8 | LLM Function Tools & RAG | Function calling, retrieval-augmented generation, and vector search. |
+| 9 | Model Context Protocol | Model Context Protocol: building AI tools and external integrations. |
+| 10 | Git & GitHub | Git and GitHub fundamentals, documentation, and Pages publishing. |
+| 11 | Streamlit | Streamlit interfaces, state management, and deploying research tools. |
+| 12 | Pandas Basics | Pandas DataFrames, catalog operations, and data manipulation. |
+| 13 | Advanced Pandas | GroupBy, merges, pivot tables, and advanced Pandas transformations. |
+| 14 | Astroquery, Units & Coordinates | Astroquery archive access, Astropy units, coordinates, cross-matching. |
+| 15 | Astropy Time, Observation Planning & FITS | Astropy Time, observation planning, visibility, and FITS files. |
+| 16 | Skyfield Ephemerides | Skyfield ephemerides, planetary positions, and rise/set/transit. |
+| 17 | SciPy: Interpolation, Differentiation & Integration | SciPy interpolation, differentiation, and integration. |
+| 18 | Random Variables & Measurement Uncertainty | Statistics, random variables, uncertainty, and error propagation. |
+| 19 | Optimization & Curve Fitting | SciPy optimization, curve fitting, and parameter estimation. |
+| 20 | Time-Series Fitting: Exoplanet Transits | Time-series analysis and exoplanet transit light-curve fitting. |
+| 21 | Image Fitting & Photometry | Image fitting, point spread functions, and photometry. |
+| 22 | Spectroscopic Fitting | Spectroscopic fitting, equivalent widths, and line profiles. |
 
 ---
 
 ## Repository Structure
 
+The site is a lightweight static reader: a landing page (`index.html`) and a single
+client-side reader (`reader.html`) that renders each lecture from JSON — code is
+re-highlighted with highlight.js and LaTeX is typeset with KaTeX in the browser.
+
 ```
 coding_essential_for_astronomers/
 ├── README.md                 # This file
-├── build_site.py            # Script to build HTML from notebooks
-├── docs/                    # GitHub Pages website
-│   ├── index.html          # Main landing page
-│   ├── lectures.json       # Lecture metadata
-│   ├── assets/             # CSS and JavaScript
-│   │   ├── styles.css
-│   │   ├── notebook.css
-│   │   └── copy.js
-│   └── lectures/           # Individual lecture HTML files
-│       ├── lecture01-welcome-and-setting-up.html
-│       ├── lecture02-variables-and-collections.html
-│       └── ... (22 lectures total)
-└── rpds/                   # Supporting Python package
+├── build_content.py          # Builds docs/content/*.json + book-data.js from build_src
+├── build_slides.sh           # Builds Slidev decks into docs/slides
+├── build_src/
+│   └── lectures/             # Executed lecture HTML (build source; not published)
+├── docs/                     # GitHub Pages website (published root)
+│   ├── index.html            # Landing page (table of contents)
+│   ├── reader.html           # Client-side lecture reader
+│   ├── assets/
+│   │   ├── style.css         # Design system
+│   │   ├── render.js         # Notebook + Markdown + LaTeX renderer
+│   │   ├── theme.js          # Light / dark toggle
+│   │   └── book-data.js      # Generated table-of-contents manifest
+│   ├── content/              # Generated per-lecture JSON (one per lecture)
+│   ├── slides/               # Built Slidev decks (LectureN_Slides/)
+│   ├── data_gaia_dr3.csv     # Sample dataset for the Pandas lectures
+│   └── .nojekyll             # Serve assets verbatim on GitHub Pages
+└── ...
+```
+
+> Build dependency: `build_content.py` only needs `beautifulsoup4` (`pip install beautifulsoup4`).
+
+### Building
+
+```bash
+python3 build_content.py   # regenerate docs/content/*.json and docs/assets/book-data.js
+./build_slides.sh          # (re)build the Slidev decks into docs/slides
+```
+
+To preview locally, serve `docs/` over HTTP (the reader fetches lecture JSON, so
+`file://` will not work):
+
+```bash
+cd docs && python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 ---

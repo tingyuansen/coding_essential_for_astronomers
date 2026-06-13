@@ -4,10 +4,10 @@
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Lecture 21: Spectroscopic Fitting – Coding Essentials for Astronomers</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="stylesheet" href="../assets/notebook.css">
-<script src="../assets/copy.js" defer></script>
+<meta charset="utf-8"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<link href="../assets/notebook.css" rel="stylesheet"/>
+<script defer="" src="../assets/copy.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
@@ -7531,12 +7531,11 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="lecture-page jp-Notebook" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark">
 <header class="site-header">
-  <div class="container">
-    <a class="brand" href="../index.html">Coding Essentials for Astronomers</a>
-    <nav><a href="../index.html">Back to overview</a></nav>
-  </div>
+<div class="container">
+<a class="brand" href="../index.html">Coding Essentials for Astronomers</a>
+<nav><a href="../index.html">Back to overview</a></nav>
+</div>
 </header>
-
 <main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=035a590b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7544,7 +7543,6 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Spectroscopic-Fitting:-Equivalent-Widths-and-Spectral-Line-Profiles">Spectroscopic Fitting: Equivalent Widths and Spectral Line Profiles<a class="anchor-link" href="#Spectroscopic-Fitting:-Equivalent-Widths-and-Spectral-Line-Profiles">¶</a></h1>
-
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>In Lecture 20, we learned to extract information from two-dimensional images—fitting PSF models to measure stellar brightnesses and positions. Photometry is powerful: by measuring how much light reaches our detector, we can determine stellar luminosities, detect exoplanet transits, and track variable stars.</p>
 <p>Yet photometry has a fundamental limitation. When we do photometry, we place a filter in front of the detector—a piece of colored glass or coating that only allows certain wavelengths to pass through. Common filters include U (ultraviolet), B (blue), V (visual/green), R (red), and I (infrared), each transmitting light over a broad wavelength range called a "passband." For example, the V-band filter allows wavelengths from roughly 500 to 590 nm (about 90 nm wide) to reach the detector while blocking everything else. All the photons that pass through this filter are summed together to give one number—the total brightness in that band. This gives us excellent sensitivity (we're collecting lots of photons), but we've completely lost information about how the light is distributed across different wavelengths. We can't tell if the star has strong features at 520 nm versus 560 nm—it all gets averaged together into a single measurement.</p>
 <p>Spectroscopy takes the opposite approach. Instead of collecting all the light together, a spectrograph spreads starlight into its component wavelengths—creating a rainbow that reveals the physical processes occurring in stellar atmospheres. Dark absorption lines appear where atoms absorb specific wavelengths, and the continuum shape encodes temperature. Spectroscopy tells us what stars are made of, how hot they are, how fast they're moving, and whether they're rotating—every element leaves its unique fingerprint in a star's spectrum.</p>
@@ -9922,7 +9920,7 @@ Fit quality:
 </ul>
 <p>These techniques form the foundation of quantitative stellar spectroscopy used throughout astronomy to determine chemical compositions, measure rotation rates, probe atmospheric structure, and detect radial velocities. Every abundance measurement, every stellar parameter determination, and every exoplanet radial velocity detection ultimately relies on fitting spectral line profiles using methods like those in this lecture.</p>
 <h3 id="Looking-Ahead">Looking Ahead<a class="anchor-link" href="#Looking-Ahead">¶</a></h3><p>You've now completed the model-fitting trilogy: time series fitting (Lecture 19: exoplanet transits), image fitting (Lecture 20: PSF photometry), and spectral fitting (Lecture 21: line profiles and abundances). These three lectures applied the same optimization principles from Lecture 18 to increasingly complex astronomical data. The curve-fitting skills—defining models, using <code>scipy.optimize.curve_fit</code>, assessing goodness-of-fit, propagating uncertainties—are universal tools for extracting physical information from observations.</p>
-<p>In Lecture 22, we'll explore a completely different topic: the Model Context Protocol (MCP), which provides standardized ways for AI systems to interact with tools and data sources. You'll learn how to build MCP servers that connect language models to specialized astronomical workflows, creating intelligent assistants that can query databases, analyze data, and generate visualizations. This represents a paradigm shift: instead of writing explicit analysis scripts, you'll create tools that AI systems can use to solve problems autonomously—a powerful approach for complex, exploratory research tasks.</p>
+<p>This brings the course to a close. Look back at how far you've come: from your first Python script and a clean environment, through numerical computing and visualization, AI tooling and version control, astronomical data with Astropy and Pandas, and finally the full model-fitting toolkit you just applied to light curves, images, and spectra. You can now take raw observations and pull real physical information out of them—brightnesses, positions, velocities, abundances—while honestly quantifying how much to trust each number. The libraries will keep changing, but the habits you've built—decomposing problems, writing clear code, validating results, and propagating uncertainties—will serve you for the rest of your research career. Good luck, and clear skies!</p>
 </div>
 </div>
 </div>
@@ -9938,9 +9936,9 @@ Fit quality:
 </div>
 </main>
 <footer class="site-footer">
-  <div class="container">
-    <p>Part of the Coding Essentials for Astronomers lecture series.</p>
-  </div>
+<div class="container">
+<p>Part of the Coding Essentials for Astronomers lecture series.</p>
+</div>
 </footer>
 <script>
   window.addEventListener('DOMContentLoaded', () => {

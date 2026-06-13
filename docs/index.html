@@ -1,60 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coding Essentials for Astronomers</title>
-  <link rel="stylesheet" href="assets/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var t=localStorage.getItem('stig-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<title>Coding Essentials for Astronomers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body{ background: var(--paper); }
+  .cover{ max-width: 72rem; margin:0 auto; padding: 0 2.5rem; }
+
+  /* hero */
+  .hero{ padding: 6.5rem 0 3.5rem; border-bottom:1px solid var(--rule); position:relative; }
+  .hero-eyebrow{
+    font-family:var(--font-sans); font-size:12.5px; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 1.6rem; display:flex; gap:.8rem; align-items:center;
+  }
+  .hero-eyebrow .line{ width:38px; height:1.5px; background:var(--accent-line); }
+  .hero h1{
+    font-size: clamp(2.6rem, 6.2vw, 4.7rem); line-height:1.02; font-weight:700; letter-spacing:-.028em;
+    margin:0; max-width:16ch;
+  }
+  .hero .lede{
+    font-size: clamp(1.1rem, 1.7vw, 1.32rem); line-height:1.55; color:var(--ink-soft); max-width:42rem;
+    margin:1.8rem 0 0;
+  }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:2.4rem; margin-top:2.6rem; font-family:var(--font-sans); }
+  .hero-meta .stat .v{ font-size:1.7rem; font-weight:600; letter-spacing:-.02em; color:var(--ink); font-family:var(--font-serif); }
+  .hero-meta .stat .k{ font-size:11.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:.2rem; }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.8rem; }
+  .btn{
+    font-family:var(--font-sans); font-size:14.5px; font-weight:600; padding:.8rem 1.5rem; border-radius:9px;
+    cursor:pointer; transition:transform .14s, box-shadow .14s, background .14s; text-decoration:none; display:inline-flex; align-items:center; gap:.55rem;
+  }
+  .btn-primary{ background:var(--accent); color:#fff; box-shadow:0 2px 14px oklch(0.5 0.135 256 / .28); }
+  .btn-primary:hover{ background:var(--accent-deep); color:#fff; transform:translateY(-1px); }
+  .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--rule); }
+  .btn-ghost:hover{ border-color:var(--accent-line); color:var(--accent-deep); }
+
+  /* about strip */
+  .about{ padding:3.2rem 0; border-bottom:1px solid var(--rule); display:grid; grid-template-columns: 12rem 1fr; gap:2.5rem; }
+  .about-label{ font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); padding-top:.3rem; }
+  .about p{ margin:0 0 1rem; font-size:1.05rem; color:var(--ink-soft); max-width:46rem; }
+  .about p:last-child{ margin-bottom:0; }
+  .about a{ border-bottom:1px solid var(--accent-line); }
+  .about-list{ margin:1.2rem 0 0; padding:0; list-style:none; display:grid; gap:.7rem; max-width:46rem; }
+  .about-list li{ position:relative; padding-left:1.4rem; font-size:1.02rem; color:var(--ink-soft); line-height:1.5; }
+  .about-list li::before{ content:""; position:absolute; left:0; top:.62em; width:6px; height:6px; border-radius:2px; background:var(--accent-line); }
+  .about-list strong{ color:var(--ink); font-weight:600; }
+
+  .people{ padding:3.2rem 0; border-bottom:1px solid var(--rule); display:grid; grid-template-columns: 12rem 1fr; gap:2.5rem; }
+  .people-label{ font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); padding-top:.3rem; }
+  .people-list{ list-style:none; margin:0; padding:0; display:grid; gap:.65rem; }
+  .person-row{ display:flex; justify-content:space-between; gap:1rem; align-items:baseline; padding:.65rem 0; border-bottom:1px solid var(--rule); }
+  .person-name{ font-size:.98rem; font-weight:600; color:var(--ink); }
+  .person-meta{ font-family:var(--font-sans); font-size:12.5px; color:var(--muted); text-align:right; white-space:nowrap; }
+
+  /* TOC */
+  .toc{ padding: 3.5rem 0 6rem; }
+  .toc-h{ font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 2.5rem; }
+  .part{ margin-bottom: 3.2rem; }
+  .part-head{ display:flex; align-items:baseline; gap:1rem; margin-bottom:1.2rem; padding-bottom:.7rem; border-bottom:1px solid var(--rule); }
+  .part-num{ font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:var(--accent); letter-spacing:.05em; }
+  .part-title{ font-size:1.5rem; font-weight:700; letter-spacing:-.015em; }
+  .part-blurb{ font-family:var(--font-sans); font-size:13.5px; color:var(--muted); margin-left:auto; max-width:30rem; text-align:right; line-height:1.45; }
+
+  .ch-grid{ display:grid; grid-template-columns: 1fr; gap:.35rem 0; max-width:52rem; }
+  .ch-row{
+    display:grid; grid-template-columns: 2.6rem 1fr; gap:.6rem; align-items:start; padding:.95rem .9rem;
+    border-radius:10px; text-decoration:none; transition: background .14s; border:1px solid transparent;
+  }
+  .ch-row:hover{ background:var(--paper-2); border-color:var(--rule); }
+  .ch-row .cn{ font-family:var(--font-mono); font-size:13px; font-weight:500; color:var(--faint); padding-top:.15rem; }
+  .ch-row:hover .cn{ color:var(--accent); }
+  .ch-row .cb{ display:block; min-width:0; }
+  .ch-row .ct{ display:block; font-size:1.06rem; font-weight:600; color:var(--ink); line-height:1.25; letter-spacing:-.008em; }
+  .ch-row .cd{ font-family:var(--font-sans); font-size:13px; color:var(--muted); margin-top:.25rem; line-height:1.4; }
+  .ch-row .cl{ font-family:var(--font-sans); font-size:12.5px; color:var(--muted); margin-top:.45rem; display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+  .ch-row .tag{
+    font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:.1rem .45rem; border-radius:4px;
+    background:var(--accent-soft); color:var(--accent-deep);
+  }
+  .ch-row .tag.alt{ background:var(--ember-soft); color:var(--ember); }
+
+  footer{ border-top:1px solid var(--rule); padding:2.8rem 0 4rem; font-family:var(--font-sans); font-size:13.5px; color:var(--muted); line-height:1.6; }
+  footer h3{ font-family:var(--font-sans); font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin:2rem 0 .8rem; }
+  footer a{ border-bottom:1px solid var(--accent-line); }
+  footer .cite{ font-family:var(--font-mono); font-size:12.5px; background:var(--paper-2); border:1px solid var(--rule);
+    padding:.9rem 1.1rem; border-radius:8px; margin:.6rem 0; white-space:pre-wrap; color:var(--ink-soft); }
+  footer details summary{ cursor:pointer; color:var(--accent); }
+  footer pre{ font-family:var(--font-mono); font-size:12px; background:var(--paper-2); border:1px solid var(--rule);
+    padding:.9rem 1.1rem; border-radius:8px; margin:.6rem 0; white-space:pre-wrap; overflow-x:auto; color:var(--ink-soft); }
+
+  @media (max-width: 820px){
+    .cover{ padding:0 1.5rem; }
+    .about{ grid-template-columns:1fr; gap:1rem; }
+    .people{ grid-template-columns:1fr; gap:1rem; }
+    .part-blurb{ display:none; }
+    .hero{ padding:4rem 0 2.5rem; }
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">Coding Essentials for Astronomers</a>
-      <nav>
-        <a href="#lectures">Lecture archive</a>
-      </nav>
+<div class="cover">
+
+  <section class="hero">
+    <p class="hero-eyebrow"><span class="line"></span>An open textbook</p>
+    <h1>Coding Essentials for Astronomers</h1>
+    <p class="lede">Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers — twenty-two lectures with runnable code and real outputs.</p>
+    <div class="hero-meta">
+      <div class="stat"><div class="v">22</div><div class="k">Lectures</div></div>
+      <div class="stat"><div class="v">Runnable</div><div class="k">Code &amp; Outputs</div></div>
+      <div class="stat"><div class="v">Slides</div><div class="k">For every lecture</div></div>
     </div>
-  </header>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="reader.html?ch=1">Start reading
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#contents">Table of contents</a>
+    </div>
+  </section>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Coding Essentials for Astronomers</h1>
-        <p>Foundational Python, scientific computing, and tooling guidance presented as an open textbook for astronomers.</p>
-        <p class="author-credit">Author: Yuan-Sen Ting (The Ohio State University)</p>
-        <a class="cta" href="#lectures">Open lecture archive →</a>
-      </div>
-    </section>
-
-    <section class="container highlight">
-      <h2>Inside the textbook</h2>
-      <ul>
-        <li>Python programming patterns applied to observational and simulation workflows.</li>
-        <li>Numerical, visualization, and automation techniques for modern data volumes.</li>
-        <li>Data analysis techniques across all modalities: images, spectra, and time series.</li>
-        <li>Best practices for collaboration, version control, and human-AI co-development.</li>
+  <section class="about">
+    <div class="about-label">About this book</div>
+    <div>
+      <p>This repository presents the complete lecture materials for <em>Coding Essentials for Astronomers</em>, a comprehensive open textbook covering Python programming, scientific computing, and modern data analysis techniques specifically tailored for astronomical research. Every lecture is rendered with its code and real outputs preserved inline, paired with slides and, for most, an AI quiz bot.</p>
+      <ul class="about-list">
+        <li><strong>Python programming patterns</strong> applied to observational and simulation workflows.</li>
+        <li><strong>Numerical, visualization, and automation techniques</strong> for modern data volumes.</li>
+        <li><strong>Data analysis techniques</strong> across all modalities: images, spectra, and time series.</li>
+        <li><strong>Best practices</strong> for collaboration, version control, and human–AI co-development.</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section id="lectures" class="container">
-      <h2 class="section-title">Lecture archive</h2>
-      <div class="lecture-grid" data-lecture-grid>
-        <p style="color: var(--muted);">Loading lectures…</p>
-      </div>
-    </section>
-  </main>
+  <section class="toc" id="contents">
+    <p class="toc-h">Table of Contents</p>
+    <div id="tocBody"></div>
+  </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Crafted for the Coding Essentials for Astronomers series. Built as a static site ready for GitHub Pages.</p>
-      <section style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">How to Cite This Work</h3>
-        <p style="margin-bottom: 0.5rem;">If you use this material in your research or teaching, please cite it as:</p>
-        <p style="font-family: monospace; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 4px; margin: 1rem 0; white-space: pre-wrap;">Ting, Y.-S. (2025). <em>Coding Essentials for Astronomers</em>. The Ohio State University. 
-DOI: 10.5281/zenodo.17850426</p>
-        <details style="margin-top: 1rem;">
-          <summary style="cursor: pointer; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">BibTeX Citation</summary>
-          <pre style="font-family: monospace; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 4px; margin: 0.5rem 0; white-space: pre-wrap; font-size: 0.85rem; overflow-x: auto;">@misc{ting2025coding,
+  <section class="people">
+    <div class="people-label">Author</div>
+    <div>
+      <ul class="people-list">
+        <li class="person-row"><span class="person-name">Yuan-Sen Ting</span><span class="person-meta">The Ohio State University</span></li>
+      </ul>
+      <p style="font-family:var(--font-sans); font-size:13.5px; color:var(--muted); margin:1.1rem 0 0; max-width:34rem; line-height:1.5;">Written in collaboration with Claude (Anthropic); all material is designed, curated, and reviewed by the author.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><em>Coding Essentials for Astronomers</em> — an open textbook of twenty-two hands-on lectures by Yuan-Sen Ting (The Ohio State University), rendered with runnable code and outputs.</p>
+
+    <h3>How to cite this work</h3>
+    <p>If you use this material in your research or teaching, please cite it as:</p>
+    <div class="cite">Ting, Y.-S. (2025). Coding Essentials for Astronomers. The Ohio State University.
+DOI: 10.5281/zenodo.17850426</div>
+    <details>
+      <summary>BibTeX</summary>
+      <pre>@misc{ting2025coding,
   author       = {Ting, Yuan-Sen},
   title        = {Coding Essentials for Astronomers},
   year         = {2025},
@@ -63,78 +169,42 @@ DOI: 10.5281/zenodo.17850426</p>
   url          = {https://doi.org/10.5281/zenodo.17850426},
   note         = {Open educational resource. Written in collaboration with Claude (Anthropic).}
 }</pre>
-        </details>
-      </section>
-      <section style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">License &amp; Usage</h3>
-        <p style="margin-bottom: 0.75rem;">This textbook is made available for educational purposes. If you wish to use these lectures in your teaching or research, please cite and refer to the original materials rather than creating derivative versions.</p>
-        <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">While the writing was done in collaboration with AI (Claude Opus 4, Opus 4.5, Sonnet 4, and Sonnet 4.5 by Anthropic), all material has been carefully designed, curated, and reviewed by the author. The pedagogical structure, topic selection, and scientific content reflect the author's expertise and teaching philosophy.</p>
-      </section>
-    </div>
+    </details>
+
+    <h3>License &amp; usage</h3>
+    <p>This textbook is made available for educational purposes. If you wish to use these lectures in your teaching or research, please cite and refer to the original materials rather than creating derivative versions. While the writing was done in collaboration with AI (Claude by Anthropic), all material has been carefully designed, curated, and reviewed by the author.</p>
   </footer>
 
-  <script>
-    const grid = document.querySelector('[data-lecture-grid]');
+</div>
 
-    function escapeHtml(value) {
-      return value
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+<script src="assets/book-data.js"></script>
+<script>
+  let html = '';
+  for (const part of window.BOOK.parts) {
+    html += `<div class="part">`;
+    html += `<div class="part-head">
+        <span class="part-num">${part.name.replace('Part ','')}</span>
+        <span class="part-title">${part.title}</span>
+        <span class="part-blurb">${part.blurb}</span>
+      </div>`;
+    html += `<div class="ch-grid">`;
+    for (const c of part.chapters) {
+      const tags = ['<span class="tag">Notebook</span>'];
+      if (c.slides) tags.push(`<span class="tag slides" role="link" tabindex="0" onclick="event.preventDefault();event.stopPropagation();window.open('${c.slides}','_blank')">Slides ↗</span>`);
+      if (c.quiz)   tags.push(`<span class="tag alt" role="link" tabindex="0" onclick="event.preventDefault();event.stopPropagation();window.open('${c.quiz}','_blank')">Quiz ↗</span>`);
+      html += `<a class="ch-row" href="reader.html?ch=${c.n}">
+        <span class="cn">${String(c.n).padStart(2,'0')}</span>
+        <span class="cb">
+          <span class="ct">${c.title}</span>
+          ${c.summary ? `<span class="cd">${c.summary}</span>` : ''}
+          <span class="cl">${tags.join('')}</span>
+        </span>
+      </a>`;
     }
-
-    function renderLectures(lectures) {
-      if (!Array.isArray(lectures) || lectures.length === 0) {
-        grid.innerHTML = '<p style="color: var(--muted);">No lectures have been published yet.</p>';
-        return;
-      }
-      grid.innerHTML = lectures.map(lecture => {
-        const number = String(lecture.number).padStart(2, '0');
-        const title = escapeHtml(lecture.title);
-        const date = escapeHtml(lecture.date);
-        const summary = lecture.summary ? escapeHtml(lecture.summary) : 'Lecture overview coming soon.';
-        const pageLink = escapeHtml(lecture.relative_path);
-        const slidesLink = escapeHtml(`slides/Lecture${lecture.number}_Slides/`);
-        const actions = [
-          `<a href="${pageLink}">Read lecture</a>`,
-          `<a href="${slidesLink}" target="_blank" rel="noopener">View slides</a>`
-        ];
-        if (lecture.quiz_link) {
-          const quizLink = escapeHtml(lecture.quiz_link);
-          actions.push(`<a href="${quizLink}" target="_blank" rel="noopener">AI quiz bot</a>`);
-        }
-        if (lecture.data_file) {
-          const dataLink = escapeHtml(lecture.data_file);
-          actions.push(`<a href="${dataLink}" download>Download data</a>`);
-        }
-        return `
-          <article class="lecture-card">
-            <span class="lecture-number">Lecture ${number}</span>
-            <h3>${title}</h3>
-            <p>${date}</p>
-            <p>${summary}</p>
-            <div class="actions">
-              ${actions.join('\n              ')}
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    fetch('lectures.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Unable to load lecture metadata');
-        }
-        return response.json();
-      })
-      .then(renderLectures)
-      .catch(error => {
-        console.error(error);
-        grid.innerHTML = '<p style="color: var(--muted);">We could not load the lecture list. Please refresh.</p>';
-      });
-  </script>
+    html += `</div></div>`;
+  }
+  document.getElementById('tocBody').innerHTML = html;
+</script>
+<script src="assets/theme.js"></script>
 </body>
 </html>
